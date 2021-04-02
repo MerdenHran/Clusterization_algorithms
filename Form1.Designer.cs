@@ -38,6 +38,8 @@ namespace Clusterization_algorithms
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCalculate = new System.Windows.Forms.Button();
             this.btnGenPoints = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,11 +141,33 @@ namespace Clusterization_algorithms
             this.btnGenPoints.UseVisualStyleBackColor = false;
             this.btnGenPoints.Click += new System.EventHandler(this.btnGenPoints_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1065, 415);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(180, 347);
+            this.textBox1.TabIndex = 18;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(1065, 344);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 51);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Draw route";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 775);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxSetPointsCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -172,6 +196,8 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnCalculate;
         private System.Windows.Forms.Button btnGenPoints;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -15,6 +15,9 @@ namespace Clusterization_algorithms
         private int radius; // search radius
         private Graphic graphic;
 
+        public static List<Point> listOfClastersCenter = new List<Point>();
+        public static List<Tuple<Point, Point, double>> MINlistOfConnects = new List<Tuple<Point, Point, double>>();
+
         public int Radius { get => radius; set => radius = value; }
 
         public Forel()
@@ -167,18 +170,22 @@ namespace Clusterization_algorithms
 
             List<Point> cluster = getCluster(center);
 
-            if (cluster.Count == 0)
-            { // if cluster no have elements, new_center = center
+            if (cluster.Count == 0){ // if cluster no have elements, new_center = center
+                
                 graphic.DrawFinalCircle(center, radius);
+                listOfClastersCenter.Add(center);
                 return center;
             }
 
             Point newCenter = findBarycenter(cluster);
             Console.WriteLine("<< FindNewCenter return " + newCenter);
 
-            if (center == newCenter)
-                graphic.DrawFinalCircle(center, radius);
+            if (center == newCenter){
 
+                graphic.DrawFinalCircle(center, radius);
+                listOfClastersCenter.Add(center);
+            }
+                
             return newCenter;
         }
 
@@ -237,6 +244,37 @@ namespace Clusterization_algorithms
                     Console.WriteLine();
                 counter++;
             }
+        }
+
+        public List<Tuple<Point, Point, double>> drawRoute()
+        {
+            List<Tuple<Point, Point, double>> listOfConnects = new List<Tuple<Point, Point, double>>();
+            for (int i = 0; i < listOfClastersCenter.Count; i++)
+            {
+                for (int j = 0; j < listOfClastersCenter.Count; j++)
+                {
+                    if (i == j) continue;
+                    listOfConnects.Add(Tuple.Create(listOfClastersCenter[i], listOfClastersCenter[j], calcDistance(listOfClastersCenter[i], listOfClastersCenter[j])));
+                }
+            }
+
+            for (int i = 0; i < listOfConnects.Count; i++)
+            {
+                Tuple<Point, Point, double> min = Tuple.Create(new Point(), new Point(), double.MaxValue);
+                for (int j = 0; j < listOfConnects.Count; j++)
+                {
+                    if (listOfConnects[i].Item1 == listOfConnects[j].Item1)
+                    {
+                        if (min.Item3 > listOfConnects[j].Item3)
+                        {
+                            min = Tuple.Create(listOfConnects[j].Item1, listOfConnects[j].Item2, listOfConnects[j].Item3);
+                        }
+                    }
+                }
+                MINlistOfConnects.Add(min);
+            }
+
+            return MINlistOfConnects;
         }
     }
 }

@@ -156,5 +156,14 @@ namespace Clusterization_algorithms
 
             forel.clearFields();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Point element in Forel.listOfClastersCenter)
+            {
+                textBox1.Text += Convert.ToString(element + "\n");
+            }
+            graphic.RouteDrow(forel.drawRoute());
+        }
     }
 }

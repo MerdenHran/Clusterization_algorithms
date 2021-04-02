@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
@@ -57,6 +58,14 @@ namespace Clusterization_algorithms
             for (int i = 0; i < points.Length; i++)
             {
                 DrawPoint(points[i]);
+            }
+        }
+        public void RouteDrow(List<Tuple<Point, Point, double>> tuples)
+        {
+            for (int i = 0; i < tuples.Count; i++)
+            {
+                DrawLine(tuples[i].Item1, tuples[i].Item2);
+                tuples.RemoveAt(i);
             }
         }
     }
