@@ -140,7 +140,7 @@ namespace Clusterization_algorithms
 
         private void btnCalculate_Click_1(object sender, EventArgs e)
         {
-            forel.Radius = 50;
+            forel.Radius = 150;
 
             if (Int32.TryParse(textBoxSetRadius.Text, out int radius))
                 forel.Radius = radius;

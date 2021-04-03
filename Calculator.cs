@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Clusterization_algorithms
 {
     /// <summary>
-    /// Class calculate math operations. Call without creating object.
+    /// Class calculate math operations and print data. Call without creating object.
     /// </summary>
     class Calculator
     {

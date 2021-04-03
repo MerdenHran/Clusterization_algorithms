@@ -98,8 +98,7 @@ namespace Clusterization_algorithms
         // write points in list to cluster
         private void addPointsToCluster(List<Point> pointsList)
         {
-            Console.WriteLine("#AddPointsToCluster");
-            printList(pointsList);
+            //Console.WriteLine("#AddPointsToCluster");
             foreach (Point point in pointsList)
             {
                 addToCluster(point);
@@ -127,8 +126,7 @@ namespace Clusterization_algorithms
 
             Console.WriteLine();
 
-            Console.WriteLine("<< GetCluster return cluster list");
-            printList(cluster);
+            //Console.WriteLine("<< GetCluster return cluster list");
             return cluster;
         }
 
@@ -193,22 +191,6 @@ namespace Clusterization_algorithms
             Console.WriteLine("#ClearFields");
             clusterNum = 0;
             points.Clear();
-        }
-
-        // print formatted to TextBox
-        private void printList(List<Point> list)
-        {
-
-            Console.WriteLine("Print point list:");
-            int counter = 1;
-
-            foreach (Point p in list)
-            {
-                Console.Write(p + " ");
-                if (counter % 10 == 0)
-                    Console.WriteLine();
-                counter++;
-            }
         }
     }
 }
