@@ -156,5 +156,10 @@ namespace Clusterization_algorithms
 
             forel.clearFields();
         }
+
+        private void btnKMeans_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

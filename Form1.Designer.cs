@@ -38,6 +38,7 @@ namespace Clusterization_algorithms
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCalculate = new System.Windows.Forms.Button();
             this.btnGenPoints = new System.Windows.Forms.Button();
+            this.btnKMeans = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +66,7 @@ namespace Clusterization_algorithms
             // textBoxSetPointsCount
             // 
             this.textBoxSetPointsCount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetPointsCount.Location = new System.Drawing.Point(1065, 291);
+            this.textBoxSetPointsCount.Location = new System.Drawing.Point(1065, 340);
             this.textBoxSetPointsCount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetPointsCount.Name = "textBoxSetPointsCount";
             this.textBoxSetPointsCount.Size = new System.Drawing.Size(180, 32);
@@ -75,7 +76,7 @@ namespace Clusterization_algorithms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(1060, 264);
+            this.label2.Location = new System.Drawing.Point(1060, 313);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(152, 24);
             this.label2.TabIndex = 15;
@@ -85,7 +86,7 @@ namespace Clusterization_algorithms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(1060, 190);
+            this.label1.Location = new System.Drawing.Point(1060, 239);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 24);
             this.label1.TabIndex = 14;
@@ -94,7 +95,7 @@ namespace Clusterization_algorithms
             // textBoxSetRadius
             // 
             this.textBoxSetRadius.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetRadius.Location = new System.Drawing.Point(1065, 217);
+            this.textBoxSetRadius.Location = new System.Drawing.Point(1065, 266);
             this.textBoxSetRadius.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetRadius.Name = "textBoxSetRadius";
             this.textBoxSetRadius.Size = new System.Drawing.Size(180, 32);
@@ -104,7 +105,7 @@ namespace Clusterization_algorithms
             // 
             this.btnClear.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnClear.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClear.Location = new System.Drawing.Point(1065, 125);
+            this.btnClear.Location = new System.Drawing.Point(1064, 175);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(180, 50);
@@ -117,7 +118,7 @@ namespace Clusterization_algorithms
             // 
             this.btnCalculate.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnCalculate.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCalculate.Location = new System.Drawing.Point(1065, 68);
+            this.btnCalculate.Location = new System.Drawing.Point(1065, 67);
             this.btnCalculate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCalculate.Name = "btnCalculate";
             this.btnCalculate.Size = new System.Drawing.Size(180, 50);
@@ -139,11 +140,25 @@ namespace Clusterization_algorithms
             this.btnGenPoints.UseVisualStyleBackColor = false;
             this.btnGenPoints.Click += new System.EventHandler(this.btnGenPoints_Click);
             // 
+            // btnKMeans
+            // 
+            this.btnKMeans.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnKMeans.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKMeans.Location = new System.Drawing.Point(1065, 121);
+            this.btnKMeans.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnKMeans.Name = "btnKMeans";
+            this.btnKMeans.Size = new System.Drawing.Size(180, 50);
+            this.btnKMeans.TabIndex = 17;
+            this.btnKMeans.Text = "K-means";
+            this.btnKMeans.UseVisualStyleBackColor = false;
+            this.btnKMeans.Click += new System.EventHandler(this.btnKMeans_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 775);
+            this.Controls.Add(this.btnKMeans);
             this.Controls.Add(this.textBoxSetPointsCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -172,6 +187,7 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnCalculate;
         private System.Windows.Forms.Button btnGenPoints;
+        private System.Windows.Forms.Button btnKMeans;
     }
 }
 
