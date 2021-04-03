@@ -34,5 +34,20 @@ namespace Clusterization_algorithms
 
             return point;
         }
+
+        public static String printPoints(Dictionary<Point, int> points)
+        {
+            String str = "";
+
+            Console.WriteLine("\nPoints list:");
+
+            foreach (var point in points)
+            {
+                Console.WriteLine(point.ToString());
+                str += point.ToString() + "\n";
+            }
+            Console.WriteLine();
+            return str;
+        }
     }
 }

@@ -53,6 +53,10 @@ namespace Clusterization_algorithms
             }
         }
 
+        public Dictionary<Point, int> getPoints() {
+            return points;
+        }
+
         public String printPoints()
         {
             String str = "";
@@ -92,7 +96,7 @@ namespace Clusterization_algorithms
 
             Console.WriteLine("Add point " + key + " to cluster " + clusterNum);
 
-            printPoints();
+            Calculator.printPoints(points);
         }
 
         // write points in list to cluster

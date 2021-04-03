@@ -20,6 +20,10 @@ namespace Clusterization_algorithms
         {
         }
 
+        private void PAUSE() {
+            Thread.Sleep(100); // set this value to set drawing speed
+        }
+
         public void DrawLine(Point p1, Point p2)
         {
             graphics.DrawLine(blackPen, p1, p2);
@@ -29,14 +33,14 @@ namespace Clusterization_algorithms
         {
             Console.WriteLine("#DrawCircle " + p);
             graphics.DrawEllipse(greyPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            Thread.Sleep(500);
+            PAUSE();
         }
 
         public void DrawFinalCircle(Point p, int radius)
         {
             Console.WriteLine("#DrawCircle " + p);
             graphics.DrawEllipse(blackPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            Thread.Sleep(500);
+            PAUSE();
         }
 
         public void DrawPoint(Point p)
@@ -49,7 +53,7 @@ namespace Clusterization_algorithms
         {
             Brush brush = (Brush)Brushes.Red;
             graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
-            Thread.Sleep(500);
+            PAUSE();
         }
 
         public void DrawPointArray(Point[] points)

@@ -135,7 +135,7 @@ namespace Clusterization_algorithms
 
             //calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
             forel.setPoints(points);
-            textBoxInfo.Text = forel.printPoints();
+            textBoxInfo.Text = Calculator.printPoints(forel.getPoints());
         }
 
         private void btnCalculate_Click_1(object sender, EventArgs e)
