@@ -57,36 +57,6 @@ namespace Clusterization_algorithms
             return points;
         }
 
-        public String printPoints()
-        {
-            String str = "";
-
-            Console.WriteLine("\nPoints list:");
-
-            foreach (var point in points)
-            {
-                Console.WriteLine(point.ToString());
-                str += point.ToString() + "\n";
-            }
-            Console.WriteLine();
-            return str;
-        }
-
-        // distance between A and B points
-        private double calcDistance(Point a, Point b)
-        {
-            Console.WriteLine("#CalculateDistance");
-
-            int delX = (int)Math.Pow(b.X - a.X, 2);
-            int delY = (int)Math.Pow(b.Y - a.Y, 2);
-            double distance = Math.Sqrt(delX + delY); // distance between points
-
-            Console.WriteLine("distance between " + a + " " + b + " = " + distance);
-
-            return distance;
-        }
-
-
         //write select point to cluster
         private void addToCluster(Point key)
         {
@@ -121,7 +91,7 @@ namespace Clusterization_algorithms
 
                 if (points.ElementAt(i).Value == 0)
                 {
-                    double distance = calcDistance(center, points.ElementAt(i).Key);
+                    double distance = Calculator.calcDistance(center, points.ElementAt(i).Key);
 
                     if (distance <= radius)
                         cluster.Add(points.ElementAt(i).Key);

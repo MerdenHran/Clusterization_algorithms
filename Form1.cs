@@ -146,7 +146,7 @@ namespace Clusterization_algorithms
                 forel.Radius = radius;
 
             forel.startForel();
-            textBoxInfo.Text = forel.printPoints();
+            textBoxInfo.Text = Calculator.printPoints(forel.getPoints());
         }
 
         private void btnClear_Click_1(object sender, EventArgs e)

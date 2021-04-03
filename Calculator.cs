@@ -35,6 +35,18 @@ namespace Clusterization_algorithms
             return point;
         }
 
+        // distance between A and B points
+        public static double calcDistance(Point a, Point b)
+        {
+            int delX = (int)Math.Pow(b.X - a.X, 2);
+            int delY = (int)Math.Pow(b.Y - a.Y, 2);
+            double distance = Math.Sqrt(delX + delY); // distance between points
+
+            //Console.WriteLine("distance between " + a + " " + b + " = " + distance);
+
+            return distance;
+        }
+
         public static String printPoints(Dictionary<Point, int> points)
         {
             String str = "";
