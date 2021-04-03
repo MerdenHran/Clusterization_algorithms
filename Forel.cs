@@ -106,34 +106,6 @@ namespace Clusterization_algorithms
             }
         }
 
-        // find points center | centroid | barycenter | mass center
-        private Point findBarycenter(List<Point> pointGroup)
-        {
-            Console.WriteLine("#FindBarycenter");
-
-            int x = 0;
-            int y = 0;
-
-            printList(pointGroup);
-
-            for (int i = 0; i < pointGroup.Count; i++)
-            {
-                x += pointGroup.ElementAt(i).X;
-                y += pointGroup.ElementAt(i).Y;
-            }
-
-            x = x / pointGroup.Count;
-            y = y / pointGroup.Count;
-
-            Point point = new Point(x, y);
-            Console.WriteLine("FindBarycenter return: " + point);
-
-            graphic.DrawRedPoint(point);
-            graphic.DrawCircle(point, radius);
-
-            return point;
-        }
-
         // get cluster from center coordinates
         private List<Point> getCluster(Point center)
         {
@@ -163,8 +135,6 @@ namespace Clusterization_algorithms
         // find new centroid (mass center)
         private Point findNewCenter(Point center)
         {
-            Console.WriteLine("#FindNewCenter");
-
             List<Point> cluster = getCluster(center);
 
             if (cluster.Count == 0)
@@ -173,8 +143,10 @@ namespace Clusterization_algorithms
                 return center;
             }
 
-            Point newCenter = findBarycenter(cluster);
-            Console.WriteLine("<< FindNewCenter return " + newCenter);
+            //Point newCenter = findBarycenter(cluster);
+            Point newCenter = Calculator.findCentroid(cluster);
+            graphic.DrawRedPoint(newCenter);
+            graphic.DrawCircle(newCenter, radius);
 
             if (center == newCenter)
                 graphic.DrawFinalCircle(center, radius);
