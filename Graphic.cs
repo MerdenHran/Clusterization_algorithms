@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
@@ -31,14 +32,14 @@ namespace Clusterization_algorithms
 
         public void DrawCircle(Point p, int radius)
         {
-            Console.WriteLine("#DrawCircle " + p);
+            //Console.WriteLine("#DrawCircle " + p);
             graphics.DrawEllipse(greyPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
             PAUSE();
         }
 
         public void DrawFinalCircle(Point p, int radius)
         {
-            Console.WriteLine("#DrawCircle " + p);
+            //Console.WriteLine("#DrawCircle " + p);
             graphics.DrawEllipse(blackPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
             PAUSE();
         }
@@ -62,6 +63,12 @@ namespace Clusterization_algorithms
             {
                 DrawPoint(points[i]);
             }
+        }
+
+        public void DrawPointDictionary(Dictionary<Point, int> points)
+        {
+            foreach (KeyValuePair<Point, int> result in points)
+                DrawPoint(result.Key);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Clusterization_algorithms
          * if (cluster = 0) => point not belong to cluster*/
         private Dictionary<Point, int> points = new Dictionary<Point, int>();
         private int clusterNum = 0;
-        private Random rand = new Random();
         private int radius; // search radius
         private Graphic graphic;
 
@@ -32,17 +31,6 @@ namespace Clusterization_algorithms
             this.graphic = graphic;
         }
 
-        // generate random points and add them to the dictionary
-        public void generatePoints(int count, int rangeX, int rangeY)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                Point point = new Point(rand.Next(rangeX), rand.Next(rangeY));
-                points.Add(point, 0);
-                graphic.DrawPoint(point);
-            }
-        }
-
         //set starting custer value (0) for all points in list
         public void setPoints(List<Point> pointList)
         {
@@ -53,6 +41,12 @@ namespace Clusterization_algorithms
             }
         }
 
+        public void setPoints(Dictionary<Point, int> pointDictionary)
+        {
+            points = pointDictionary;
+            graphic.DrawPointDictionary(pointDictionary);
+        }
+
         public Dictionary<Point, int> getPoints() {
             return points;
         }
@@ -60,11 +54,11 @@ namespace Clusterization_algorithms
         //write select point to cluster
         private void addToCluster(Point key)
         {
-            Console.WriteLine("#AddToCluster");
+            //Console.WriteLine("#AddToCluster");
             points.Remove(key);
             points.Add(key, clusterNum);
 
-            Console.WriteLine("Add point " + key + " to cluster " + clusterNum);
+            //Console.WriteLine("Add point " + key + " to cluster " + clusterNum);
 
             Calculator.printPoints(points);
         }
@@ -82,7 +76,7 @@ namespace Clusterization_algorithms
         // get cluster from center coordinates
         private List<Point> getCluster(Point center)
         {
-            Console.WriteLine("#GetCluster");
+            //Console.WriteLine("#GetCluster");
 
             List<Point> cluster = new List<Point> { };
 
@@ -98,8 +92,7 @@ namespace Clusterization_algorithms
                 }
             }
 
-            Console.WriteLine();
-
+            //Console.WriteLine();
             //Console.WriteLine("<< GetCluster return cluster list");
             return cluster;
         }
@@ -129,16 +122,16 @@ namespace Clusterization_algorithms
         //start clusters searching process
         private Point clusterisation(Point center)
         {
-            Console.WriteLine("#Clusterisation");
+            //Console.WriteLine("#Clusterisation");
             Point newCenter = findNewCenter(center);
-            Console.WriteLine(newCenter);
+            //Console.WriteLine(newCenter);
 
             if (newCenter != center)
                 clusterisation(newCenter);
             else
                 addPointsToCluster(getCluster(newCenter));
 
-            Console.WriteLine("<< Clusterization return " + center);
+            //Console.WriteLine("<< Clusterization return " + center);
             return newCenter;
         }
 
@@ -146,7 +139,7 @@ namespace Clusterization_algorithms
         // THIS METHOD RUN FOREL ALGORITHM
         public void startForel()
         {
-            Console.WriteLine("#StartForel");
+            //Console.WriteLine("#StartForel");
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -162,7 +155,7 @@ namespace Clusterization_algorithms
         // reset data
         public void clearFields()
         {
-            Console.WriteLine("#ClearFields");
+            //Console.WriteLine("#ClearFields");
             clusterNum = 0;
             points.Clear();
         }

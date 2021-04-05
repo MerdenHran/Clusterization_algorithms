@@ -130,11 +130,12 @@ namespace Clusterization_algorithms
                 new Point(145, 175)//100
             };
 
-            int pointsCount = 10;
-            Int32.TryParse(textBoxSetPointsCount.Text, out pointsCount);
+            if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
+                pointsCount = 20;
 
-            //calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
-            forel.setPoints(points);
+            //forel.setPoints(points);
+
+            forel.setPoints(Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height));
             textBoxInfo.Text = Calculator.printPoints(forel.getPoints());
         }
 
