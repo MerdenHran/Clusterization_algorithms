@@ -248,7 +248,7 @@ namespace Clusterization_algorithms
 
         public List<Tuple<Point, Point, double>> drawRoute()
         {
-            List<Tuple<Point, Point, double>> listOfConnects = new List<Tuple<Point, Point, double>>();
+            List<Tuple<Point, Point, double>> listOfConnects = new List<Tuple<Point, Point, double>>(); // 
             for (int i = 0; i < listOfClastersCenter.Count; i++)
             {
                 for (int j = 0; j < listOfClastersCenter.Count; j++)
