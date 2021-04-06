@@ -22,7 +22,7 @@ namespace Clusterization_algorithms
         }
 
         private void PAUSE() {
-            Thread.Sleep(100); // set this value to set drawing speed
+            Thread.Sleep(500); // set this value to set drawing speed
         }
 
         public void DrawLine(Point p1, Point p2)
@@ -50,12 +50,14 @@ namespace Clusterization_algorithms
             graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
         }
 
-        public void DrawRedPoint(Point p)
+        public void DrawCentroid(Point p)
         {
             Brush brush = (Brush)Brushes.Red;
             graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
             PAUSE();
         }
+
+
 
         public void DrawPointArray(Point[] points)
         {
@@ -69,6 +71,10 @@ namespace Clusterization_algorithms
         {
             foreach (KeyValuePair<Point, int> result in points)
                 DrawPoint(result.Key);
+        }
+
+        public void ClearImage() {
+            graphics.Clear(Color.White);
         }
     }
 }

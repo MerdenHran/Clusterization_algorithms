@@ -25,26 +25,10 @@ namespace Clusterization_algorithms
             this.graphic = graphic;
         }
 
-        public Forel(int radius, Graphic graphic)
-        {
-            this.radius = radius;
-            this.graphic = graphic;
-        }
-
-        //set starting custer value (0) for all points in list
-        public void setPoints(List<Point> pointList)
-        {
-            for (int i = 0; i < pointList.Count; i++)
-            {
-                points.Add(pointList.ElementAt(i), 0);
-                graphic.DrawPoint(pointList.ElementAt(i));
-            }
-        }
-
         public void setPoints(Dictionary<Point, int> pointDictionary)
         {
             points = pointDictionary;
-            graphic.DrawPointDictionary(pointDictionary);
+            //graphic.DrawPointDictionary(pointDictionary);
         }
 
         public Dictionary<Point, int> getPoints() {
@@ -110,7 +94,7 @@ namespace Clusterization_algorithms
 
             //Point newCenter = findBarycenter(cluster);
             Point newCenter = Calculator.findCentroid(cluster);
-            graphic.DrawRedPoint(newCenter);
+            graphic.DrawCentroid(newCenter);
             graphic.DrawCircle(newCenter, radius);
 
             if (center == newCenter)

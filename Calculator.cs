@@ -31,7 +31,7 @@ namespace Clusterization_algorithms
             y = y / pointGroup.Count;
 
             Point point = new Point(x, y);
-            //Console.WriteLine("FindBarycenter return: " + point);
+            //Console.WriteLine("FindCentroid return: " + point);
 
             return point;
         }
@@ -81,8 +81,9 @@ namespace Clusterization_algorithms
             return str;
         }
 
-        public static List<Point> setStaticPoints() { 
-            return new List<Point> {
+        public static Dictionary<Point, int> setStaticPoints() { 
+
+            List<Point> pointList = new List<Point> { 
                 new Point(410, 186),
                 new Point(89, 367),
                 new Point(71, 417),
@@ -184,6 +185,13 @@ namespace Clusterization_algorithms
                 new Point(111, 531),
                 new Point(145, 175)//100
             };
+
+            Dictionary<Point, int> pointDict = new Dictionary<Point, int> { };
+
+            foreach (Point point in pointList)
+                pointDict.Add(point, 0);
+
+            return pointDict;         
         }
     }
 }
