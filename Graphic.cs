@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
@@ -27,7 +27,9 @@ namespace Clusterization_algorithms
 
         public void DrawLine(Point p1, Point p2)
         {
-            graphics.DrawLine(blackPen, p1, p2);
+            Pen pen = new Pen(Color.Green);
+            pen.Width = 3;
+            graphics.DrawLine(pen, p1, p2);
         }
 
         public void DrawCircle(Point p, int radius)
@@ -74,6 +76,15 @@ namespace Clusterization_algorithms
 
         public void ClearImage() {
             graphics.Clear(Color.White);
+        }
+
+        public void RouteDrow(List<Tuple<Point, Point, double>> tuples)
+        {
+            for (int i = 0; i < tuples.Count; i++)
+            {
+                DrawLine(tuples[i].Item1, tuples[i].Item2);
+            }
+
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Clusterization_algorithms
         private int radius; // search radius
         private Graphic graphic;
 
+        public static List<Point> listOfClastersCenter = new List<Point>();
+        public static List<Tuple<Point, Point, double>> list_of_min_connects = new List<Tuple<Point, Point, double>>();
+
         public int Radius { get => radius; set => radius = value; }
 
         public Forel()
@@ -86,9 +89,10 @@ namespace Clusterization_algorithms
         {
             List<Point> cluster = getCluster(center);
 
-            if (cluster.Count == 0)
-            { // if cluster no have elements, new_center = center
+            if (cluster.Count == 0){ // if cluster no have elements, new_center = center
+                
                 graphic.DrawFinalCircle(center, radius);
+                listOfClastersCenter.Add(center);
                 return center;
             }
 
@@ -97,9 +101,12 @@ namespace Clusterization_algorithms
             graphic.DrawCentroid(newCenter);
             graphic.DrawCircle(newCenter, radius);
 
-            if (center == newCenter)
-                graphic.DrawFinalCircle(center, radius);
+            if (center == newCenter){
 
+                graphic.DrawFinalCircle(center, radius);
+                listOfClastersCenter.Add(center);
+            }
+                
             return newCenter;
         }
 
@@ -142,6 +149,86 @@ namespace Clusterization_algorithms
             //Console.WriteLine("#ClearFields");
             clusterNum = 0;
             points.Clear();
+            listOfClastersCenter.Clear();
+        }
+
+        // print formatted to TextBox
+        private void printList(List<Point> list)
+        {
+
+            Console.WriteLine("Print point list:");
+            int counter = 1;
+
+            foreach (Point p in list)
+            {
+                Console.Write(p + " ");
+                if (counter % 10 == 0)
+                    Console.WriteLine();
+                counter++;
+            }
+        }
+
+        public void rem_Eq_Conn(List<Tuple<Point, Point, double>> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = 0; j < list.Count; j++)
+                {
+                    if (list[i].Item3 == list[j].Item3) list.RemoveAt(j);
+                }
+            }
+        }
+        
+        public List<Tuple<Point, Point, double>> search_min_conn(List<Tuple<Point, Point, double>> tuples)
+        {
+            List<Tuple<Point, Point, double>> templist = new List<Tuple<Point, Point, double>>();
+
+            Tuple<Point, Point, double> min_1_Conn = Tuple.Create(new Point(), new Point(), Double.MaxValue);
+ 
+            for (int i = 0; i < listOfClastersCenter.Count; i++)
+            {
+                for (int j = 0; j < tuples.Count; j++)
+                {
+                    if(listOfClastersCenter[i] == tuples[j].Item1)
+                    {
+                        if (min_1_Conn.Item3 > tuples[j].Item3)
+                        {
+                            min_1_Conn = Tuple.Create(tuples[j].Item1, tuples[j].Item2, tuples[j].Item3);
+                        }
+                    }
+                }
+                templist.Add(min_1_Conn);
+                min_1_Conn = Tuple.Create(new Point(), new Point(), Double.MaxValue);
+            }
+
+            return templist;
+        }
+        public List<Tuple<Point, Point, double>> drawRoute()
+        {
+            List<Tuple<Point, Point, double>> list_of_min_connects = new List<Tuple<Point, Point, double>>();
+
+            List<Tuple<Point, Point, double>> listOfConnects = new List<Tuple<Point, Point, double>>(); // 
+            for (int i = 0; i < listOfClastersCenter.Count; i++)
+            {
+                for (int j = 0; j < listOfClastersCenter.Count; j++)
+                {
+                    if (i == j) continue;
+                    listOfConnects.Add(Tuple.Create(listOfClastersCenter[i], listOfClastersCenter[j], Calculator.calcDistance(listOfClastersCenter[i], listOfClastersCenter[j])));
+                }
+            }
+            //rem_Eq_Conn(listOfConnects);
+
+            //list_of_min_connects = search_min_conn(listOfConnects);
+
+            for (int i = 0; i < listOfConnects.Count; i++)
+            {
+                if(listOfConnects[i].Item3 < radius * 2)
+                {
+                    list_of_min_connects.Add(listOfConnects[i]);
+                }
+            }
+
+            return list_of_min_connects;
         }
     }
 }
