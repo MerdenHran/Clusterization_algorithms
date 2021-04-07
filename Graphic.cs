@@ -22,7 +22,7 @@ namespace Clusterization_algorithms
         }
 
         private void PAUSE() {
-            Thread.Sleep(500); // set this value to set drawing speed
+            Thread.Sleep(100); // set this value to set drawing speed
         }
 
         public void DrawLine(Point p1, Point p2)

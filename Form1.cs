@@ -88,9 +88,13 @@ namespace Clusterization_algorithms
             forel.drawRoute().Clear();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-
+            foreach (Tuple<Point, Point, double> element in forel.drawRoute())
+            {
+                textBox3.Text += Convert.ToString(element + "\n");
+            }
+            graphic.RouteDrow(forel.drawRoute());
         }
     }
 }
