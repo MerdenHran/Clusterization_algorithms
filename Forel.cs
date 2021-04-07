@@ -16,7 +16,7 @@ namespace Clusterization_algorithms
         private Graphic graphic;
 
         public static List<Point> listOfClastersCenter = new List<Point>();
-        public static List<Tuple<Point, Point, double>> MINlistOfConnects = new List<Tuple<Point, Point, double>>();
+        public static List<Tuple<Point, Point, double>> list_of_min_connects = new List<Tuple<Point, Point, double>>();
 
         public int Radius { get => radius; set => radius = value; }
 
@@ -228,6 +228,7 @@ namespace Clusterization_algorithms
             Console.WriteLine("#ClearFields");
             clusterNum = 0;
             points.Clear();
+            listOfClastersCenter.Clear();
         }
 
         // print formatted to TextBox
@@ -246,8 +247,45 @@ namespace Clusterization_algorithms
             }
         }
 
+        public void rem_Eq_Conn(List<Tuple<Point, Point, double>> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = 0; j < list.Count; j++)
+                {
+                    if (list[i].Item3 == list[j].Item3) list.RemoveAt(j);
+                }
+            }
+        }
+        
+        public List<Tuple<Point, Point, double>> search_min_conn(List<Tuple<Point, Point, double>> tuples)
+        {
+            List<Tuple<Point, Point, double>> templist = new List<Tuple<Point, Point, double>>();
+
+            Tuple<Point, Point, double> min_1_Conn = Tuple.Create(new Point(), new Point(), Double.MaxValue);
+ 
+            for (int i = 0; i < listOfClastersCenter.Count; i++)
+            {
+                for (int j = 0; j < tuples.Count; j++)
+                {
+                    if(listOfClastersCenter[i] == tuples[j].Item1)
+                    {
+                        if (min_1_Conn.Item3 > tuples[j].Item3)
+                        {
+                            min_1_Conn = Tuple.Create(tuples[j].Item1, tuples[j].Item2, tuples[j].Item3);
+                        }
+                    }
+                }
+                templist.Add(min_1_Conn);
+                min_1_Conn = Tuple.Create(new Point(), new Point(), Double.MaxValue);
+            }
+
+            return templist;
+        }
         public List<Tuple<Point, Point, double>> drawRoute()
         {
+            List<Tuple<Point, Point, double>> list_of_min_connects = new List<Tuple<Point, Point, double>>();
+
             List<Tuple<Point, Point, double>> listOfConnects = new List<Tuple<Point, Point, double>>(); // 
             for (int i = 0; i < listOfClastersCenter.Count; i++)
             {
@@ -257,24 +295,19 @@ namespace Clusterization_algorithms
                     listOfConnects.Add(Tuple.Create(listOfClastersCenter[i], listOfClastersCenter[j], calcDistance(listOfClastersCenter[i], listOfClastersCenter[j])));
                 }
             }
+            //rem_Eq_Conn(listOfConnects);
+
+            //list_of_min_connects = search_min_conn(listOfConnects);
 
             for (int i = 0; i < listOfConnects.Count; i++)
             {
-                Tuple<Point, Point, double> min = Tuple.Create(new Point(), new Point(), double.MaxValue);
-                for (int j = 0; j < listOfConnects.Count; j++)
+                if(listOfConnects[i].Item3 < radius * 2)
                 {
-                    if (listOfConnects[i].Item1 == listOfConnects[j].Item1)
-                    {
-                        if (min.Item3 > listOfConnects[j].Item3)
-                        {
-                            min = Tuple.Create(listOfConnects[j].Item1, listOfConnects[j].Item2, listOfConnects[j].Item3);
-                        }
-                    }
+                    list_of_min_connects.Add(listOfConnects[i]);
                 }
-                MINlistOfConnects.Add(min);
             }
 
-            return MINlistOfConnects;
+            return list_of_min_connects;
         }
     }
 }

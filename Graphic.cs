@@ -24,7 +24,7 @@ namespace Clusterization_algorithms
         public void DrawLine(Point p1, Point p2)
         {
             Pen pen = new Pen(Color.Green);
-            pen.Width = 5;
+            pen.Width = 3;
             graphics.DrawLine(pen, p1, p2);
         }
 
@@ -32,14 +32,14 @@ namespace Clusterization_algorithms
         {
             Console.WriteLine("#DrawCircle " + p);
             graphics.DrawEllipse(greyPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            Thread.Sleep(200);
+            Thread.Sleep(0);
         }
 
         public void DrawFinalCircle(Point p, int radius)
         {
             Console.WriteLine("#DrawCircle " + p);
             graphics.DrawEllipse(blackPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            Thread.Sleep(200);
+            Thread.Sleep(0);
         }
 
         public void DrawPoint(Point p)
@@ -52,7 +52,7 @@ namespace Clusterization_algorithms
         {
             Brush brush = (Brush)Brushes.Red;
             graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
-            Thread.Sleep(200);
+            Thread.Sleep(0);
         }
 
         public void DrawPointArray(Point[] points)
@@ -66,13 +66,9 @@ namespace Clusterization_algorithms
         {
             for (int i = 0; i < tuples.Count; i++)
             {
-                for(int j = 0; j < tuples.Count; j++)
-                {
-                    if(100 > tuples[i].Item3)
-                    DrawLine(tuples[i].Item1, tuples[j].Item2);
-
-                }
+                DrawLine(tuples[i].Item1, tuples[i].Item2);
             }
+
         }
     }
 }

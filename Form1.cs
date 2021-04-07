@@ -21,7 +21,17 @@ namespace Clusterization_algorithms
             Graphics graphics = pictBoxArea.CreateGraphics();
             graphic = new Graphic(graphics);
             forel = new Forel(graphic);
+            //MouseClick += new MouseEventHandler(Form1_MouseClick);
         }
+
+        //public int x, y;
+        //private void Form1_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    x = MousePosition.X;
+        //    y = MousePosition.Y;
+        //    textBox2.Text = "X = " + x.ToString() + ";  Y + " + y.ToString();   //или textBox1.Text   
+        //}
+
 
         private void btnGenPoints_Click(object sender, EventArgs e)
         {
@@ -155,11 +165,13 @@ namespace Clusterization_algorithms
             textBoxInfo.Clear();
 
             forel.clearFields();
+
+            forel.drawRoute().Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (Point element in Forel.listOfClastersCenter)
+            foreach (Tuple<Point, Point, double> element in forel.drawRoute())
             {
                 textBox1.Text += Convert.ToString(element + "\n");
             }

@@ -40,6 +40,7 @@ namespace Clusterization_algorithms
             this.btnGenPoints = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,14 +147,14 @@ namespace Clusterization_algorithms
             this.textBox1.Location = new System.Drawing.Point(1300, 413);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 347);
+            this.textBox1.Size = new System.Drawing.Size(180, 402);
             this.textBox1.TabIndex = 18;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(1300, 342);
+            this.button1.Location = new System.Drawing.Point(1300, 326);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(180, 51);
             this.button1.TabIndex = 17;
@@ -161,11 +162,19 @@ namespace Clusterization_algorithms
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(1300, 383);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(180, 22);
+            this.textBox2.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1523, 859);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxSetPointsCount);
@@ -198,6 +207,7 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Button btnGenPoints;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 
