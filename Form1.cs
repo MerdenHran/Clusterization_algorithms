@@ -34,8 +34,8 @@ namespace Clusterization_algorithms
             if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                 pointsCount = 20;
 
-            //points = Calculator.setStaticPoints();
-            points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+            points = Calculator.setStaticPoints();
+            //points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
             graphic.DrawPointDictionary(points);
 
             textBoxInfo.Text = Calculator.printPoints(points);
