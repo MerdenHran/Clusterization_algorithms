@@ -54,7 +54,6 @@ namespace Clusterization_algorithms
         {
             Brush brush = (Brush)Brushes.Red;
             graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
-            PAUSE();
         }
 
 
