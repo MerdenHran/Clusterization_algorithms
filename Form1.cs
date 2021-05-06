@@ -53,11 +53,18 @@ namespace Clusterization_algorithms
 
         private void btnKMeans_Click(object sender, EventArgs e)
         {
-            List<Point> seeds = new List<Point>{
-                new Point(200, 200),
-                new Point(400, 400),
-                new Point(200, 400)
-            };
+            //List<Point> seeds = new List<Point>{
+            //    new Point(200, 200),
+            //    new Point(400, 400),
+            //    new Point(200, 400)
+            //};
+
+            //SeedGenerator seedG = new SeedGenerator(points, 3);
+            SeedGenerator seedG = new SeedGenerator(); // < may use full constructor
+            seedG.SetPoints(points);       // <
+            seedG.seedCount = 3;           // <
+            List<Point> seeds = seedG.GetSeeds(); // Calculate and get seeds
+
 
             k_means.SetPoints(points);
             k_means.SetSeeds(seeds);
