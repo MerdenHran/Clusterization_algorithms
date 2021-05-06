@@ -59,10 +59,14 @@ namespace Clusterization_algorithms
             //    new Point(200, 400)
             //};
 
-            //SeedGenerator seedG = new SeedGenerator(points, 3);
-            SeedGenerator seedG = new SeedGenerator(); // < may use full constructor
-            seedG.SetPoints(points);       // <
-            seedG.seedCount = 3;           // <
+            SeedGenerator seedG = new SeedGenerator(); //
+            seedG.SetPoints(points);
+            seedG.seedCount = 3; // by default
+
+            if (Int32.TryParse(textBoxSetSeedsCount.Text, out int seedCount))
+                seedG.seedCount = seedCount;
+
+
             List<Point> seeds = seedG.GetSeeds(); // Calculate and get seeds
 
 

@@ -36,7 +36,7 @@ namespace Clusterization_algorithms
             Point seed1 = points.ElementAt(rnum).Key; // get 1-st random seed from points
             seeds.Add(seed1);                         // add point to seed list
             points.Remove(seed1);                     // remove this point from points
-            Console.WriteLine("1-st seed: " + seed1.ToString() + '\n');
+            //Console.WriteLine("1-st seed: " + seed1.ToString() + '\n');
 
             calculatePointsWeight(seed1);
 
@@ -50,10 +50,10 @@ namespace Clusterization_algorithms
         { // !!!
             SortPoints();
 
-            Console.WriteLine("Sum of weigth: " + sumOfWeigh);
+            //Console.WriteLine("Sum of weigth: " + sumOfWeigh);
 
             double rsum = rand.Next(0, (int)sumOfWeigh);
-            Console.WriteLine("Random sum: " + rsum + '\n');
+            //Console.WriteLine("Random sum: " + rsum + '\n');
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -66,7 +66,7 @@ namespace Clusterization_algorithms
                     points.Remove(pair.Key);
                     calculatePointsWeight(pair.Key);
 
-                    Console.WriteLine("new seed: " + pair.Key);
+                    //Console.WriteLine("new seed: " + pair.Key);
                     break;
                 }
 
@@ -74,8 +74,8 @@ namespace Clusterization_algorithms
                 //Console.WriteLine(rsum);
             }
 
-            Console.WriteLine();
-            printSeeds();
+            //Console.WriteLine();
+            //printSeeds();
         }
 
         private void SortPoints()
@@ -87,7 +87,7 @@ namespace Clusterization_algorithms
                 newPoints.Add(pair.Key, pair.Value);
             }
             points = newPoints;
-            printPoints();
+            //printPoints();
         }
 
         private void calculatePointsWeight(Point seed)
