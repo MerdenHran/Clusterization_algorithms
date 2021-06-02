@@ -25,17 +25,7 @@ namespace Clusterization_algorithms
 
             forel = new Forel(graphic);
             k_means = new K_means(graphic);
-            //MouseClick += new MouseEventHandler(Form1_MouseClick);
         }
-
-        //public int x, y;
-        //private void Form1_MouseClick(object sender, MouseEventArgs e)
-        //{
-        //    x = MousePosition.X;
-        //    y = MousePosition.Y;
-        //    textBox2.Text = "X = " + x.ToString() + ";  Y + " + y.ToString();   //или textBox1.Text   
-        //}
-
 
         private void btnGenPoints_Click(object sender, EventArgs e)
         {
@@ -44,8 +34,8 @@ namespace Clusterization_algorithms
             if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                 pointsCount = 20;
 
-            points = Calculator.setStaticPoints();
-            //points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+            //points = Calculator.setStaticPoints();
+            points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
             graphic.DrawPointDictionary(points);
 
             textBoxInfo.Text = Calculator.printPoints(points);
@@ -66,9 +56,7 @@ namespace Clusterization_algorithms
             if (Int32.TryParse(textBoxSetSeedsCount.Text, out int seedCount))
                 seedG.seedCount = seedCount;
 
-
             List<Point> seeds = seedG.GetSeeds(); // Calculate and get seeds
-
 
             k_means.SetPoints(points);
             k_means.SetSeeds(seeds);
@@ -93,19 +81,7 @@ namespace Clusterization_algorithms
         {
             pictBoxArea.Image = null;
             textBoxInfo.Clear();
-
             forel.clearFields();
-
-            forel.drawRoute().Clear();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            foreach (Tuple<Point, Point, double> element in forel.drawRoute())
-            {
-                textBox3.Text += Convert.ToString(element + "\n");
-            }
-            graphic.RouteDrow(forel.drawRoute());
         }
     }
 }
