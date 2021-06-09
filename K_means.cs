@@ -11,7 +11,7 @@ namespace Clusterization_algorithms
         /* Dictionary contain all pairs (point, number_of_cluster),
         * if (cluster = 0) => point not belong to cluster*/
         private Dictionary<Point, int> points = new Dictionary<Point, int>();
-        private List<Point> seeds;
+        public List<Point> seeds;
         private Graphic graphic;
 
         public K_means()
@@ -73,7 +73,7 @@ namespace Clusterization_algorithms
                 }
 
                 AddToCluster(point, closerSeedNum);
-                graphic.DrawLine(seeds.ElementAt(closerSeedNum - 1), point.Key);
+                graphic.DrawLineKMeans(seeds.ElementAt(closerSeedNum - 1), point.Key);
             }
         }
 

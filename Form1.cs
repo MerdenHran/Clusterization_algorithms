@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Clusterization_algorithms
@@ -15,7 +10,9 @@ namespace Clusterization_algorithms
         Graphic graphic;
         Forel forel;
         K_means k_means;
+        Route route;
         Dictionary<Point, int> points;
+        List<Point> clustersCenter = new List<Point> { };
 
         public Form1()
         {
@@ -25,6 +22,7 @@ namespace Clusterization_algorithms
 
             forel = new Forel(graphic);
             k_means = new K_means(graphic);
+            route = new Route();
         }
 
         private void btnGenPoints_Click(object sender, EventArgs e)
@@ -34,8 +32,8 @@ namespace Clusterization_algorithms
             if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                 pointsCount = 20;
 
-            //points = Calculator.setStaticPoints();
-            points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+            points = Calculator.setStaticPoints();
+            //points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
             graphic.DrawPointDictionary(points);
 
             textBoxInfo.Text = Calculator.printPoints(points);
@@ -62,6 +60,8 @@ namespace Clusterization_algorithms
             k_means.SetSeeds(seeds);
             k_means.startK_means();
 
+            clustersCenter = k_means.seeds;
+
             textBoxInfo.Text = Calculator.printPoints(k_means.getPoints());
         }
 
@@ -74,6 +74,8 @@ namespace Clusterization_algorithms
                 forel.Radius = radius;
 
             forel.startForel();
+            clustersCenter = forel.listOfClastersCenter;
+
             textBoxInfo.Text = Calculator.printPoints(forel.getPoints());
         }
 
@@ -82,6 +84,20 @@ namespace Clusterization_algorithms
             pictBoxArea.Image = null;
             textBoxInfo.Clear();
             forel.clearFields();
+        }
+
+        private void btnRoute_Click(object sender, EventArgs e)
+        {
+            route.All_points = Calculator.DictionaryToList(points);
+            route.CalculateRoute();
+            graphic.DrawRoute(route.RouteList);
+        }
+
+        private void btnClustersRoute_Click(object sender, EventArgs e)
+        {
+            route.All_points = clustersCenter;
+            route.CalculateRoute();
+            graphic.DrawRoute(route.RouteList);
         }
     }
 }

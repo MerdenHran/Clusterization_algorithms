@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Clusterization_algorithms
 {
@@ -192,6 +190,71 @@ namespace Clusterization_algorithms
                 pointDict.Add(point, 0);
 
             return pointDict;         
+        }
+
+        public static double FindCOS(Point a, Point b, Point c) // рахує косинус між прямими (зовнішнього кута)
+        { // Find cos between vectors
+            //Console.WriteLine("FindCOS" + a + ", " + b + ", " + c);
+
+            Point v1 = new Point(b.X - a.X, b.Y - a.Y); // find vectors
+            Point v2 = new Point(c.X - b.X, c.Y - b.Y);
+
+            double modV1 = Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y);
+            double modV2 = Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y);
+            double skal = v1.X * v2.X + v1.Y * v2.Y;
+            double cos = skal / (modV1 * modV2);
+
+            return cos;
+        }
+
+        public static double FindSIN(Point a, Point b, Point c)
+        {
+            double cos = FindCOS(a, b, c);
+            double sin = Math.Sqrt(1 - cos * cos);
+            return sin;
+        }
+
+        public static List<Point> DictionaryToList(Dictionary<Point, int> dictionary)
+        {
+            List<Point> points = new List<Point>() { };
+
+            for (int i = 0; i < dictionary.Count; i++)
+                points.Add(dictionary.ElementAt(i).Key);
+
+            return points;
+        }
+
+        public static Dictionary<Point, int> ListToDictionary(List<Point> pointList)
+        {
+            Dictionary<Point, int> dictionary = new Dictionary<Point, int> { };
+
+            //pointList.ToDictionary<Point, int>;
+
+            for (int i = 0; i < pointList.Count; i++)
+                dictionary.Add(pointList[i], 0);
+
+            return dictionary;
+        }
+
+        public static List<Point> sortListByCentroid(List<Point> points)
+        {
+            Dictionary<Point, int> dictionary = ListToDictionary(points);
+
+            Point center = findCentroid(points);
+
+            return points;
+        }
+
+        public static double calcRouteLength(List<Point> points)
+        {
+
+            double dist = calcDistance(points[0], points[points.Count - 1]);
+
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                dist += calcDistance(points[i], points[i + 1]);
+            }
+            return dist;
         }
     }
 }

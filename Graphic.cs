@@ -27,7 +27,14 @@ namespace Clusterization_algorithms
 
         public void DrawLine(Point p1, Point p2)
         {
-            Pen pen = new Pen(Color.Green);
+            Pen pen = new Pen(Color.LightBlue);
+            pen.Width = 3;
+            graphics.DrawLine(pen, p1, p2);
+        }
+
+        public void DrawLineKMeans(Point p1, Point p2)
+        {
+            Pen pen = new Pen(Color.LightGreen);
             pen.Width = 3;
             graphics.DrawLine(pen, p1, p2);
         }
@@ -78,13 +85,14 @@ namespace Clusterization_algorithms
             graphics.Clear(Color.White);
         }
 
-        public void RouteDrow(List<Tuple<Point, Point, double>> tuples)
+        public void DrawRoute(List<Point> points)
         {
-            for (int i = 0; i < tuples.Count; i++)
+            for (int i = 1; i < points.Count; i++)
             {
-                DrawLine(tuples[i].Item1, tuples[i].Item2);
-            }
 
+                DrawLine(points[i - 1], points[i]);
+                PAUSE();
+            }
         }
     }
 }

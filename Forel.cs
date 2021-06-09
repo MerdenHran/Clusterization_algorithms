@@ -14,9 +14,8 @@ namespace Clusterization_algorithms
         private int radius; // search radius
         private Graphic graphic;
 
-        public static List<Point> listOfClastersCenter = new List<Point>();
-        public static List<Tuple<Point, Point, double>> list_of_min_connects = new List<Tuple<Point, Point, double>>();
-
+        public List<Point> listOfClastersCenter = new List<Point>();
+        
         public int Radius { get => radius; set => radius = value; }
 
         public Forel()
