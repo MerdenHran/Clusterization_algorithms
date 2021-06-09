@@ -13,11 +13,12 @@ namespace Clusterization_algorithms
         Route route;
         Dictionary<Point, int> points;
         List<Point> clustersCenter = new List<Point> { };
+        Graphics graphics;
 
         public Form1()
         {
             InitializeComponent();
-            Graphics graphics = pictBoxArea.CreateGraphics();
+            graphics = pictBoxArea.CreateGraphics();
             graphic = new Graphic(graphics);
 
             forel = new Forel(graphic);
@@ -30,22 +31,25 @@ namespace Clusterization_algorithms
             Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
 
             if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
-                pointsCount = 20;
+                pointsCount = 200;
 
             points = Calculator.setStaticPoints();
             //points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
-            graphic.DrawPointDictionary(points);
 
+            ClearFields();
+        }
+
+        public void ClearFields() {
+            graphics.Clear(Color.White);
+            textBoxInfo.Clear();
+            graphic.DrawPointDictionary(points);
             textBoxInfo.Text = Calculator.printPoints(points);
+            clustersCenter.Clear();
         }
 
         private void btnKMeans_Click(object sender, EventArgs e)
         {
-            //List<Point> seeds = new List<Point>{
-            //    new Point(200, 200),
-            //    new Point(400, 400),
-            //    new Point(200, 400)
-            //};
+            ClearFields();
 
             SeedGenerator seedG = new SeedGenerator(); //
             seedG.SetPoints(points);
@@ -56,17 +60,19 @@ namespace Clusterization_algorithms
 
             List<Point> seeds = seedG.GetSeeds(); // Calculate and get seeds
 
-            k_means.SetPoints(points);
-            k_means.SetSeeds(seeds);
+            k_means.setPoints(points);
+            k_means.Seeds = seeds;
             k_means.startK_means();
 
-            clustersCenter = k_means.seeds;
+            clustersCenter = k_means.Seeds;
 
             textBoxInfo.Text = Calculator.printPoints(k_means.getPoints());
         }
 
         private void btnForel_Click(object sender, EventArgs e)
         {
+            ClearFields();
+
             forel.setPoints(points);
             forel.Radius = 100;
 
@@ -79,15 +85,16 @@ namespace Clusterization_algorithms
             textBoxInfo.Text = Calculator.printPoints(forel.getPoints());
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            pictBoxArea.Image = null;
-            textBoxInfo.Clear();
-            forel.clearFields();
-        }
+        //private void btnClear_Click(object sender, EventArgs e)
+        //{
+        //    pictBoxArea.Image = null;
+        //    textBoxInfo.Clear();
+        //}
 
-        private void btnRoute_Click(object sender, EventArgs e)
+        private void btnRoute_Click(object sender, EventArgs e) // all points route
         {
+            ClearFields();
+
             route.All_points = Calculator.DictionaryToList(points);
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);

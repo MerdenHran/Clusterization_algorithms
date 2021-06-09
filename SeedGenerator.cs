@@ -114,6 +114,8 @@ namespace Clusterization_algorithms
 
         public void SetPoints(Dictionary<Point, int> dictionary)
         {
+            points.Clear();
+
             foreach (var pair in dictionary)
             {
                 points.Add(pair.Key, 0);

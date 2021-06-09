@@ -30,7 +30,6 @@ namespace Clusterization_algorithms
 
             Point point = new Point(x, y);
             //Console.WriteLine("FindCentroid return: " + point);
-
             return point;
         }
 
@@ -79,9 +78,9 @@ namespace Clusterization_algorithms
             return str;
         }
 
-        public static Dictionary<Point, int> setStaticPoints() { 
+        public static Dictionary<Point, int> setStaticPoints() {
 
-            List<Point> pointList = new List<Point> { 
+            List<Point> pointList = new List<Point> {
                 new Point(410, 186),
                 new Point(89, 367),
                 new Point(71, 417),
@@ -189,7 +188,7 @@ namespace Clusterization_algorithms
             foreach (Point point in pointList)
                 pointDict.Add(point, 0);
 
-            return pointDict;         
+            return pointDict;
         }
 
         public static double FindCOS(Point a, Point b, Point c) // рахує косинус між прямими (зовнішнього кута)
@@ -239,15 +238,12 @@ namespace Clusterization_algorithms
         public static List<Point> sortListByCentroid(List<Point> points)
         {
             Dictionary<Point, int> dictionary = ListToDictionary(points);
-
             Point center = findCentroid(points);
-
             return points;
         }
 
         public static double calcRouteLength(List<Point> points)
         {
-
             double dist = calcDistance(points[0], points[points.Count - 1]);
 
             for (int i = 0; i < points.Count - 1; i++)

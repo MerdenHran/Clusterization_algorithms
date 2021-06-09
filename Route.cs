@@ -56,7 +56,7 @@ namespace Clusterization_algorithms
             return routeList;
         }
 
-        public List<Point> ElasticNet()
+        private List<Point> ElasticNet()
         {
 
             routeList.AddRange(convex_hull);
@@ -105,9 +105,8 @@ namespace Clusterization_algorithms
             return cos;
         }
 
-        public void JarvisMarch()
+        private void JarvisMarch()
         {
-
             List<Point> points = new List<Point> { };
             points.AddRange(all_points);
 

@@ -11,8 +11,19 @@ namespace Clusterization_algorithms
         /* Dictionary contain all pairs (point, number_of_cluster),
         * if (cluster = 0) => point not belong to cluster*/
         private Dictionary<Point, int> points = new Dictionary<Point, int>();
-        public List<Point> seeds;
+        private List<Point> seeds;
         private Graphic graphic;
+
+        public List<Point> Seeds { get => seeds; set => seeds = value; }
+
+        public void setPoints(Dictionary<Point, int> pointDictionary) {
+            points.Clear();
+
+            foreach (KeyValuePair<Point, int> point in pointDictionary)
+            {
+                points.Add(point.Key, point.Value);
+            }
+        }
 
         public K_means()
         {
@@ -23,26 +34,14 @@ namespace Clusterization_algorithms
             this.graphic = graphic;
         }
 
-        public void SetPoints(Dictionary<Point, int> pointDictionary)
-        {
-            points = pointDictionary;
-            //graphic.DrawPointDictionary(pointDictionary);
-        }
-
         public Dictionary<Point, int> getPoints()
         {
             return points;
         }
 
-        public void SetSeeds(List<Point> points) => seeds = points;
-
-        public List<Point> GetSeeds() {
-            return seeds;
-        }
-
         public void DrawSeeds() {
             foreach (Point seed in seeds)
-                graphic.DrawCentroid(seed);
+                graphic.DrawPoint(seed, Brushes.Red);
         }
 
         //write select point to cluster
@@ -54,7 +53,7 @@ namespace Clusterization_algorithms
             Calculator.printPoints(points);
         }
 
-        public void FindAllClusters() {
+        private void FindAllClusters() {
 
             for (int i = 0; i < points.Count; i++) {
 
@@ -73,11 +72,11 @@ namespace Clusterization_algorithms
                 }
 
                 AddToCluster(point, closerSeedNum);
-                graphic.DrawLineKMeans(seeds.ElementAt(closerSeedNum - 1), point.Key);
+                graphic.DrawLine(seeds.ElementAt(closerSeedNum - 1), point.Key, Color.LightGreen);
             }
         }
 
-        public Boolean FindCentroids() {
+        private Boolean FindCentroids() {
             List<Point> centroids = new List<Point> { };
 
             for (int i = 0; i < seeds.Count; i++) {
@@ -100,7 +99,7 @@ namespace Clusterization_algorithms
             return true;
         }
 
-        public void startK_means() {
+        public void startK_means() { //
 
             graphic.DrawPointDictionary(points);
             DrawSeeds();
@@ -114,7 +113,7 @@ namespace Clusterization_algorithms
             DrawSeeds();
         }
 
-        public Boolean isEqualSeed(List<Point> list) {
+        private Boolean isEqualSeed(List<Point> list) {
             for (int i = 0; i < seeds.Count; i++) {
                 if (seeds.ElementAt(i) != list.ElementAt(i))
                     return false;

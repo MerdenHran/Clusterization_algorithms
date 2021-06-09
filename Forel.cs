@@ -29,7 +29,12 @@ namespace Clusterization_algorithms
 
         public void setPoints(Dictionary<Point, int> pointDictionary)
         {
-            points = pointDictionary;
+            points.Clear();
+            listOfClastersCenter.Clear();
+
+            foreach (KeyValuePair<Point, int> point in pointDictionary) {
+                points.Add(point.Key, point.Value);
+            }
             //graphic.DrawPointDictionary(pointDictionary);
         }
 
@@ -90,19 +95,19 @@ namespace Clusterization_algorithms
 
             if (cluster.Count == 0){ // if cluster no have elements, new_center = center
                 
-                graphic.DrawFinalCircle(center, radius);
+                graphic.DrawCircle(center, radius, Color.Black);
                 listOfClastersCenter.Add(center);
                 return center;
             }
 
             //Point newCenter = findBarycenter(cluster);
             Point newCenter = Calculator.findCentroid(cluster);
-            graphic.DrawCentroid(newCenter);
-            graphic.DrawCircle(newCenter, radius);
+            graphic.DrawPoint(newCenter, Brushes.Pink);
+            graphic.DrawCircle(newCenter, radius, Color.LightGray);
 
             if (center == newCenter){
-
-                graphic.DrawFinalCircle(center, radius);
+                graphic.DrawCircle(center, radius, Color.Black);
+                graphic.DrawPoint(newCenter, Brushes.Red);
                 listOfClastersCenter.Add(center);
             }
                 
@@ -129,6 +134,7 @@ namespace Clusterization_algorithms
         // THIS METHOD RUN FOREL ALGORITHM
         public void startForel()
         {
+            clusterNum = 0;
             //Console.WriteLine("#StartForel");
 
             for (int i = 0; i < points.Count; i++)
@@ -142,19 +148,9 @@ namespace Clusterization_algorithms
             }
         }
 
-        // reset data
-        public void clearFields()
-        {
-            //Console.WriteLine("#ClearFields");
-            clusterNum = 0;
-            points.Clear();
-            listOfClastersCenter.Clear();
-        }
-
         // print formatted to TextBox
         private void printList(List<Point> list)
         {
-
             Console.WriteLine("Print point list:");
             int counter = 1;
 

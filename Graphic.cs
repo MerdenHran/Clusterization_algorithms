@@ -8,77 +8,53 @@ namespace Clusterization_algorithms
     class Graphic
     {
         private Graphics graphics;
-        private Pen blackPen = new Pen(Color.Black);
-        private Pen greyPen = new Pen(Color.Gray);
 
         public Graphic(Graphics graphics)
         {
             this.graphics = graphics;
-            blackPen.Width = 2;
         }
 
         public Graphic()
         {
         }
 
-        private void PAUSE() {
-            Thread.Sleep(100); // set this value to set drawing speed
+        private void PAUSE(int pause) {
+            pause = 100;
+            Thread.Sleep(pause); // set this value to set drawing speed
         }
 
-        public void DrawLine(Point p1, Point p2)
+        public void DrawLine(Point p1, Point p2, Color color)
         {
-            Pen pen = new Pen(Color.LightBlue);
+            Pen pen = new Pen(color);
             pen.Width = 3;
             graphics.DrawLine(pen, p1, p2);
         }
 
-        public void DrawLineKMeans(Point p1, Point p2)
+        public void DrawCircle(Point p, int radius, Color color)
         {
-            Pen pen = new Pen(Color.LightGreen);
-            pen.Width = 3;
-            graphics.DrawLine(pen, p1, p2);
+            Pen pen = new Pen(color);
+            pen.Width = 2;
+            graphics.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
+            PAUSE(100);
         }
 
-        public void DrawCircle(Point p, int radius)
+        public void DrawPoint(Point p, Brush brush)
         {
-            //Console.WriteLine("#DrawCircle " + p);
-            graphics.DrawEllipse(greyPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            PAUSE();
-        }
-
-        public void DrawFinalCircle(Point p, int radius)
-        {
-            //Console.WriteLine("#DrawCircle " + p);
-            graphics.DrawEllipse(blackPen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            PAUSE();
-        }
-
-        public void DrawPoint(Point p)
-        {
-            Brush brush = (Brush)Brushes.Black;
             graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
         }
-
-        public void DrawCentroid(Point p)
-        {
-            Brush brush = (Brush)Brushes.Red;
-            graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
-        }
-
-
 
         public void DrawPointArray(Point[] points)
         {
             for (int i = 0; i < points.Length; i++)
             {
-                DrawPoint(points[i]);
+                DrawPoint(points[i], Brushes.Black);
             }
         }
 
         public void DrawPointDictionary(Dictionary<Point, int> points)
         {
             foreach (KeyValuePair<Point, int> result in points)
-                DrawPoint(result.Key);
+                DrawPoint(result.Key, Brushes.Black);
         }
 
         public void ClearImage() {
@@ -87,11 +63,9 @@ namespace Clusterization_algorithms
 
         public void DrawRoute(List<Point> points)
         {
-            for (int i = 1; i < points.Count; i++)
-            {
-
-                DrawLine(points[i - 1], points[i]);
-                PAUSE();
+            for (int i = 1; i < points.Count; i++) {
+                DrawLine(points[i - 1], points[i], Color.Orange);
+                PAUSE(100);
             }
         }
     }

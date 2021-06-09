@@ -119,7 +119,6 @@ namespace Clusterization_algorithms
             this.btnClear.TabIndex = 12;
             this.btnClear.Text = "Clear field";
             this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnForel
             // 
