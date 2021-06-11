@@ -151,7 +151,6 @@ namespace Clusterization_algorithms
         private void SortInsidePoints()
         { // sort inside points by mass center // [спростити, переробити]
             Point center = Calculator.findCentroid(all_points);
-            List<Point> sortedList = new List<Point> { };
             Dictionary<Point, double> dict = new Dictionary<Point, double> { };
 
             for (int i = 0; i < inside_points.Count; i++)
@@ -160,16 +159,10 @@ namespace Clusterization_algorithms
                 dict.Add(inside_points[i], dist);
             }
 
-            List<KeyValuePair<Point, double>> myList = dict.ToList();
-            myList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
-
-            for (int i = myList.Count - 1; i >= 0; i--)
-            {
-                sortedList.Add(myList[i].Key);
-            }
+            dict = Calculator.sortDictionaryByValue(dict);
 
             inside_points.Clear();
-            inside_points.AddRange(sortedList);
+            inside_points.AddRange(Calculator.DictionaryToList(dict));
         }
     }
 }

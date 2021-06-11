@@ -51,7 +51,7 @@ namespace Clusterization_algorithms
 
             //Console.WriteLine("Add point " + key + " to cluster " + clusterNum);
 
-            Calculator.printPoints(points);
+            Calculator.printPointsDictionary(points);
         }
 
         // write points in list to cluster

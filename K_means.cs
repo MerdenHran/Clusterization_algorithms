@@ -49,7 +49,7 @@ namespace Clusterization_algorithms
             points.Add(point.Key, clusterNum);
 
             //graphic.D
-            Calculator.printPoints(points);
+            Calculator.printPointsDictionary(points);
         }
 
         private void FindAllClusters() {

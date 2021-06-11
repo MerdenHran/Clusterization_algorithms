@@ -63,8 +63,10 @@ namespace Clusterization_algorithms
             return points;
         }
 
-        public static String printPoints(Dictionary<Point, int> points)
+        public static String printPointsDictionary(Dictionary<Point, int> points)
         {
+            points = sortDictionaryByValue(points);
+
             String str = "";
 
             //Console.WriteLine("\nPoints list:");
@@ -223,6 +225,16 @@ namespace Clusterization_algorithms
             return points;
         }
 
+        public static List<Point> DictionaryToList(Dictionary<Point, double> dictionary)
+        {
+            List<Point> points = new List<Point>() { };
+
+            for (int i = 0; i < dictionary.Count; i++)
+                points.Add(dictionary.ElementAt(i).Key);
+
+            return points;
+        }
+
         public static Dictionary<Point, int> ListToDictionary(List<Point> pointList)
         {
             Dictionary<Point, int> dictionary = new Dictionary<Point, int> { };
@@ -235,22 +247,23 @@ namespace Clusterization_algorithms
             return dictionary;
         }
 
-        public static List<Point> sortListByCentroid(List<Point> points)
-        {
-            Dictionary<Point, int> dictionary = ListToDictionary(points);
-            Point center = findCentroid(points);
-            return points;
-        }
-
         public static double calcRouteLength(List<Point> points)
         {
             double dist = calcDistance(points[0], points[points.Count - 1]);
 
             for (int i = 0; i < points.Count - 1; i++)
-            {
                 dist += calcDistance(points[i], points[i + 1]);
-            }
+
             return dist;
+        }
+
+        public static Dictionary<Point, int> sortDictionaryByValue(Dictionary<Point, int> dictionary) {
+            return dictionary.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        public static Dictionary<Point, double> sortDictionaryByValue(Dictionary<Point, double> dictionary)
+        {
+            return dictionary.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

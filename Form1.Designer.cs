@@ -198,7 +198,7 @@ namespace Clusterization_algorithms
             this.btnRoute.Name = "btnRoute";
             this.btnRoute.Size = new System.Drawing.Size(127, 45);
             this.btnRoute.TabIndex = 28;
-            this.btnRoute.Text = "Draw route";
+            this.btnRoute.Text = "All route";
             this.btnRoute.UseVisualStyleBackColor = false;
             this.btnRoute.Click += new System.EventHandler(this.btnRoute_Click);
             // 
@@ -211,7 +211,7 @@ namespace Clusterization_algorithms
             this.btnSpiralRoute.Name = "btnSpiralRoute";
             this.btnSpiralRoute.Size = new System.Drawing.Size(186, 45);
             this.btnSpiralRoute.TabIndex = 29;
-            this.btnSpiralRoute.Text = "Draw spiral route";
+            this.btnSpiralRoute.Text = "All spiral route";
             this.btnSpiralRoute.UseVisualStyleBackColor = false;
             // 
             // btnClustersRoute

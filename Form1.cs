@@ -43,7 +43,7 @@ namespace Clusterization_algorithms
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
             graphic.DrawPointDictionary(points);
-            textBoxInfo.Text = Calculator.printPoints(points);
+            textBoxInfo.Text = Calculator.printPointsDictionary(points);
             clustersCenter.Clear();
         }
 
@@ -67,7 +67,7 @@ namespace Clusterization_algorithms
 
             clustersCenter = k_means.Seeds;
 
-            textBoxInfo.Text = Calculator.printPoints(k_means.getPoints());
+            textBoxInfo.Text = Calculator.printPointsDictionary(k_means.getPoints());
         }
 
         private void btnForel_Click(object sender, EventArgs e)
@@ -84,14 +84,8 @@ namespace Clusterization_algorithms
             forel.startForel();
             clustersCenter = forel.listOfClastersCenter;
 
-            textBoxInfo.Text = Calculator.printPoints(forel.getPoints());
+            textBoxInfo.Text = Calculator.printPointsDictionary(forel.getPoints());
         }
-
-        //private void btnClear_Click(object sender, EventArgs e)
-        //{
-        //    pictBoxArea.Image = null;
-        //    textBoxInfo.Clear();
-        //}
 
         private void btnRoute_Click(object sender, EventArgs e) // all points route
         {
