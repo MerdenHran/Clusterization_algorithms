@@ -49,6 +49,7 @@ namespace Clusterization_algorithms
 
         private void btnKMeans_Click(object sender, EventArgs e)
         {
+            labelRoute.Text = "";
             ClearFields();
 
             SeedGenerator seedG = new SeedGenerator(); //
@@ -71,6 +72,7 @@ namespace Clusterization_algorithms
 
         private void btnForel_Click(object sender, EventArgs e)
         {
+            labelRoute.Text = "";
             ClearFields();
 
             forel.setPoints(points);
@@ -93,11 +95,13 @@ namespace Clusterization_algorithms
 
         private void btnRoute_Click(object sender, EventArgs e) // all points route
         {
+            labelRoute.Text = "";
             ClearFields();
 
             route.All_points = Calculator.DictionaryToList(points);
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);
+            labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
         }
 
         private void btnClustersRoute_Click(object sender, EventArgs e)
@@ -105,6 +109,7 @@ namespace Clusterization_algorithms
             route.All_points = clustersCenter;
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
         }
     }
 }

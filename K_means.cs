@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 
 namespace Clusterization_algorithms
 {
@@ -106,7 +105,7 @@ namespace Clusterization_algorithms
             FindAllClusters();
             
             if (FindCentroids()) {
-                Thread.Sleep(1000);
+                graphic.PAUSE(300);
                 graphic.ClearImage();
                 startK_means();
             }

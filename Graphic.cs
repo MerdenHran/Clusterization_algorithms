@@ -18,8 +18,7 @@ namespace Clusterization_algorithms
         {
         }
 
-        private void PAUSE(int pause) {
-            pause = 100;
+        public void PAUSE(int pause = 100) {
             Thread.Sleep(pause); // set this value to set drawing speed
         }
 
@@ -35,7 +34,7 @@ namespace Clusterization_algorithms
             Pen pen = new Pen(color);
             pen.Width = 2;
             graphics.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            PAUSE(100);
+            PAUSE(80);
         }
 
         public void DrawPoint(Point p, Brush brush)
@@ -65,7 +64,7 @@ namespace Clusterization_algorithms
         {
             for (int i = 1; i < points.Count; i++) {
                 DrawLine(points[i - 1], points[i], Color.Orange);
-                PAUSE(100);
+                PAUSE(30);
             }
         }
     }
