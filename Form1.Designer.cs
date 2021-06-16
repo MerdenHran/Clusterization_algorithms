@@ -213,6 +213,7 @@ namespace Clusterization_algorithms
             this.btnSpiralRoute.TabIndex = 29;
             this.btnSpiralRoute.Text = "All spiral route";
             this.btnSpiralRoute.UseVisualStyleBackColor = false;
+            this.btnSpiralRoute.Click += new System.EventHandler(this.btnSpiralRoute_Click);
             // 
             // btnClustersRoute
             // 

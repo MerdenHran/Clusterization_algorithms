@@ -11,7 +11,7 @@ namespace Clusterization_algorithms
         Forel forel;
         K_means k_means;
         Route route;
-        Dictionary<Point, int> points;
+        Dictionary<Point, int> allPoints;
         List<Point> clustersCenter = new List<Point> { };
         Graphics graphics;
 
@@ -33,7 +33,7 @@ namespace Clusterization_algorithms
             if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                 pointsCount = 200;
 
-            points = Calculator.setStaticPoints();
+            allPoints = Calculator.setStaticPoints();
             //points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
 
             ClearFields();
@@ -42,8 +42,8 @@ namespace Clusterization_algorithms
         public void ClearFields() {
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
-            graphic.DrawPointDictionary(points);
-            textBoxInfo.Text = Calculator.printPointsDictionary(points);
+            graphic.DrawPointDictionary(allPoints);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPoints);
             clustersCenter.Clear();
         }
 
@@ -53,7 +53,7 @@ namespace Clusterization_algorithms
             ClearFields();
 
             SeedGenerator seedG = new SeedGenerator(); //
-            seedG.SetPoints(points);
+            seedG.SetPoints(allPoints);
             seedG.seedCount = 3; // by default
 
             if (Int32.TryParse(textBoxSetSeedsCount.Text, out int seedCount))
@@ -61,7 +61,7 @@ namespace Clusterization_algorithms
 
             List<Point> seeds = seedG.GetSeeds(); // Calculate and get seeds
 
-            k_means.setPoints(points);
+            k_means.setPoints(allPoints);
             k_means.Seeds = seeds;
             k_means.startK_means();
 
@@ -75,7 +75,7 @@ namespace Clusterization_algorithms
             labelRoute.Text = "";
             ClearFields();
 
-            forel.setPoints(points);
+            forel.setPoints(allPoints);
             forel.Radius = 100;
 
             if (Int32.TryParse(textBoxSetRadius.Text, out int radius))
@@ -92,7 +92,7 @@ namespace Clusterization_algorithms
             labelRoute.Text = "";
             ClearFields();
 
-            route.All_points = Calculator.DictionaryToList(points);
+            route.All_points = Calculator.DictionaryToList(allPoints);
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);
             labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
@@ -104,6 +104,17 @@ namespace Clusterization_algorithms
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
+        }
+
+        private void btnSpiralRoute_Click(object sender, EventArgs e)
+        {
+            labelRoute.Text = "";
+            ClearFields();
+
+            route.All_points = Calculator.DictionaryToList(allPoints);
+            route.JarvisMarch(true);
+            graphic.DrawRoute(route.Convex_hull);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.Convex_hull), 3);
         }
     }
 }

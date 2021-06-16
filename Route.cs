@@ -18,6 +18,7 @@ namespace Clusterization_algorithms
             set => all_points.AddRange(value);
         }
         public List<Point> RouteList { get => routeList; }
+        public List<Point> Convex_hull { get => convex_hull; }
 
         public Route()
         {
@@ -105,7 +106,7 @@ namespace Clusterization_algorithms
             return cos;
         }
 
-        private void JarvisMarch()
+        public void JarvisMarch(bool getSpiralRoute = false) // 
         {
             List<Point> points = new List<Point> { };
             points.AddRange(all_points);
@@ -126,10 +127,8 @@ namespace Clusterization_algorithms
 
                 for (int i = 0; i < points.Count; i++)
                 { // where cos is min that point is next
-
                     double cos = Calculator.FindCOS(convex_hull[k], convex_hull[k + 1], points[i]); // шукаємо косинус кута між векторами
-                                                                                                    //Console.WriteLine("cos = " + cos);
-
+                                                                                                    //Console.WriteLine("cos = " + 
                     if (cos > max_cos)
                     { // чим менший cos тим більший кут () між векторами
                         max_cos = cos;
