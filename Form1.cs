@@ -30,11 +30,10 @@ namespace Clusterization_algorithms
         {
             Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
 
-            if(!Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
-                pointsCount = 200;
-
             allPoints = Calculator.setStaticPoints();
-            //points = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+
+            if (Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
+                allPoints = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
 
             ClearFields();
         }

@@ -105,7 +105,7 @@ namespace Clusterization_algorithms
             FindAllClusters();
             
             if (FindCentroids()) {
-                graphic.PAUSE(300);
+                graphic.PAUSE(100);
                 graphic.ClearImage();
                 startK_means();
             }

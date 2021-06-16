@@ -55,7 +55,15 @@ namespace Clusterization_algorithms
 
             for (int i = 0; i < count; i++)
             {
-                Point point = new Point(rand.Next(rangeX), rand.Next(rangeY));
+                Point point;
+
+                do
+                {
+                    point = new Point(rand.Next(rangeX), rand.Next(rangeY));
+                } while (points.ContainsKey(point));
+
+
+
                 points.Add(point, 0);
 
                 //Console.WriteLine(point.ToString());
