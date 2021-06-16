@@ -92,7 +92,7 @@ namespace Clusterization_algorithms
             labelRoute.Text = "";
             ClearFields();
 
-            route.All_points = Calculator.DictionaryToList(allPoints);
+            route.All_points(Calculator.DictionaryToList(allPoints));
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);
             labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
@@ -100,7 +100,7 @@ namespace Clusterization_algorithms
 
         private void btnClustersRoute_Click(object sender, EventArgs e)
         {
-            route.All_points = clustersCenter;
+            route.All_points(clustersCenter);
             route.CalculateRoute();
             graphic.DrawRoute(route.RouteList);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
@@ -111,7 +111,7 @@ namespace Clusterization_algorithms
             labelRoute.Text = "";
             ClearFields();
 
-            route.All_points = Calculator.DictionaryToList(allPoints);
+            route.All_points(Calculator.DictionaryToList(allPoints));
             route.JarvisMarch(true);
             graphic.DrawRoute(route.Convex_hull);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.Convex_hull), 3);

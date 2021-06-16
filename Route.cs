@@ -13,9 +13,10 @@ namespace Clusterization_algorithms
         private List<Point> inside_points = new List<Point> { };
         private List<Point> all_points = new List<Point> { };
 
-        public List<Point> All_points
+        public void All_points(List<Point> points)
         {
-            set => all_points.AddRange(value);
+            all_points.Clear();
+            all_points.AddRange(points);
         }
         public List<Point> RouteList { get => routeList; }
         public List<Point> Convex_hull { get => convex_hull; }
@@ -26,10 +27,6 @@ namespace Clusterization_algorithms
 
         public List<Point> CalculateRoute()
         {
-            routeList.Clear();
-            convex_hull.Clear();
-            inside_points.Clear();
-
             JarvisMarch();
             ElasticNet();
 
@@ -108,6 +105,10 @@ namespace Clusterization_algorithms
 
         public void JarvisMarch(bool getSpiralRoute = false) // 
         {
+            routeList.Clear();
+            convex_hull.Clear();
+            inside_points.Clear();
+
             List<Point> points = new List<Point> { };
             points.AddRange(all_points);
 
@@ -117,7 +118,9 @@ namespace Clusterization_algorithms
             convex_hull.Add(falsePoint);
 
             Point point = points[0];
-            points.Add(startPoint);
+            
+            if(!getSpiralRoute)
+                points.Add(startPoint);
             int k = 0;
 
             do
@@ -141,7 +144,7 @@ namespace Clusterization_algorithms
                 points.Remove(nextPoint);
                 convex_hull.Add(nextPoint);
 
-            } while (point != startPoint);
+            } while ((point != startPoint));
 
             convex_hull.Remove(falsePoint);
             inside_points.AddRange(points);

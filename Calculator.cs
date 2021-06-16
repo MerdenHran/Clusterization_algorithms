@@ -193,6 +193,12 @@ namespace Clusterization_algorithms
             return pointDict;
         }
 
+        public static double Find3PointsLength(Point a, Point b, Point c) {
+            double l1 = calcDistance(a, b);
+            double l2 = calcDistance(b, c);
+            return l1 + l1;
+        }
+
         public static double FindCOS(Point a, Point b, Point c) // рахує косинус між прямими (зовнішнього кута)
         { // Find cos between vectors
             //Console.WriteLine("FindCOS" + a + ", " + b + ", " + c);
