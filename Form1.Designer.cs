@@ -196,7 +196,7 @@ namespace Clusterization_algorithms
             // 
             this.btnRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRoute.Location = new System.Drawing.Point(1074, 376);
+            this.btnRoute.Location = new System.Drawing.Point(1074, 425);
             this.btnRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRoute.Name = "btnRoute";
             this.btnRoute.Size = new System.Drawing.Size(127, 45);
@@ -209,7 +209,7 @@ namespace Clusterization_algorithms
             // 
             this.btnSpiralRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnSpiralRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSpiralRoute.Location = new System.Drawing.Point(1207, 376);
+            this.btnSpiralRoute.Location = new System.Drawing.Point(1205, 425);
             this.btnSpiralRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSpiralRoute.Name = "btnSpiralRoute";
             this.btnSpiralRoute.Size = new System.Drawing.Size(186, 45);
@@ -227,7 +227,7 @@ namespace Clusterization_algorithms
             this.btnClustersRoute.Name = "btnClustersRoute";
             this.btnClustersRoute.Size = new System.Drawing.Size(319, 45);
             this.btnClustersRoute.TabIndex = 30;
-            this.btnClustersRoute.Text = "Draw route by clusters";
+            this.btnClustersRoute.Text = "Draw route by Elastic Net\r\n";
             this.btnClustersRoute.UseVisualStyleBackColor = false;
             this.btnClustersRoute.Click += new System.EventHandler(this.btnClustersRoute_Click);
             // 
@@ -235,12 +235,12 @@ namespace Clusterization_algorithms
             // 
             this.btnBruteForce.BackColor = System.Drawing.Color.DarkGray;
             this.btnBruteForce.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnBruteForce.Location = new System.Drawing.Point(1076, 425);
+            this.btnBruteForce.Location = new System.Drawing.Point(1074, 376);
             this.btnBruteForce.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBruteForce.Name = "btnBruteForce";
             this.btnBruteForce.Size = new System.Drawing.Size(317, 45);
             this.btnBruteForce.TabIndex = 31;
-            this.btnBruteForce.Text = "Draw route by brute-force";
+            this.btnBruteForce.Text = "Draw route by Brute-force";
             this.btnBruteForce.UseVisualStyleBackColor = false;
             this.btnBruteForce.Click += new System.EventHandler(this.btnBruteForce_Click);
             // 

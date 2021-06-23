@@ -60,10 +60,10 @@ namespace Clusterization_algorithms
             graphics.Clear(Color.White);
         }
 
-        public void DrawRoute(List<Point> points)
+        public void DrawRoute(List<Point> points, Color color)
         {
             for (int i = 1; i < points.Count; i++) {
-                DrawLine(points[i - 1], points[i], Color.Orange);
+                DrawLine(points[i - 1], points[i], color);
                 PAUSE(10);
             }
         }

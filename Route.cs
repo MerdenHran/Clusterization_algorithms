@@ -13,6 +13,9 @@ namespace Clusterization_algorithms
         private List<Point> inside_points = new List<Point> { };
         private List<Point> all_points = new List<Point> { };
 
+        //Brute-force
+        private double length;
+
         public void All_points(List<Point> points)
         {
             all_points.Clear();
@@ -165,6 +168,60 @@ namespace Clusterization_algorithms
 
             inside_points.Clear();
             inside_points.AddRange(Calculator.DictionaryToList(dict));
+        }
+
+        public List<Point> CalculateRouteBruteForce(List<Point> points)
+        {
+            List<Point> newPoints = new List<Point> { };
+            newPoints.Add(startPoint);
+            newPoints.AddRange(points);
+            newPoints.Add(startPoint);
+
+            points = newPoints;
+
+            length = 9999999;
+            RecursivePermutation(1, newPoints);
+
+            return routeList;
+        }
+
+        private void RecursivePermutation(int startPos, List<Point> points) // first and last fixed
+        {
+            int size = points.Count;
+
+            if (startPos == size - 1)
+            {
+                double newLength = Calculator.calcRouteLength(points);
+                if (newLength < length)
+                {
+                    length = newLength;
+                    routeList.Clear();
+                    routeList.AddRange(points);
+                }
+                //for (int i = 0; i < size; i++)
+                //    Console.Write(all_points[i] + " ");  // out
+                //Console.WriteLine();
+            }
+            else
+            {
+                for (int j = startPos; j < size - 1; ++j)
+                {
+                    swap(startPos, j, points);
+                    startPos++;
+                    RecursivePermutation(startPos, points);
+                    startPos--;
+                    swap(startPos, j, points);
+                }
+            }
+        }
+
+        private void swap(int pos_1, int pos_2, List<Point> points)
+        {
+            //Console.WriteLine("swap: " + pos_1 + " <-> " + pos_2);
+            Point point = points[pos_1];
+            points[pos_1] = points[pos_2];
+            points[pos_2] = point;
+            //printArray();
         }
     }
 }

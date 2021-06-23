@@ -93,7 +93,7 @@ namespace Clusterization_algorithms
 
             route.All_points(Calculator.DictionaryToList(allPoints));
             route.CalculateRoute();
-            graphic.DrawRoute(route.RouteList);
+            graphic.DrawRoute(route.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
         }
 
@@ -101,7 +101,7 @@ namespace Clusterization_algorithms
         {
             route.All_points(clustersCenter);
             route.CalculateRoute();
-            graphic.DrawRoute(route.RouteList);
+            graphic.DrawRoute(route.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
         }
 
@@ -112,7 +112,7 @@ namespace Clusterization_algorithms
 
             route.All_points(Calculator.DictionaryToList(allPoints));
             route.JarvisMarch(true);
-            graphic.DrawRoute(route.Convex_hull);
+            graphic.DrawRoute(route.Convex_hull, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.Convex_hull), 3);
         }
 
@@ -128,15 +128,10 @@ namespace Clusterization_algorithms
 
         private void btnBruteForce_Click(object sender, EventArgs e)
         {
-            Point startPoint = new Point(0, 0);
-            List<Point> points = new List<Point> { };
-            points.Add(startPoint);
-            points.AddRange(clustersCenter);
-            points.Add(startPoint);
-
-            points = Calculator.FindShortestWay(points);
-            graphic.DrawRoute(points);
+            List<Point> points = route.CalculateRouteBruteForce(clustersCenter);
+            graphic.DrawRoute(points, Color.Blue);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(points), 3);
         }
+
     }
 }
