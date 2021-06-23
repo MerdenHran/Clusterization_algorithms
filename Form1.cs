@@ -115,5 +115,28 @@ namespace Clusterization_algorithms
             graphic.DrawRoute(route.Convex_hull);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.Convex_hull), 3);
         }
+
+        private void btnGenPoints_MouseMove(object sender, MouseEventArgs e)
+        {
+            btnGenPoints.BackColor = Color.LightGreen;
+        }
+
+        private void btnGenPoints_MouseLeave(object sender, EventArgs e)
+        {
+            btnGenPoints.BackColor = Color.DarkGray;
+        }
+
+        private void btnBruteForce_Click(object sender, EventArgs e)
+        {
+            Point startPoint = new Point(0, 0);
+            List<Point> points = new List<Point> { };
+            points.Add(startPoint);
+            points.AddRange(clustersCenter);
+            points.Add(startPoint);
+
+            points = Calculator.FindShortestWay(points);
+            graphic.DrawRoute(points);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(points), 3);
+        }
     }
 }

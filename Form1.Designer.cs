@@ -45,6 +45,7 @@ namespace Clusterization_algorithms
             this.btnRoute = new System.Windows.Forms.Button();
             this.btnSpiralRoute = new System.Windows.Forms.Button();
             this.btnClustersRoute = new System.Windows.Forms.Button();
+            this.btnBruteForce = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,7 +113,7 @@ namespace Clusterization_algorithms
             // 
             // btnForel
             // 
-            this.btnForel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnForel.BackColor = System.Drawing.Color.DarkGray;
             this.btnForel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnForel.Location = new System.Drawing.Point(1237, 254);
             this.btnForel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -125,7 +126,7 @@ namespace Clusterization_algorithms
             // 
             // btnGenPoints
             // 
-            this.btnGenPoints.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnGenPoints.BackColor = System.Drawing.Color.DarkGray;
             this.btnGenPoints.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnGenPoints.Location = new System.Drawing.Point(1074, 22);
             this.btnGenPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -135,10 +136,12 @@ namespace Clusterization_algorithms
             this.btnGenPoints.Text = "Sensor network detection";
             this.btnGenPoints.UseVisualStyleBackColor = false;
             this.btnGenPoints.Click += new System.EventHandler(this.btnGenPoints_Click);
+            this.btnGenPoints.MouseLeave += new System.EventHandler(this.btnGenPoints_MouseLeave);
+            this.btnGenPoints.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnGenPoints_MouseMove);
             // 
             // btnKMeans
             // 
-            this.btnKMeans.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnKMeans.BackColor = System.Drawing.Color.DarkGray;
             this.btnKMeans.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnKMeans.Location = new System.Drawing.Point(1237, 144);
             this.btnKMeans.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -170,7 +173,7 @@ namespace Clusterization_algorithms
             // 
             // btnCMeans
             // 
-            this.btnCMeans.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnCMeans.BackColor = System.Drawing.Color.DarkGray;
             this.btnCMeans.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCMeans.Location = new System.Drawing.Point(1237, 193);
             this.btnCMeans.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -191,7 +194,7 @@ namespace Clusterization_algorithms
             // 
             // btnRoute
             // 
-            this.btnRoute.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRoute.Location = new System.Drawing.Point(1074, 376);
             this.btnRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -204,7 +207,7 @@ namespace Clusterization_algorithms
             // 
             // btnSpiralRoute
             // 
-            this.btnSpiralRoute.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnSpiralRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnSpiralRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnSpiralRoute.Location = new System.Drawing.Point(1207, 376);
             this.btnSpiralRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -217,7 +220,7 @@ namespace Clusterization_algorithms
             // 
             // btnClustersRoute
             // 
-            this.btnClustersRoute.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnClustersRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnClustersRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnClustersRoute.Location = new System.Drawing.Point(1074, 327);
             this.btnClustersRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -228,11 +231,25 @@ namespace Clusterization_algorithms
             this.btnClustersRoute.UseVisualStyleBackColor = false;
             this.btnClustersRoute.Click += new System.EventHandler(this.btnClustersRoute_Click);
             // 
+            // btnBruteForce
+            // 
+            this.btnBruteForce.BackColor = System.Drawing.Color.DarkGray;
+            this.btnBruteForce.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnBruteForce.Location = new System.Drawing.Point(1076, 425);
+            this.btnBruteForce.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBruteForce.Name = "btnBruteForce";
+            this.btnBruteForce.Size = new System.Drawing.Size(317, 45);
+            this.btnBruteForce.TabIndex = 31;
+            this.btnBruteForce.Text = "Draw route by brute-force";
+            this.btnBruteForce.UseVisualStyleBackColor = false;
+            this.btnBruteForce.Click += new System.EventHandler(this.btnBruteForce_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1412, 775);
+            this.ClientSize = new System.Drawing.Size(1415, 775);
+            this.Controls.Add(this.btnBruteForce);
             this.Controls.Add(this.btnClustersRoute);
             this.Controls.Add(this.btnSpiralRoute);
             this.Controls.Add(this.btnRoute);
@@ -275,6 +292,7 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Button btnRoute;
         private System.Windows.Forms.Button btnSpiralRoute;
         private System.Windows.Forms.Button btnClustersRoute;
+        private System.Windows.Forms.Button btnBruteForce;
     }
 }
 

@@ -34,7 +34,7 @@ namespace Clusterization_algorithms
             Pen pen = new Pen(color);
             pen.Width = 2;
             graphics.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            PAUSE(50);
+            PAUSE(30);
         }
 
         public void DrawPoint(Point p, Brush brush)

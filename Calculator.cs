@@ -33,6 +33,54 @@ namespace Clusterization_algorithms
             return point;
         }
 
+        public static List<Point> FindShortestWay(List<Point> route) {  // brute-force 
+            List<Point> points = new List<Point> { };
+            points.AddRange(route);
+            List<Point> newPoints = new List<Point> { }; 
+
+            points = FixedRecursivePermutation(1, points, 999999999999, newPoints);
+            return points;
+        }
+
+        private static List<Point> FixedRecursivePermutation(int startPos, List<Point> points, double length, List<Point> route) // first and last fixed
+        {
+            int size = points.Count;
+            double newLength = 0;
+
+            if (startPos == size - 1)
+            {
+                newLength = calcRouteLength(points);
+
+                if (newLength < length)
+                {
+                    route.Clear();
+                    route.AddRange(points);
+                }
+
+            }
+            else
+            {
+                for (int j = startPos; j < size - 1; ++j)
+                {
+                    swap(startPos, j, points);
+                    startPos++;
+                    FixedRecursivePermutation(startPos, points, length, route);
+                    startPos--;
+                    swap(startPos, j, points);
+                }
+            }
+
+            return route;
+        }
+
+        private static void swap(int pos_1, int pos_2, List<Point> points)
+        {
+            //Console.WriteLine("swap: " + pos_1 + " <-> " + pos_2);
+            Point point = points[pos_1];
+            points[pos_1] = points[pos_2];
+            points[pos_2] = point;
+        }
+
         // distance between A and B points
         public static double calcDistance(Point a, Point b)
         {
