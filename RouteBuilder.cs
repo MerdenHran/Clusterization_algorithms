@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Clusterization_algorithms
 {
-    class Route
+    class RouteBuilder
     {
         Point startPoint = new Point(0, 0);
         private List<Point> routeList = new List<Point> { };
@@ -24,7 +24,7 @@ namespace Clusterization_algorithms
         public List<Point> RouteList { get => routeList; }
         public List<Point> Convex_hull { get => convex_hull; }
 
-        public Route()
+        public RouteBuilder()
         {
         }
 
@@ -43,14 +43,14 @@ namespace Clusterization_algorithms
             double unsort_route_length = Calculator.calcRouteLength(unsort_route);
             double sort_route_length = Calculator.calcRouteLength(routeList);
 
-            Console.WriteLine("Unsort route length: " + unsort_route_length);
-            Console.WriteLine("Sort route length:   " + sort_route_length);
+            //Console.WriteLine("Unsort route length: " + unsort_route_length);
+            //Console.WriteLine("Sort route length:   " + sort_route_length);
 
             if (unsort_route_length < sort_route_length)
             {
                 routeList.Clear();
                 routeList.AddRange(unsort_route);
-                Console.WriteLine("UNSORTED");
+                //Console.WriteLine("UNSORTED");
             }
 
             all_points.Clear();
@@ -153,8 +153,8 @@ namespace Clusterization_algorithms
             inside_points.AddRange(points);
         }
 
-        private void SortInsidePoints()
-        { // sort inside points by mass center // [спростити, переробити]
+        private void SortInsidePoints() // rework later
+        { 
             Point center = Calculator.findCentroid(all_points);
             Dictionary<Point, double> dict = new Dictionary<Point, double> { };
 
@@ -198,9 +198,6 @@ namespace Clusterization_algorithms
                     routeList.Clear();
                     routeList.AddRange(points);
                 }
-                //for (int i = 0; i < size; i++)
-                //    Console.Write(all_points[i] + " ");  // out
-                //Console.WriteLine();
             }
             else
             {
@@ -217,11 +214,9 @@ namespace Clusterization_algorithms
 
         private void swap(int pos_1, int pos_2, List<Point> points)
         {
-            //Console.WriteLine("swap: " + pos_1 + " <-> " + pos_2);
             Point point = points[pos_1];
             points[pos_1] = points[pos_2];
             points[pos_2] = point;
-            //printArray();
         }
     }
 }

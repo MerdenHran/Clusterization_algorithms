@@ -8,12 +8,12 @@ namespace Clusterization_algorithms
     public partial class Form1 : Form
     {
         Graphic graphic;
+        Graphics graphics;
         Forel forel;
         K_means k_means;
-        Route route;
+        RouteBuilder routeBuilder;
         Dictionary<Point, int> allPoints;
         List<Point> clustersCenter = new List<Point> { };
-        Graphics graphics;
 
         public Form1()
         {
@@ -23,7 +23,7 @@ namespace Clusterization_algorithms
 
             forel = new Forel(graphic);
             k_means = new K_means(graphic);
-            route = new Route();
+            routeBuilder = new RouteBuilder();
         }
 
         private void btnGenPoints_Click(object sender, EventArgs e)
@@ -91,18 +91,18 @@ namespace Clusterization_algorithms
             labelRoute.Text = "";
             ClearFields();
 
-            route.All_points(Calculator.DictionaryToList(allPoints));
-            route.CalculateRoute();
-            graphic.DrawRoute(route.RouteList, Color.Orange);
-            labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
+            routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
+            routeBuilder.CalculateRoute();
+            graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
+            labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
         }
 
         private void btnClustersRoute_Click(object sender, EventArgs e)
         {
-            route.All_points(clustersCenter);
-            route.CalculateRoute();
-            graphic.DrawRoute(route.RouteList, Color.Orange);
-            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.RouteList), 3);
+            routeBuilder.All_points(clustersCenter);
+            routeBuilder.CalculateRoute();
+            graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
         }
 
         private void btnSpiralRoute_Click(object sender, EventArgs e)
@@ -110,10 +110,10 @@ namespace Clusterization_algorithms
             labelRoute.Text = "";
             ClearFields();
 
-            route.All_points(Calculator.DictionaryToList(allPoints));
-            route.JarvisMarch(true);
-            graphic.DrawRoute(route.Convex_hull, Color.Orange);
-            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route.Convex_hull), 3);
+            routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
+            routeBuilder.JarvisMarch(true);
+            graphic.DrawRoute(routeBuilder.Convex_hull, Color.Orange);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.Convex_hull), 3);
         }
 
         private void btnGenPoints_MouseMove(object sender, MouseEventArgs e)
@@ -128,9 +128,9 @@ namespace Clusterization_algorithms
 
         private void btnBruteForce_Click(object sender, EventArgs e)
         {
-            List<Point> points = route.CalculateRouteBruteForce(clustersCenter);
-            graphic.DrawRoute(points, Color.Blue);
-            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(points), 3);
+            List<Point> route = routeBuilder.CalculateRouteBruteForce(clustersCenter);
+            graphic.DrawRoute(route, Color.Blue);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
         }
 
     }
