@@ -24,6 +24,7 @@ namespace Clusterization_algorithms
             forel = new Forel(graphic);
             k_means = new K_means(graphic);
             routeBuilder = new RouteBuilder();
+            //pictBox1Cluster.Visible = false;
         }
 
         private void btnGenPoints_Click(object sender, EventArgs e)
@@ -133,5 +134,16 @@ namespace Clusterization_algorithms
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
         }
 
+        private void btn1ClusterOn_Click(object sender, EventArgs e)
+        {
+            pictBox1Cluster.Visible = true;
+            Console.WriteLine("PictBox1Cluster: W(X)=" + pictBox1Cluster.Width + " H(Y)=" + pictBox1Cluster.Height);
+
+        }
+
+        private void btn1ClusterOff_Click(object sender, EventArgs e)
+        {
+            pictBox1Cluster.Visible = false;
+        }
     }
 }

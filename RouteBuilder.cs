@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace Clusterization_algorithms
 {
@@ -124,7 +122,7 @@ namespace Clusterization_algorithms
             
             if(!getSpiralRoute)
                 points.Add(startPoint);
-            int k = 0;
+            int ki = 0;
 
             do
             {
@@ -133,7 +131,7 @@ namespace Clusterization_algorithms
 
                 for (int i = 0; i < points.Count; i++)
                 { // where cos is min that point is next
-                    double cos = Calculator.FindCOS(convex_hull[k], convex_hull[k + 1], points[i]); // шукаємо косинус кута між векторами
+                    double cos = Calculator.FindCOS(convex_hull[ki], convex_hull[ki + 1], points[i]); // шукаємо косинус кута між векторами
                                                                                                     //Console.WriteLine("cos = " + 
                     if (cos > max_cos)
                     { // чим менший cos тим більший кут () між векторами
@@ -143,7 +141,7 @@ namespace Clusterization_algorithms
                 }
 
                 point = nextPoint;
-                k++;
+                ki++;
                 points.Remove(nextPoint);
                 convex_hull.Add(nextPoint);
 
