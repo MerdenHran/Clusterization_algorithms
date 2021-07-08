@@ -13,7 +13,9 @@ namespace Clusterization_algorithms
         K_means k_means;
         RouteBuilder routeBuilder;
         Dictionary<Point, int> allPoints;
-        List<Point> clustersCenter = new List<Point> { };
+        List<Point> clusterCenters = new List<Point> { };
+        int radius; // in forel
+       // List<Point> route = new List<Point> { };
 
         public Form1()
         {
@@ -44,7 +46,7 @@ namespace Clusterization_algorithms
             textBoxInfo.Clear();
             graphic.DrawPointDictionary(allPoints);
             textBoxInfo.Text = Calculator.printPointsDictionary(allPoints);
-            clustersCenter.Clear();
+            clusterCenters.Clear();
         }
 
         private void btnKMeans_Click(object sender, EventArgs e)
@@ -65,7 +67,7 @@ namespace Clusterization_algorithms
             k_means.Seeds = seeds;
             k_means.startK_means();
 
-            clustersCenter = k_means.Seeds;
+            clusterCenters = k_means.Seeds;
 
             textBoxInfo.Text = Calculator.printPointsDictionary(k_means.getPoints());
         }
@@ -78,11 +80,12 @@ namespace Clusterization_algorithms
             forel.setPoints(allPoints);
             forel.Radius = 100;
 
-            if (Int32.TryParse(textBoxSetRadius.Text, out int radius))
-                forel.Radius = radius;
+            if (Int32.TryParse(textBoxSetRadius.Text, out int r))
+                forel.Radius = r;
 
+            radius = forel.Radius;
             forel.startForel();
-            clustersCenter = forel.listOfClastersCenter;
+            clusterCenters = forel.listOfClastersCenter;
 
             textBoxInfo.Text = Calculator.printPointsDictionary(forel.getPoints());
         }
@@ -100,7 +103,7 @@ namespace Clusterization_algorithms
 
         private void btnClustersRoute_Click(object sender, EventArgs e)
         {
-            routeBuilder.All_points(clustersCenter);
+            routeBuilder.All_points(clusterCenters);
             routeBuilder.CalculateRoute();
             graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
@@ -129,21 +132,55 @@ namespace Clusterization_algorithms
 
         private void btnBruteForce_Click(object sender, EventArgs e)
         {
-            List<Point> route = routeBuilder.CalculateRouteBruteForce(clustersCenter);
+            List<Point> route = routeBuilder.CalculateRouteBruteForce(clusterCenters);
             graphic.DrawRoute(route, Color.Blue);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
         }
 
         private void btn1ClusterOn_Click(object sender, EventArgs e)
         {
-            pictBox1Cluster.Visible = true;
-            Console.WriteLine("PictBox1Cluster: W(X)=" + pictBox1Cluster.Width + " H(Y)=" + pictBox1Cluster.Height);
+            int clusterNum = 1;
 
+            if (Int32.TryParse(textBoxSetClusterNum.Text, out int num))
+                clusterNum = num;
+
+            clusterNum--;
+
+            Point center = clusterCenters[clusterNum]; // cluster center
+            List<Point> cluster = Calculator.getCluster(clusterNum, allPoints);
+
+            Point vector = new Point(center.X - radius, center.Y - radius);
+            center = new Point(radius, radius);
+            Calculator.moveCluster(cluster, vector);
+
+            Calculator.printPointList(cluster);
         }
 
         private void btn1ClusterOff_Click(object sender, EventArgs e)
         {
-            pictBox1Cluster.Visible = false;
+            DrawAllObject();
+        }
+
+        private void DrawAllObject() {
+            graphics.Clear(Color.White);
+            textBoxInfo.Clear();
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPoints);
+
+            if (allPoints.Count != 0)
+                graphic.DrawPointDictionary(allPoints);
+
+            if (clusterCenters.Count != 0) {
+                for (int i = 0; i < clusterCenters.Count; i++) {
+                    graphic.DrawPoint(clusterCenters[i], Brushes.Red);
+                    graphic.DrawCircle(clusterCenters[i], radius, Color.Black, 0);
+                }
+            }
+
+            if (routeBuilder.RouteList.Count != 0)
+            {
+                graphic.DrawRoute(routeBuilder.RouteList, Color.Orange, 0);
+                labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
+            }
         }
     }
 }

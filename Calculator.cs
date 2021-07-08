@@ -86,6 +86,12 @@ namespace Clusterization_algorithms
             return str;
         }
 
+        public static void printPointList(List<Point> points) {
+            Console.WriteLine("Point list");
+            for (int i = 0; i < points.Count; i++)
+                Console.WriteLine(i + ". " + points[i].ToString());
+        }
+
         public static Dictionary<Point, int> setStaticPoints() {
 
             List<Point> pointList = new List<Point> {
@@ -276,6 +282,23 @@ namespace Clusterization_algorithms
         public static Dictionary<Point, double> sortDictionaryByValue(Dictionary<Point, double> dictionary)
         {
             return dictionary.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        public static List<Point> getCluster(int clusterNum, Dictionary<Point, int> dictionary) {
+            List<Point> cluster = new List<Point> { };
+
+            for (int i = 0; i < dictionary.Count; i++) {
+                if (dictionary.ElementAt(i).Value == clusterNum) {
+                    cluster.Add(dictionary.ElementAt(i).Key);
+                }
+            }
+            return cluster;
+        }
+
+        public static void moveCluster(List<Point> cluster, Point vector) {
+            for (int i = 0; i < cluster.Count; i++) {
+                cluster[i] = new Point(cluster[i].X - vector.X, cluster[i].Y - vector.Y);
+            }
         }
     }
 }

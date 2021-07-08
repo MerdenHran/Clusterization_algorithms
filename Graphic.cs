@@ -28,12 +28,12 @@ namespace Clusterization_algorithms
             graphics.DrawLine(pen, p1, p2);
         }
 
-        public void DrawCircle(Point p, int radius, Color color)
+        public void DrawCircle(Point p, int radius, Color color, int pause = 30)
         {
             Pen pen = new Pen(color);
             pen.Width = 2;
             graphics.DrawEllipse(pen, p.X - radius, p.Y - radius, 2 * radius, 2 * radius);
-            PAUSE(30);
+            PAUSE(pause);
         }
 
         public void DrawPoint(Point p, Brush brush)
@@ -59,11 +59,11 @@ namespace Clusterization_algorithms
             graphics.Clear(Color.White);
         }
 
-        public void DrawRoute(List<Point> points, Color color)
+        public void DrawRoute(List<Point> points, Color color, int pause = 10)
         {
             for (int i = 1; i < points.Count; i++) {
                 DrawLine(points[i - 1], points[i], color);
-                PAUSE(10);
+                PAUSE(pause);
             }
         }
     }

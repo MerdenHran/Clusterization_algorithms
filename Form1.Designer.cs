@@ -48,10 +48,8 @@ namespace Clusterization_algorithms
             this.btnBruteForce = new System.Windows.Forms.Button();
             this.btn1ClusterOn = new System.Windows.Forms.Button();
             this.textBoxSetClusterNum = new System.Windows.Forms.TextBox();
-            this.pictBox1Cluster = new System.Windows.Forms.PictureBox();
             this.btn1ClusterOff = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictBox1Cluster)).BeginInit();
             this.SuspendLayout();
             // 
             // pictBoxArea
@@ -271,18 +269,6 @@ namespace Clusterization_algorithms
             this.textBoxSetClusterNum.Size = new System.Drawing.Size(106, 32);
             this.textBoxSetClusterNum.TabIndex = 33;
             // 
-            // pictBox1Cluster
-            // 
-            this.pictBox1Cluster.BackColor = System.Drawing.Color.LightCyan;
-            this.pictBox1Cluster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictBox1Cluster.Enabled = false;
-            this.pictBox1Cluster.Location = new System.Drawing.Point(158, 11);
-            this.pictBox1Cluster.Name = "pictBox1Cluster";
-            this.pictBox1Cluster.Size = new System.Drawing.Size(650, 643);
-            this.pictBox1Cluster.TabIndex = 34;
-            this.pictBox1Cluster.TabStop = false;
-            this.pictBox1Cluster.Visible = false;
-            // 
             // btn1ClusterOff
             // 
             this.btn1ClusterOff.Location = new System.Drawing.Point(1235, 511);
@@ -299,7 +285,6 @@ namespace Clusterization_algorithms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1414, 775);
             this.Controls.Add(this.btn1ClusterOff);
-            this.Controls.Add(this.pictBox1Cluster);
             this.Controls.Add(this.textBoxSetClusterNum);
             this.Controls.Add(this.btn1ClusterOn);
             this.Controls.Add(this.btnBruteForce);
@@ -322,7 +307,6 @@ namespace Clusterization_algorithms
             this.Name = "Form1";
             this.Text = "Clusterization algorithms";
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictBox1Cluster)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,7 +333,6 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Button btnBruteForce;
         private System.Windows.Forms.Button btn1ClusterOn;
         private System.Windows.Forms.TextBox textBoxSetClusterNum;
-        private System.Windows.Forms.PictureBox pictBox1Cluster;
         private System.Windows.Forms.Button btn1ClusterOff;
     }
 }
