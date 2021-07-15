@@ -55,6 +55,12 @@ namespace Clusterization_algorithms
                 DrawPoint(result.Key, Brushes.Black);
         }
 
+        public void DrawPointList(List<Point> points)
+        {
+            foreach (Point point in points)
+                DrawPoint(point, Brushes.Black);
+        }
+
         public void ClearImage() {
             graphics.Clear(Color.White);
         }

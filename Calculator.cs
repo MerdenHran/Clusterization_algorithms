@@ -86,10 +86,17 @@ namespace Clusterization_algorithms
             return str;
         }
 
-        public static void printPointList(List<Point> points) {
-            Console.WriteLine("Point list");
-            for (int i = 0; i < points.Count; i++)
-                Console.WriteLine(i + ". " + points[i].ToString());
+        public static String printPointList(List<Point> points) {
+            String str = "";
+
+            Console.WriteLine("\nPoints list:");
+            foreach (var point in points)
+            {
+                Console.WriteLine(point.ToString());
+                str += point.ToString() + "\n";
+            }
+            Console.WriteLine();
+            return str;
         }
 
         public static Dictionary<Point, int> setStaticPoints() {
@@ -290,14 +297,46 @@ namespace Clusterization_algorithms
             for (int i = 0; i < dictionary.Count; i++) {
                 if (dictionary.ElementAt(i).Value == clusterNum) {
                     cluster.Add(dictionary.ElementAt(i).Key);
+                    //Console.WriteLine(dictionary.ElementAt(i).Value + " "+ dictionary.ElementAt(i).Key + " "+ clusterNum);
                 }
             }
             return cluster;
         }
 
-        public static void moveCluster(List<Point> cluster, Point vector) {
+        public static void MoveCluster(List<Point> cluster, Point vector) {
             for (int i = 0; i < cluster.Count; i++) {
                 cluster[i] = new Point(cluster[i].X - vector.X, cluster[i].Y - vector.Y);
+            }
+        }
+
+        public static void ZoomCluster(List<Point> cluster, int zoom)
+        {
+            for (int i = 0; i < cluster.Count; i++)
+            {
+                cluster[i] = new Point(cluster[i].X * zoom, cluster[i].Y * zoom);
+            }
+        }
+
+        public static Dictionary<Point, int> copyDictionary(Dictionary<Point, int> dictionary) {
+            Dictionary<Point, int> newDictionary = new Dictionary<Point, int> { };
+            foreach (var pair in dictionary)
+                newDictionary.Add(pair.Key, pair.Value);
+
+            return newDictionary;
+        }
+
+        public static void printIntArray(int[] array)
+        {
+            Console.WriteLine("Print int array");
+            foreach (int num in array)
+                Console.Write(num + " ");
+        }
+
+        public static void printIntList(List<int> list)
+        {
+            Console.WriteLine("Print int list");
+            foreach (int num in list){
+                Console.WriteLine(num.ToString());
             }
         }
     }

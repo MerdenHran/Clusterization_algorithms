@@ -263,20 +263,22 @@ namespace Clusterization_algorithms
             // textBoxSetClusterNum
             // 
             this.textBoxSetClusterNum.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetClusterNum.Location = new System.Drawing.Point(1283, 515);
+            this.textBoxSetClusterNum.Location = new System.Drawing.Point(1281, 515);
             this.textBoxSetClusterNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetClusterNum.Name = "textBoxSetClusterNum";
-            this.textBoxSetClusterNum.Size = new System.Drawing.Size(106, 32);
+            this.textBoxSetClusterNum.Size = new System.Drawing.Size(110, 32);
             this.textBoxSetClusterNum.TabIndex = 33;
             // 
             // btn1ClusterOff
             // 
-            this.btn1ClusterOff.Location = new System.Drawing.Point(1235, 511);
+            this.btn1ClusterOff.BackColor = System.Drawing.Color.Salmon;
+            this.btn1ClusterOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn1ClusterOff.Location = new System.Drawing.Point(1235, 513);
             this.btn1ClusterOff.Name = "btn1ClusterOff";
-            this.btn1ClusterOff.Size = new System.Drawing.Size(42, 42);
+            this.btn1ClusterOff.Size = new System.Drawing.Size(40, 40);
             this.btn1ClusterOff.TabIndex = 35;
             this.btn1ClusterOff.Text = "×";
-            this.btn1ClusterOff.UseVisualStyleBackColor = true;
+            this.btn1ClusterOff.UseVisualStyleBackColor = false;
             this.btn1ClusterOff.Click += new System.EventHandler(this.btn1ClusterOff_Click);
             // 
             // Form1

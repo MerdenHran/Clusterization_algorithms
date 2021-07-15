@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Clusterization_algorithms
@@ -6,10 +7,11 @@ namespace Clusterization_algorithms
     class RouteBuilder
     {
         Point startPoint = new Point(0, 0);
-        private List<Point> routeList = new List<Point> { };
+        private List<Point> all_points = new List<Point> { }; // start point position
+        private List<Point> routeList = new List<Point> { }; // finish point position
         private List<Point> convex_hull = new List<Point> { };
         private List<Point> inside_points = new List<Point> { };
-        private List<Point> all_points = new List<Point> { };
+        private List<int> indexes = new List<int> { };
 
         //Brute-force
         private double length;
@@ -51,7 +53,9 @@ namespace Clusterization_algorithms
                 //Console.WriteLine("UNSORTED");
             }
 
-            all_points.Clear();
+            findIndexes();
+
+            //all_points.Clear();
             return routeList;
         }
 
@@ -180,6 +184,7 @@ namespace Clusterization_algorithms
             length = 9999999;
             RecursivePermutation(1, newPoints);
 
+            findIndexes();
             return routeList;
         }
 
@@ -215,6 +220,30 @@ namespace Clusterization_algorithms
             Point point = points[pos_1];
             points[pos_1] = points[pos_2];
             points[pos_2] = point;
+        }
+
+        private void findIndexes()
+        {
+            indexes.Clear();
+            //Calculator.printPointList(all_points);
+            //Calculator.printPointList(routeList);
+            foreach (Point point in all_points) {
+                int index = routeList.IndexOf(point);
+                indexes.Add(index);
+                Console.Write(index + " ");
+            }
+            //Calculator.printIntList(indexes);
+        }
+
+        public Dictionary<Point, int> SortClustersByRoute(Dictionary<Point, int> dictionary) {
+            Dictionary<Point, int> newDict = new Dictionary<Point, int> { };
+            foreach (var pair in dictionary) {
+                int old_cluster = pair.Value;
+                int new_cluster = indexes[old_cluster-1];
+                newDict.Add(pair.Key, new_cluster);
+            }
+
+            return newDict;
         }
     }
 }
