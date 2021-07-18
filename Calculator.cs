@@ -303,17 +303,17 @@ namespace Clusterization_algorithms
             return cluster;
         }
 
-        public static void MoveCluster(List<Point> cluster, Point vector) {
+        public static void MovePointList(List<Point> cluster, Point vector) {
             for (int i = 0; i < cluster.Count; i++) {
                 cluster[i] = new Point(cluster[i].X - vector.X, cluster[i].Y - vector.Y);
             }
         }
 
-        public static void ZoomCluster(List<Point> cluster, int zoom)
+        public static void ZoomPointList(List<Point> list, int zoom)
         {
-            for (int i = 0; i < cluster.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                cluster[i] = new Point(cluster[i].X * zoom, cluster[i].Y * zoom);
+                list[i] = new Point(list[i].X * zoom, list[i].Y * zoom);
             }
         }
 

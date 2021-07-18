@@ -169,22 +169,24 @@ namespace Clusterization_algorithms
             //graphic.DrawCircle(center, radius, Color.Black, 0);
 
             Point vector = new Point(center.X - radius, center.Y - radius);
-            //center = new Point(radius, radius);
-            //Calculator.MoveCluster(cluster, vector);
-            
+            center = new Point(radius, radius);
+            Calculator.MovePointList(cluster, vector);
+            Calculator.MovePointList(routeFragment, vector);
 
-            //int size = pictBoxArea.Height;
-            //if (pictBoxArea.Width < size)
-                //size = pictBoxArea.Width;
 
-            //int zoom = size / radius;
-            //Console.WriteLine("zoom: " + zoom);
-            //int xy = radius * zoom;
-            //center = new Point(xy, xy);
-            //Calculator.ZoomCluster(cluster, zoom);
+            int size = pictBoxArea.Height;
+            if (pictBoxArea.Width < size)
+                size = pictBoxArea.Width;
 
-            graphic.DrawPoint(center, Brushes.Red);
-            graphic.DrawCircle(center, radius, Color.Black, 0);
+            int zoom = size / (radius * 2);
+            Console.WriteLine("zoom: " + zoom);
+            int newRadius = radius * zoom;
+            Point newCenter = new Point(center.X * zoom, center.Y * zoom);
+            Calculator.ZoomPointList(cluster, zoom);
+            Calculator.ZoomPointList(routeFragment, zoom);
+
+            graphic.DrawPoint(newCenter, Brushes.Red);
+            graphic.DrawCircle(newCenter, newRadius, Color.Black, 0);
             graphic.DrawPointList(cluster);
             graphic.DrawRoute(routeFragment, Color.Orange);
             //Calculator.printPointList(cluster);
