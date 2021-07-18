@@ -13,7 +13,7 @@ namespace Clusterization_algorithms
         K_means k_means;
         RouteBuilder routeBuilder;
         Dictionary<Point, int> allPoints;
-        Dictionary<Point, int> allPointsClustered;
+        Dictionary<Point, int> allPointsInClusters;
         List<Point> clusterCenters = new List<Point> { };
         int radius; // in forel
        // List<Point> route = new List<Point> { };
@@ -38,7 +38,8 @@ namespace Clusterization_algorithms
             if (Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                 allPoints = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
 
-            allPointsClustered = allPoints;
+            allPointsInClusters = allPoints;
+            routeBuilder.RouteList = new List<Point> { };
 
             ClearFields();
         }
@@ -72,7 +73,7 @@ namespace Clusterization_algorithms
             clusterCenters = k_means.Seeds;
 
             textBoxInfo.Text = Calculator.printPointsDictionary(k_means.getPoints());
-            allPointsClustered = k_means.getPoints();
+            allPointsInClusters = k_means.getPoints();
         }
 
         private void btnForel_Click(object sender, EventArgs e)
@@ -91,7 +92,7 @@ namespace Clusterization_algorithms
             clusterCenters = forel.listOfClastersCenter;
 
             textBoxInfo.Text = Calculator.printPointsDictionary(forel.getPoints());
-            allPointsClustered = forel.getPoints();
+            allPointsInClusters = forel.getPoints();
         }
 
         private void btnRoute_Click(object sender, EventArgs e) // all points route
@@ -112,8 +113,8 @@ namespace Clusterization_algorithms
             graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
 
-            allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
+            //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsInClusters);
         }
 
         private void btnSpiralRoute_Click(object sender, EventArgs e)
@@ -143,8 +144,8 @@ namespace Clusterization_algorithms
             List<Point> route = routeBuilder.CalculateRouteBruteForce(clusterCenters);
             graphic.DrawRoute(route, Color.Blue);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
-            allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
+            //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsInClusters);
         }
 
         private void btn1ClusterOn_Click(object sender, EventArgs e)
@@ -155,27 +156,29 @@ namespace Clusterization_algorithms
             if (Int32.TryParse(textBoxSetClusterNum.Text, out int num))
                 clusterNum = num;
 
-            List<Point> cluster = Calculator.getCluster(clusterNum, allPointsClustered);
+            List<Point> cluster = Calculator.getCluster(clusterNum, allPointsInClusters);
 
             Point center = Calculator.findCentroid(cluster);
+            List<Point> routeFragment = routeBuilder.getRouteFragment(center);
             //Point center = clusterCenters[clusterNum - 1];
             //Point center = routeBuilder.RouteList[clusterNum];
-            
+
             //textBoxInfo.Text = Calculator.printPointList(cluster);
             //graphic.DrawPointList(cluster);
             //graphic.DrawPoint(center, Brushes.Red);
             //graphic.DrawCircle(center, radius, Color.Black, 0);
 
             Point vector = new Point(center.X - radius, center.Y - radius);
-            center = new Point(radius, radius);
-            Calculator.MoveCluster(cluster, vector);
+            //center = new Point(radius, radius);
+            //Calculator.MoveCluster(cluster, vector);
+            
 
-            int size = pictBoxArea.Height;
-            if (pictBoxArea.Width < size)
-                size = pictBoxArea.Width;
+            //int size = pictBoxArea.Height;
+            //if (pictBoxArea.Width < size)
+                //size = pictBoxArea.Width;
 
-            int zoom = size / radius;
-            Console.WriteLine("zoom: " + zoom);
+            //int zoom = size / radius;
+            //Console.WriteLine("zoom: " + zoom);
             //int xy = radius * zoom;
             //center = new Point(xy, xy);
             //Calculator.ZoomCluster(cluster, zoom);
@@ -183,7 +186,7 @@ namespace Clusterization_algorithms
             graphic.DrawPoint(center, Brushes.Red);
             graphic.DrawCircle(center, radius, Color.Black, 0);
             graphic.DrawPointList(cluster);
-
+            graphic.DrawRoute(routeFragment, Color.Orange);
             //Calculator.printPointList(cluster);
         }
 
@@ -195,7 +198,7 @@ namespace Clusterization_algorithms
         private void DrawAllObject() {
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsInClusters);
 
             if (allPoints.Count != 0)
                 graphic.DrawPointDictionary(allPoints);

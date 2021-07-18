@@ -11,7 +11,7 @@ namespace Clusterization_algorithms
         private List<Point> routeList = new List<Point> { }; // finish point position
         private List<Point> convex_hull = new List<Point> { };
         private List<Point> inside_points = new List<Point> { };
-        private List<int> indexes = new List<int> { };
+        //private List<int> indexes = new List<int> { };
 
         //Brute-force
         private double length;
@@ -21,8 +21,8 @@ namespace Clusterization_algorithms
             all_points.Clear();
             all_points.AddRange(points);
         }
-        public List<Point> RouteList { get => routeList; }
         public List<Point> Convex_hull { get => convex_hull; }
+        public List<Point> RouteList { get => routeList; set => routeList = value; }
 
         public RouteBuilder()
         {
@@ -53,7 +53,7 @@ namespace Clusterization_algorithms
                 //Console.WriteLine("UNSORTED");
             }
 
-            findIndexes();
+            //findIndexes();
 
             //all_points.Clear();
             return routeList;
@@ -184,7 +184,7 @@ namespace Clusterization_algorithms
             length = 9999999;
             RecursivePermutation(1, newPoints);
 
-            findIndexes();
+            //findIndexes();
             return routeList;
         }
 
@@ -222,28 +222,45 @@ namespace Clusterization_algorithms
             points[pos_2] = point;
         }
 
-        private void findIndexes()
-        {
-            indexes.Clear();
-            //Calculator.printPointList(all_points);
-            //Calculator.printPointList(routeList);
-            foreach (Point point in all_points) {
-                int index = routeList.IndexOf(point);
-                indexes.Add(index);
-                Console.Write(index + " ");
+        public List<Point> getRouteFragment(Point point) {
+            List<Point> fragment = new List<Point> { };
+
+            for (int i = 0; i < routeList.Count; i++) {
+                //Console.WriteLine(i+". "+routeList[i]);
+                if (routeList[i] == point) {
+
+                    fragment.Add(routeList[i - 1]);
+                    fragment.Add(routeList[i]);
+                    fragment.Add(routeList[i + 1]);
+                    
+                    return fragment;
+                }
             }
-            //Calculator.printIntList(indexes);
+            return routeList;
         }
 
-        public Dictionary<Point, int> SortClustersByRoute(Dictionary<Point, int> dictionary) {
-            Dictionary<Point, int> newDict = new Dictionary<Point, int> { };
-            foreach (var pair in dictionary) {
-                int old_cluster = pair.Value;
-                int new_cluster = indexes[old_cluster-1];
-                newDict.Add(pair.Key, new_cluster);
-            }
+        //private void findIndexes()
+        //{
+        //    indexes.Clear();
+        //    //Calculator.printPointList(all_points);
+        //    //Calculator.printPointList(routeList);
+        //    foreach (Point point in all_points) {
+        //        int index = routeList.IndexOf(point);
+        //        indexes.Add(index);
+        //        Console.Write(index + " ");
+        //    }
+        //    //Calculator.printIntList(indexes);
+        //}
 
-            return newDict;
-        }
+        //public Dictionary<Point, int> SortClustersByRoute(Dictionary<Point, int> dictionary) {
+        //    Dictionary<Point, int> newDict = new Dictionary<Point, int> { };
+        //    foreach (var pair in dictionary) {
+        //        int old_cluster = pair.Value;
+        //        int new_cluster = indexes[old_cluster-1];
+        //        newDict.Add(pair.Key, new_cluster);
+        //    }
+
+        //    return newDict;
+        //}
     }
 }
