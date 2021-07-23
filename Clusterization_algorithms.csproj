@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="EnergyCalculator.cs" />
     <Compile Include="Forel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

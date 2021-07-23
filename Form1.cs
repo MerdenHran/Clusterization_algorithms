@@ -12,8 +12,9 @@ namespace Clusterization_algorithms
         Forel forel;
         K_means k_means;
         RouteBuilder routeBuilder;
+        EnergyCalculator energyCalculator;
         Dictionary<Point, int> allPoints;
-        Dictionary<Point, int> allPointsInClusters;
+        Dictionary<Point, int> allPointsClustered;
         List<Point> clusterCenters = new List<Point> { };
         int radius; // in forel
        // List<Point> route = new List<Point> { };
@@ -38,8 +39,9 @@ namespace Clusterization_algorithms
             if (Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                 allPoints = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
 
-            allPointsInClusters = allPoints;
+            allPointsClustered = allPoints;
             routeBuilder.RouteList = new List<Point> { };
+            energyCalculator = new EnergyCalculator(allPoints);
 
             ClearFields();
         }
@@ -73,7 +75,7 @@ namespace Clusterization_algorithms
             clusterCenters = k_means.Seeds;
 
             textBoxInfo.Text = Calculator.printPointsDictionary(k_means.getPoints());
-            allPointsInClusters = k_means.getPoints();
+            allPointsClustered = k_means.getPoints();
         }
 
         private void btnForel_Click(object sender, EventArgs e)
@@ -92,7 +94,7 @@ namespace Clusterization_algorithms
             clusterCenters = forel.listOfClastersCenter;
 
             textBoxInfo.Text = Calculator.printPointsDictionary(forel.getPoints());
-            allPointsInClusters = forel.getPoints();
+            allPointsClustered = forel.getPoints();
         }
 
         private void btnRoute_Click(object sender, EventArgs e) // all points route
@@ -114,7 +116,7 @@ namespace Clusterization_algorithms
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
 
             //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsInClusters);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
         }
 
         private void btnSpiralRoute_Click(object sender, EventArgs e)
@@ -145,7 +147,7 @@ namespace Clusterization_algorithms
             graphic.DrawRoute(route, Color.Blue);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
             //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsInClusters);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
         }
 
         private void btn1ClusterOn_Click(object sender, EventArgs e)
@@ -156,7 +158,7 @@ namespace Clusterization_algorithms
             if (Int32.TryParse(textBoxSetClusterNum.Text, out int num))
                 clusterNum = num;
 
-            List<Point> cluster = Calculator.getCluster(clusterNum, allPointsInClusters);
+            List<Point> cluster = Calculator.getCluster(clusterNum, allPointsClustered);
 
             Point center = Calculator.findCentroid(cluster);
             List<Point> routeFragment = routeBuilder.getRouteFragment(center);
@@ -200,7 +202,7 @@ namespace Clusterization_algorithms
         private void DrawAllObject() {
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsInClusters);
+            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
 
             if (allPoints.Count != 0)
                 graphic.DrawPointDictionary(allPoints);
@@ -217,6 +219,12 @@ namespace Clusterization_algorithms
                 graphic.DrawRoute(routeBuilder.RouteList, Color.Orange, 0);
                 labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
             }
+        }
+
+        private void btnCalcEnergy_Click(object sender, EventArgs e) {
+            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters);
+
+            
         }
     }
 }

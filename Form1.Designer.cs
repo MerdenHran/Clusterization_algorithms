@@ -49,6 +49,7 @@ namespace Clusterization_algorithms
             this.btn1ClusterOn = new System.Windows.Forms.Button();
             this.textBoxSetClusterNum = new System.Windows.Forms.TextBox();
             this.btn1ClusterOff = new System.Windows.Forms.Button();
+            this.btnCalcEnergy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -281,11 +282,25 @@ namespace Clusterization_algorithms
             this.btn1ClusterOff.UseVisualStyleBackColor = false;
             this.btn1ClusterOff.Click += new System.EventHandler(this.btn1ClusterOff_Click);
             // 
+            // btnCalcEnergy
+            // 
+            this.btnCalcEnergy.BackColor = System.Drawing.Color.DarkGray;
+            this.btnCalcEnergy.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCalcEnergy.Location = new System.Drawing.Point(1074, 557);
+            this.btnCalcEnergy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCalcEnergy.Name = "btnCalcEnergy";
+            this.btnCalcEnergy.Size = new System.Drawing.Size(317, 45);
+            this.btnCalcEnergy.TabIndex = 36;
+            this.btnCalcEnergy.Text = "Calculate energy";
+            this.btnCalcEnergy.UseVisualStyleBackColor = false;
+            this.btnCalcEnergy.Click += new System.EventHandler(this.btnCalcEnergy_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1414, 775);
+            this.Controls.Add(this.btnCalcEnergy);
             this.Controls.Add(this.btn1ClusterOff);
             this.Controls.Add(this.textBoxSetClusterNum);
             this.Controls.Add(this.btn1ClusterOn);
@@ -336,6 +351,7 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Button btn1ClusterOn;
         private System.Windows.Forms.TextBox textBoxSetClusterNum;
         private System.Windows.Forms.Button btn1ClusterOff;
+        private System.Windows.Forms.Button btnCalcEnergy;
     }
 }
 
