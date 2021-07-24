@@ -22,6 +22,7 @@ namespace Clusterization_algorithms
         public Form1()
         {
             InitializeComponent();
+            //pictBoxArea.Size = new System.Drawing.Size(600, 600);
             graphics = pictBoxArea.CreateGraphics();
             graphic = new Graphic(graphics);
 
