@@ -223,7 +223,12 @@ namespace Clusterization_algorithms
         }
 
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
-            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters);
+            int station_height = 10;
+
+            if(int.TryParse(textBoxSetHeight.Text, out int height))
+                station_height = height;
+
+            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters, station_height);
 
             
         }

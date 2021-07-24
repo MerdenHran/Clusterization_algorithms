@@ -12,6 +12,7 @@ namespace Clusterization_algorithms
         Dictionary<Point, int> allNodes; // int - num of cluster
         Dictionary<Point, double> nodesLevelCharge = new Dictionary<Point, double> { };
         List<int> clustersEnergy = new List<int> { };
+        double stationUsedE = 0; //energy used by station
 
         //--------- Energy consumption parameters ------------
         double E_fs = 0.01;//nJ(10^-9) amplifier energy, free space model (short distance) | d<d0
@@ -19,6 +20,8 @@ namespace Clusterization_algorithms
         int E_elec = 50; //nJ, energy for work signal transmission/recieve
         int node_E = 500000000; //nJ; = 0,5J // initial node energy
         double d0 = 87.7; // (m) distance threshold for swapping amplification models
+        int package = 4000; // bytes, package size
+        //int package = Calculator.genRandInt(20, 65535);
         //----------------------------------------------------
 
         public EnergyCalculator(Dictionary<Point, int> allNodes)
@@ -31,36 +34,45 @@ namespace Clusterization_algorithms
             //d0 = Math.Sqrt(E_fs / E_mp);
         }
 
-        public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> clusterCenters) {
+        public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> clusterCenters, int stationHeight) {
 
             for (int i = 1; i < clusterCenters.Count; i++) {
                 List<Point> cluster = Calculator.getCluster(i, nodesClustered);
-                Start_DT_Protocol(cluster);
+                Start_DT_Protocol(cluster, stationHeight);
 
 
 
             }
         }
 
-        public void Start_DT_Protocol(List<Point> cluster) { // direct transmission in cluster, calculate energy
+        public void Start_DT_Protocol(List<Point> cluster, int stationHeight) { // direct transmission in cluster, calculate energy
             Point center = Calculator.findCentroid(cluster);
             foreach (Point point in cluster)
-                PPConnection(point, center);
+                PPConnection(point, center, stationHeight);
         }
 
-        public int PPConnection(Point node, Point station) {
-            //int len = Calculator.genRandInt(20, 65535); // bytes, package size
-            int len = 4000;
-            double dist = Calculator.calcDistance(node, station);
-            Console.WriteLine("Distance: " + Math.Round(dist));
-            if (dist >= d0)
-                dist = Math.Pow(dist, 2);
+        public int PPConnection(Point node, Point station, int stationHeight) {
 
-            double E_transmission = len * E_elec + len * E_fs * Math.Pow(dist, 2);
-            double E_receive = len * E_elec;
+            double distH0 = Calculator.calcDistance(node, station);
+            double dist = Math.Sqrt(distH0 * distH0 + stationHeight * stationHeight);
+
+            Console.WriteLine("Distance: " + Math.Round(dist) + " Height: " + stationHeight);
+            
+            double E_transmission = 0;
             Console.WriteLine(node + " " + station);
-            Console.WriteLine("E: " + E_transmission + " -> " + E_receive);
 
+            if (dist < d0)
+                E_transmission = package * E_elec + package * E_fs * Math.Pow(dist, 2); // nJ
+            else
+                E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // J
+
+            double E_receive = package * E_elec;
+
+            if(dist < d0)
+                Console.WriteLine("E: " + E_transmission + " nJ -> " + E_receive+" nJ");
+            else
+                Console.WriteLine("E: " + E_transmission / 1000000000 + " J -> " + E_receive + " nJ");
+            
             return 0;
         }
 

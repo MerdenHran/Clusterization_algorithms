@@ -50,6 +50,8 @@ namespace Clusterization_algorithms
             this.textBoxSetClusterNum = new System.Windows.Forms.TextBox();
             this.btn1ClusterOff = new System.Windows.Forms.Button();
             this.btnCalcEnergy = new System.Windows.Forms.Button();
+            this.textBoxSetHeight = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -295,11 +297,32 @@ namespace Clusterization_algorithms
             this.btnCalcEnergy.UseVisualStyleBackColor = false;
             this.btnCalcEnergy.Click += new System.EventHandler(this.btnCalcEnergy_Click);
             // 
+            // textBoxSetHeight
+            // 
+            this.textBoxSetHeight.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSetHeight.Location = new System.Drawing.Point(1307, 611);
+            this.textBoxSetHeight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxSetHeight.Name = "textBoxSetHeight";
+            this.textBoxSetHeight.Size = new System.Drawing.Size(107, 32);
+            this.textBoxSetHeight.TabIndex = 37;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(1089, 614);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(212, 24);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Set station flying height:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1426, 768);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxSetHeight);
             this.Controls.Add(this.btnCalcEnergy);
             this.Controls.Add(this.btn1ClusterOff);
             this.Controls.Add(this.textBoxSetClusterNum);
@@ -352,6 +375,8 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.TextBox textBoxSetClusterNum;
         private System.Windows.Forms.Button btn1ClusterOff;
         private System.Windows.Forms.Button btnCalcEnergy;
+        private System.Windows.Forms.TextBox textBoxSetHeight;
+        private System.Windows.Forms.Label label4;
     }
 }
 
