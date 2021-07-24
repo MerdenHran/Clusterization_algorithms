@@ -10,11 +10,15 @@ namespace Clusterization_algorithms
     class EnergyCalculator // DEEC algorithm
     {
         Dictionary<Point, int> allNodes; // int - num of cluster
-        Dictionary<Point, double> nodesLevelCharge;
+        Dictionary<Point, double> nodesLevelCharge = new Dictionary<Point, double> { };
+        List<int> clustersEnergy = new List<int> { };
 
         //--------- Energy consumption parameters ------------
-        double E_amp;// amplifier energy
-        int E_tx, E_rx, E_da, maxNodeCharge;
+        double E_fs = 0.01;//nJ(10^-9) amplifier energy, free space model (short distance) | d<d0
+        double E_mp = 1300000; //nJ // multipath fading model (large distance) | d >= d0
+        int E_elec = 50; //nJ, energy for work signal transmission/recieve
+        int node_E = 500000000; //nJ; = 0,5J // initial node energy
+        double d0; //= 8,77 (m) distance threshold for swapping amplification models
         //----------------------------------------------------
 
         public EnergyCalculator(Dictionary<Point, int> allNodes)
@@ -22,31 +26,41 @@ namespace Clusterization_algorithms
             this.allNodes = allNodes;
 
             foreach (var node in allNodes)
-                nodesLevelCharge.Add(node.Key, 100); // 100% charge
+                nodesLevelCharge.Add(node.Key, node_E);
 
-            E_amp = 0.0013; // amplifier energy
-            E_tx = 50; // (nJ) (1nJ = 10 pow -9 J) energy for signal transmission
-            E_rx = 50; // (nJ), energy to receive the signal
-            E_da = 5; // (nJ), energy for 1 bit data
-            maxNodeCharge = 12960; // (J); U=3,6V; Q=3600(C); C=Q/U=1000F
+            d0 = Math.Sqrt(E_fs / E_mp);
+            Console.WriteLine("d0 = " + d0);
         }
 
         public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> clusterCenters) {
 
-            for (int i = 1; i <= clusterCenters.Count; i++) {
+            for (int i = 1; i < clusterCenters.Count; i++) {
                 List<Point> cluster = Calculator.getCluster(i, nodesClustered);
-
+                Start_DT_Protocol(cluster, clusterCenters[i]);
 
 
 
             }
         }
 
-        public void Start_DT(List<Point> cluster, Point center) { // direct transmission in cluster, find energy
-            
+        public void Start_DT_Protocol(List<Point> cluster, Point center) { // direct transmission in cluster, calculate energy
+            foreach (Point point in cluster)
+                PPConnection(point, center);
         }
-        
 
+        public int PPConnection(Point node, Point station) {
+            int len = Calculator.genRandInt(20, 65535); // bytes, package size
+            double dist = Calculator.calcDistance(node, station);
+            if (dist >= d0)
+                dist = Math.Pow(dist, 2);
+
+            double E_transmission = len * E_elec + len * E_fs * Math.Pow(dist, 2);
+            double E_receive = len * E_elec;
+
+            Console.WriteLine(E_transmission + " -> " + E_receive);
+
+            return 0;
+        }
 
 
     }

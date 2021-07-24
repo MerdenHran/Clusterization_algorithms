@@ -339,5 +339,11 @@ namespace Clusterization_algorithms
                 Console.WriteLine(num.ToString());
             }
         }
+
+        public static int genRandInt(int startNum, int endNum) {
+            Random rand = new Random();
+            int num = rand.Next(startNum, endNum);
+            return num;
+        }
     }
 }
