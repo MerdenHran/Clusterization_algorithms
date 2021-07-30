@@ -69,18 +69,20 @@ namespace Clusterization_algorithms
             return points;
         }
 
-        public static String printPointsDictionary(Dictionary<Point, int> points)
+        public static String printPointsDictionary(Dictionary<Point, int> nodes, Dictionary<Point, int> nodesCharge)
         {
-            points = sortDictionaryByValue(points);
+            nodes = sortDictionaryByValue(nodes);
 
             String str = "";
 
             //Console.WriteLine("\nPoints list:");
 
-            foreach (var point in points)
+            foreach (var node in nodes)
             {
                 //Console.WriteLine(point.ToString());
-                str += point.ToString() + "\n";
+                nodesCharge.TryGetValue(node.Key, out int charge);
+                str += node.ToString() +" "+ charge + "%\n";
+                //str += "(" + node.Key.X + ", " + node.Key.Y + ") [" + node.Value + "] " + "<" +""+ ">\n";
             }
             //Console.WriteLine();
             return str;

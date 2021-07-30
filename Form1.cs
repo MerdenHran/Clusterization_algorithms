@@ -51,7 +51,7 @@ namespace Clusterization_algorithms
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
             graphic.DrawPointDictionary(allPoints);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPoints);
+            PrintToTextBoxInfo(allPoints);
             clusterCenters.Clear();
         }
 
@@ -75,7 +75,7 @@ namespace Clusterization_algorithms
 
             clusterCenters = k_means.Seeds;
 
-            textBoxInfo.Text = Calculator.printPointsDictionary(k_means.getPoints());
+            PrintToTextBoxInfo(k_means.getPoints());
             allPointsClustered = k_means.getPoints();
         }
 
@@ -94,7 +94,7 @@ namespace Clusterization_algorithms
             forel.startForel();
             clusterCenters = forel.listOfClastersCenter;
 
-            textBoxInfo.Text = Calculator.printPointsDictionary(forel.getPoints());
+            PrintToTextBoxInfo(forel.getPoints());
             allPointsClustered = forel.getPoints();
         }
 
@@ -117,7 +117,7 @@ namespace Clusterization_algorithms
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
 
             //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
+            PrintToTextBoxInfo(allPointsClustered);
         }
 
         private void btnSpiralRoute_Click(object sender, EventArgs e)
@@ -148,7 +148,7 @@ namespace Clusterization_algorithms
             graphic.DrawRoute(route, Color.Blue);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
             //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
+            PrintToTextBoxInfo(allPointsClustered);
         }
 
         private void btn1ClusterOn_Click(object sender, EventArgs e)
@@ -203,7 +203,7 @@ namespace Clusterization_algorithms
         private void DrawAllObject() {
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
-            textBoxInfo.Text = Calculator.printPointsDictionary(allPointsClustered);
+            PrintToTextBoxInfo(allPointsClustered);
 
             if (allPoints.Count != 0)
                 graphic.DrawPointDictionary(allPoints);
@@ -223,14 +223,18 @@ namespace Clusterization_algorithms
         }
 
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
-            int station_height = 10;
+            int station_height = 0;
 
             if(int.TryParse(textBoxSetHeight.Text, out int height))
                 station_height = height;
 
             energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters, station_height);
-
+            PrintToTextBoxInfo(allPointsClustered);
             
+        }
+
+        public void PrintToTextBoxInfo(Dictionary<Point, int> dictionary) {
+            textBoxInfo.Text = Calculator.printPointsDictionary(dictionary, energyCalculator.GetNodesChargeDictionary());
         }
     }
 }

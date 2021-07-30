@@ -10,9 +10,9 @@ namespace Clusterization_algorithms
     class EnergyCalculator // DEEC algorithm
     {
         Dictionary<Point, int> allNodes; // int - num of cluster
-        Dictionary<Point, double> nodesLevelCharge = new Dictionary<Point, double> { };
+        private Dictionary<Point, int> nodesLevelCharge = new Dictionary<Point, int> { };
         List<int> clustersEnergy = new List<int> { };
-        double stationUsedE = 0; //energy used by station
+        int stationUsedE = 0; //energy used by station
 
         //--------- Energy consumption parameters ------------
         double E_fs = 0.01;//nJ(10^-9) amplifier energy, free space model (short distance) | d<d0
@@ -21,6 +21,20 @@ namespace Clusterization_algorithms
         int node_E = 500000000; //nJ; = 0,5J // initial node energy
         double d0 = 87.7; // (m) distance threshold for swapping amplification models
         int package = 4000; // bytes, package size
+
+        public Dictionary<Point, int> GetNodesChargeDictionary() {
+
+            Dictionary<Point, int> chargeList = new Dictionary<Point, int> { };
+            int onePercent = node_E / 100; // (nJ)
+
+            foreach (var node in nodesLevelCharge)
+            {
+                int charge = node.Value / onePercent; // (%)
+                chargeList.Add(node.Key, charge);
+            }
+            return chargeList;
+        }
+
         //int package = Calculator.genRandInt(20, 65535);
         //----------------------------------------------------
 
@@ -51,7 +65,7 @@ namespace Clusterization_algorithms
                 PPConnection(point, center, stationHeight);
         }
 
-        public int PPConnection(Point node, Point station, int stationHeight) {
+        public int PPConnection(Point node, Point station, int stationHeight) { // transmission from node -> station
 
             double distH0 = Calculator.calcDistance(node, station);
             double dist = Math.Sqrt(distH0 * distH0 + stationHeight * stationHeight);
@@ -64,9 +78,21 @@ namespace Clusterization_algorithms
             if (dist < d0)
                 E_transmission = package * E_elec + package * E_fs * Math.Pow(dist, 2); // nJ
             else
-                E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // J
+                //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // J
+                E_transmission = 0;
 
             double E_receive = package * E_elec;
+
+            //minus used energy from nodes charge
+            if (nodesLevelCharge.TryGetValue(node, out int oldCharge))
+            {
+                int newCharge = oldCharge - (int)E_transmission;
+                nodesLevelCharge.Remove(node);
+                nodesLevelCharge.Add(node, newCharge);
+            }
+
+            stationUsedE += Convert.ToInt32(E_receive);
+
 
             if(dist < d0)
                 Console.WriteLine("E: " + E_transmission + " nJ -> " + E_receive+" nJ");

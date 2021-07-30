@@ -48,8 +48,7 @@ namespace Clusterization_algorithms
             points.Remove(point.Key);
             points.Add(point.Key, clusterNum);
 
-            //graphic.D
-            Calculator.printPointsDictionary(points);
+            //Calculator.printPointsDictionary(points);
         }
 
         private void FindAllClusters() {
