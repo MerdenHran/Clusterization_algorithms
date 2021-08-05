@@ -42,7 +42,7 @@ namespace Clusterization_algorithms
 
             allPointsClustered = allPoints;
             routeBuilder.RouteList = new List<Point> { };
-            energyCalculator = new EnergyCalculator(allPoints);
+            energyCalculator = new EnergyCalculator(graphic, allPoints);
 
             ClearFields();
         }
@@ -156,35 +156,33 @@ namespace Clusterization_algorithms
             graphics.Clear(Color.White);
             int clusterNum = 1;
 
-            if (Int32.TryParse(textBoxSetClusterNum.Text, out int num))
+            if (Int32.TryParse(textBoxSetClusterNum.Text, out int num)) // get cluster number
                 clusterNum = num;
 
-            List<Point> cluster = Calculator.getCluster(clusterNum, allPointsClustered);
+            List<Point> cluster = Calculator.getClusterList(clusterNum, allPointsClustered);
+            PrintToTextBoxInfo(Calculator.getClusterDictionary(clusterNum, allPointsClustered));
 
-            Point center = Calculator.findCentroid(cluster);
-            List<Point> routeFragment = routeBuilder.getRouteFragment(center);
-            //Point center = clusterCenters[clusterNum - 1];
-            //Point center = routeBuilder.RouteList[clusterNum];
+            Point center = Calculator.findCentroid(cluster);    // find cluster center
+            List<Point> routeFragment = routeBuilder.getRouteFragment(center); // find part route go throught cluster
 
-            //textBoxInfo.Text = Calculator.printPointList(cluster);
-            //graphic.DrawPointList(cluster);
-            //graphic.DrawPoint(center, Brushes.Red);
-            //graphic.DrawCircle(center, radius, Color.Black, 0);
-
+            //< Move all points to the start coordinate
             Point vector = new Point(center.X - radius, center.Y - radius);
             center = new Point(radius, radius);
             Calculator.MovePointList(cluster, vector);
             Calculator.MovePointList(routeFragment, vector);
+            //>
 
-
+            //< Calculate zoom coefficient. 
             int size = pictBoxArea.Height;
             if (pictBoxArea.Width < size)
                 size = pictBoxArea.Width;
 
-            int zoom = size / (radius * 2);
-            Console.WriteLine("zoom: " + zoom);
-            int newRadius = radius * zoom;
-            Point newCenter = new Point(center.X * zoom, center.Y * zoom);
+            double zoom = size / (radius * 2.0); // proportion between cluster zone size and field size
+            //>
+
+            //< Calculate new points position, radius with zooming
+            int newRadius = (int)Math.Round(radius * zoom);
+            Point newCenter = new Point((int)Math.Round(center.X * zoom), (int)Math.Round(center.Y * zoom));
             Calculator.ZoomPointList(cluster, zoom);
             Calculator.ZoomPointList(routeFragment, zoom);
 
@@ -192,15 +190,15 @@ namespace Clusterization_algorithms
             graphic.DrawCircle(newCenter, newRadius, Color.Black, 0);
             graphic.DrawPointList(cluster);
             graphic.DrawRoute(routeFragment, Color.Orange);
-            //Calculator.printPointList(cluster);
+            //>
         }
 
         private void btn1ClusterOff_Click(object sender, EventArgs e)
         {
-            DrawAllObject();
+            DrawAllSavedObjects();
         }
 
-        private void DrawAllObject() {
+        private void DrawAllSavedObjects() {
             graphics.Clear(Color.White);
             textBoxInfo.Clear();
             PrintToTextBoxInfo(allPointsClustered);
@@ -223,17 +221,21 @@ namespace Clusterization_algorithms
         }
 
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
-            int station_height = 0;
-
-            if(int.TryParse(textBoxSetHeight.Text, out int height))
-                station_height = height;
-
-            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters, station_height);
+            DrawAllSavedObjects();
+            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
-            
         }
 
-        public void PrintToTextBoxInfo(Dictionary<Point, int> dictionary) {
+        private int ReadStationHeighth() {
+            int station_height = 0;
+
+            if (int.TryParse(textBoxSetHeight.Text, out int height))
+                station_height = height;
+
+            return station_height;
+        }
+
+        private void PrintToTextBoxInfo(Dictionary<Point, int> dictionary) {
             textBoxInfo.Text = Calculator.printPointsDictionary(dictionary, energyCalculator.GetNodesChargeDictionary());
         }
     }

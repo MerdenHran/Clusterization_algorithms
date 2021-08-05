@@ -10,7 +10,6 @@ namespace Clusterization_algorithms
     /// </summary>
     class Calculator
     {
-
         // find points center | centroid | barycenter | mass center
         public static Point findCentroid(List<Point> pointGroup)
         {
@@ -293,12 +292,27 @@ namespace Clusterization_algorithms
             return dictionary.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
-        public static List<Point> getCluster(int clusterNum, Dictionary<Point, int> dictionary) {
+        public static List<Point> getClusterList(int clusterNum, Dictionary<Point, int> dictionary) {
             List<Point> cluster = new List<Point> { };
 
             for (int i = 0; i < dictionary.Count; i++) {
                 if (dictionary.ElementAt(i).Value == clusterNum) {
                     cluster.Add(dictionary.ElementAt(i).Key);
+                    //Console.WriteLine(dictionary.ElementAt(i).Value + " "+ dictionary.ElementAt(i).Key + " "+ clusterNum);
+                }
+            }
+            return cluster;
+        }
+
+        public static Dictionary<Point, int> getClusterDictionary(int clusterNum, Dictionary<Point, int> dictionary)
+        {
+            Dictionary<Point, int> cluster = new Dictionary<Point, int> { };
+
+            for (int i = 0; i < dictionary.Count; i++)
+            {
+                if (dictionary.ElementAt(i).Value == clusterNum)
+                {
+                    cluster.Add(dictionary.ElementAt(i).Key, dictionary.ElementAt(i).Value);
                     //Console.WriteLine(dictionary.ElementAt(i).Value + " "+ dictionary.ElementAt(i).Key + " "+ clusterNum);
                 }
             }
@@ -311,11 +325,11 @@ namespace Clusterization_algorithms
             }
         }
 
-        public static void ZoomPointList(List<Point> list, int zoom)
+        public static void ZoomPointList(List<Point> list, double zoom)
         {
             for (int i = 0; i < list.Count; i++)
             {
-                list[i] = new Point(list[i].X * zoom, list[i].Y * zoom);
+                list[i] = new Point((int)Math.Round(list[i].X * zoom), (int)Math.Round(list[i].Y * zoom));
             }
         }
 

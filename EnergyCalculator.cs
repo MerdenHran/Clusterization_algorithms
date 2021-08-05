@@ -9,6 +9,7 @@ namespace Clusterization_algorithms
 {
     class EnergyCalculator // DEEC algorithm
     {
+        Graphic graphic;
         Dictionary<Point, int> allNodes; // int - num of cluster
         private Dictionary<Point, int> nodesLevelCharge = new Dictionary<Point, int> { };
         List<int> clustersEnergy = new List<int> { };
@@ -21,11 +22,23 @@ namespace Clusterization_algorithms
         int node_E = 500000000; //nJ; = 0,5J // initial node energy
         double d0 = 87.7; // (m) distance threshold for swapping amplification models
         int package = 4000; // bytes, package size
+        //int package = Calculator.genRandInt(20, 65535);
+        //----------------------------------------------------
 
-        public Dictionary<Point, int> GetNodesChargeDictionary() {
+        public EnergyCalculator(Graphic graphic, Dictionary<Point, int> allNodes)
+        {
+            this.graphic = graphic;
+            this.allNodes = allNodes;
+
+            foreach (var node in allNodes)
+                nodesLevelCharge.Add(node.Key, node_E);
+        }
+
+        public Dictionary<Point, int> GetNodesChargeDictionary()
+        {
 
             Dictionary<Point, int> chargeList = new Dictionary<Point, int> { };
-            int onePercent = node_E / 100; // (nJ)
+            int onePercent = node_E / 100; // 1% = ?nJ
 
             foreach (var node in nodesLevelCharge)
             {
@@ -35,23 +48,10 @@ namespace Clusterization_algorithms
             return chargeList;
         }
 
-        //int package = Calculator.genRandInt(20, 65535);
-        //----------------------------------------------------
-
-        public EnergyCalculator(Dictionary<Point, int> allNodes)
-        {
-            this.allNodes = allNodes;
-
-            foreach (var node in allNodes)
-                nodesLevelCharge.Add(node.Key, node_E);
-
-            //d0 = Math.Sqrt(E_fs / E_mp);
-        }
-
         public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> clusterCenters, int stationHeight) {
 
             for (int i = 1; i < clusterCenters.Count; i++) {
-                List<Point> cluster = Calculator.getCluster(i, nodesClustered);
+                List<Point> cluster = Calculator.getClusterList(i, nodesClustered);
                 Start_DT_Protocol(cluster, stationHeight);
 
 
@@ -74,11 +74,14 @@ namespace Clusterization_algorithms
             
             double E_transmission = 0;
             Console.WriteLine(node + " " + station);
+            //d0 = Math.Sqrt(E_fs / E_mp);
 
-            if (dist < d0)
+            if (dist < d0) {
                 E_transmission = package * E_elec + package * E_fs * Math.Pow(dist, 2); // nJ
+                graphic.DrawLine(node, station, Color.LightGreen);
+            }
             else
-                //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // J
+                //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // nJ
                 E_transmission = 0;
 
             double E_receive = package * E_elec;
@@ -92,12 +95,6 @@ namespace Clusterization_algorithms
             }
 
             stationUsedE += Convert.ToInt32(E_receive);
-
-
-            if(dist < d0)
-                Console.WriteLine("E: " + E_transmission + " nJ -> " + E_receive+" nJ");
-            else
-                Console.WriteLine("E: " + E_transmission / 1000000000 + " J -> " + E_receive + " nJ");
             
             return 0;
         }
