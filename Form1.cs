@@ -222,7 +222,29 @@ namespace Clusterization_algorithms
 
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
             DrawAllSavedObjects();
-            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
+
+            ConnectionType connectionType = ConnectionType.DT_to_Center;
+
+            switch (comboBoxConnectionType.SelectedIndex) {
+                
+                case 0:
+                    //by default
+                    break;
+
+                case 1:
+                    connectionType = ConnectionType.DT_to_Route;
+                    break;
+
+                case 2:
+                    connectionType = ConnectionType.PP_to_Center;
+                    break;
+                
+                case 3:
+                    connectionType = ConnectionType.PP_to_Route;
+                    break;
+            }
+
+            energyCalculator.CalculteAllNodesEnergy(connectionType, allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
         }
 

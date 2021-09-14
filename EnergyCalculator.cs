@@ -48,18 +48,32 @@ namespace Clusterization_algorithms
             return chargeList;
         }
 
-        public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> routeList, int stationHeight) {
+        public void CalculteAllNodesEnergy(ConnectionType connectionType, Dictionary<Point, int> nodesClustered, List<Point> routeList, int stationHeight) {
 
             for (int i = 1; i < routeList.Count - 1; i++) {
                 List<Point> cluster = Calculator.getClusterList(i, nodesClustered);
-                //Start_DT_Protocol(cluster, stationHeight);
-                Start_DT_ToCloserPositionOnWay(cluster, stationHeight, routeList);
 
+                switch (connectionType) {
+
+                    case ConnectionType.DT_to_Center:
+                        Start_DT_Protocol(cluster, stationHeight);
+                        break;
+
+                    case ConnectionType.DT_to_Route:
+                        Start_DT_ToRoute(cluster, stationHeight, routeList);
+                        break;
+
+                    case ConnectionType.PP_to_Center:
+                        break;
+
+                    case ConnectionType.PP_to_Route:
+                        break;
+                }
 
             }
         }
 
-        public void Start_DT_ToCloserPositionOnWay(List<Point> cluster, int stationHeight, List<Point> routeList) { // transmission while station moving on route
+        public void Start_DT_ToRoute(List<Point> cluster, int stationHeight, List<Point> routeList) { // transmission while station moving on route
             Point center = Calculator.findCentroid(cluster);
             List<Point> routeFragment = Calculator.getRouteFragment(center, routeList);
 
