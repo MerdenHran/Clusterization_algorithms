@@ -80,7 +80,7 @@ namespace Clusterization_algorithms
             {
                 //Console.WriteLine(point.ToString());
                 nodesCharge.TryGetValue(node.Key, out int charge);
-                str += node.ToString() +" "+ charge + "%\n";
+                str += node.ToString() + " " + charge + "%\n";
                 //str += "(" + node.Key.X + ", " + node.Key.Y + ") [" + node.Value + "] " + "<" +""+ ">\n";
             }
             //Console.WriteLine();
@@ -351,7 +351,7 @@ namespace Clusterization_algorithms
         public static void printIntList(List<int> list)
         {
             Console.WriteLine("Print int list");
-            foreach (int num in list){
+            foreach (int num in list) {
                 Console.WriteLine(num.ToString());
             }
         }
@@ -360,6 +360,50 @@ namespace Clusterization_algorithms
             Random rand = new Random();
             int num = rand.Next(startNum, endNum);
             return num;
+        }
+
+        public static List<Point> getRouteFragment(Point point, List<Point> routeList)
+        {
+            List<Point> fragment = new List<Point> { };
+
+            for (int i = 0; i < routeList.Count; i++)
+            {
+                //Console.WriteLine(i+". "+routeList[i]);
+                if (routeList[i] == point)
+                {
+                    fragment.Add(routeList[i - 1]);
+                    fragment.Add(routeList[i]);
+                    fragment.Add(routeList[i + 1]);
+
+                    return fragment;
+                }
+            }
+            return routeList;
+        }
+
+        public static Point find_PointProjection_OnLine(Point point, Point a_point_inLine, Point b_point_inLine) {
+            //Point a_line = new Point(1, 6);
+            //Point b_point_inLine = new Point(4, 1);
+            //Point point = new Point(6, 5);
+            Point fulcrum = new Point(); // projection point on ab line
+            double x4, y4;
+
+            double dx = b_point_inLine.X - a_point_inLine.X;
+            double dy = b_point_inLine.Y - a_point_inLine.Y;
+            double mag = Math.Sqrt(dx * dx + dy * dy);
+            dx /= mag;
+            dy /= mag;
+
+            // translate the point and get the dot product
+            double lambda = (dx * (point.X - a_point_inLine.X)) + (dy * (point.Y - a_point_inLine.Y));
+            x4 = (dx * lambda) + a_point_inLine.X;
+            y4 = (dy * lambda) + a_point_inLine.Y;
+
+            fulcrum.X = (int)Math.Round(x4);
+            fulcrum.Y = (int)Math.Round(y4);
+
+            //Console.WriteLine(fulcrum.ToString());
+            return fulcrum;
         }
     }
 }

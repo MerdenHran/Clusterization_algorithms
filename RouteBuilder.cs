@@ -222,22 +222,22 @@ namespace Clusterization_algorithms
             points[pos_2] = point;
         }
 
-        public List<Point> getRouteFragment(Point point) {
-            List<Point> fragment = new List<Point> { };
+        //public List<Point> getRouteFragment(Point point) {
+        //    List<Point> fragment = new List<Point> { };
 
-            for (int i = 0; i < routeList.Count; i++) {
-                //Console.WriteLine(i+". "+routeList[i]);
-                if (routeList[i] == point) {
+        //    for (int i = 0; i < routeList.Count; i++) {
+        //        //Console.WriteLine(i+". "+routeList[i]);
+        //        if (routeList[i] == point) {
 
-                    fragment.Add(routeList[i - 1]);
-                    fragment.Add(routeList[i]);
-                    fragment.Add(routeList[i + 1]);
+        //            fragment.Add(routeList[i - 1]);
+        //            fragment.Add(routeList[i]);
+        //            fragment.Add(routeList[i + 1]);
                     
-                    return fragment;
-                }
-            }
-            return routeList;
-        }
+        //            return fragment;
+        //        }
+        //    }
+        //    return routeList;
+        //}
 
         //private void findIndexes()
         //{

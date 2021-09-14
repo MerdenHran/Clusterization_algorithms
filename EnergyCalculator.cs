@@ -17,7 +17,7 @@ namespace Clusterization_algorithms
 
         //--------- Energy consumption parameters ------------
         double E_fs = 0.01;//nJ(10^-9) amplifier energy, free space model (short distance) | d<d0
-        double E_mp = 1300000; //nJ // multipath fading model (large distance) | d >= d0
+        //double E_mp = 1300000; //nJ // multipath fading model (large distance) | d >= d0
         int E_elec = 50; //nJ, energy for work signal transmission/recieve
         int node_E = 500000000; //nJ; = 0,5J // initial node energy
         double d0 = 87.7; // (m) distance threshold for swapping amplification models
@@ -48,14 +48,46 @@ namespace Clusterization_algorithms
             return chargeList;
         }
 
-        public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> clusterCenters, int stationHeight) {
+        public void CalculteAllNodesEnergy(Dictionary<Point, int> nodesClustered, List<Point> routeList, int stationHeight) {
 
-            for (int i = 1; i < clusterCenters.Count; i++) {
+            for (int i = 1; i < routeList.Count - 1; i++) {
                 List<Point> cluster = Calculator.getClusterList(i, nodesClustered);
-                Start_DT_Protocol(cluster, stationHeight);
+                //Start_DT_Protocol(cluster, stationHeight);
+                Start_DT_ToCloserPositionOnWay(cluster, stationHeight, routeList);
 
 
+            }
+        }
 
+        public void Start_DT_ToCloserPositionOnWay(List<Point> cluster, int stationHeight, List<Point> routeList) { // transmission while station moving on route
+            Point center = Calculator.findCentroid(cluster);
+            List<Point> routeFragment = Calculator.getRouteFragment(center, routeList);
+
+            for (int i = 0; i < cluster.Count; i++) {
+
+                Point closerFulcrum = center;
+                double minDistance = 9999;
+                
+                for (int j = 0; j < routeFragment.Count - 1; j++) {
+                    
+                    Point fulcrum = Calculator.find_PointProjection_OnLine(cluster[i], routeFragment[j], routeFragment[j+1]);
+                    double distance = Calculator.calcDistance(fulcrum, cluster[i]);
+                    
+                    if (distance < minDistance) {
+
+                        // Point must be between a,b point (i, i+1 route). Then, check this by length between points:
+                        double ab_distance = Calculator.calcDistance(routeFragment[j], routeFragment[j+1]);
+                        double af_distance = Calculator.calcDistance(routeFragment[j], fulcrum);
+                        double bf_distance = Calculator.calcDistance(routeFragment[j+1], fulcrum);
+
+                        if ((af_distance < ab_distance) && (bf_distance < ab_distance)) { // then fulcrum is between route points
+                            minDistance = distance;
+                            closerFulcrum = fulcrum;
+                        }
+                    }
+                }
+
+                PPConnection(cluster[i], closerFulcrum, stationHeight);
             }
         }
 
@@ -95,7 +127,7 @@ namespace Clusterization_algorithms
             }
 
             stationUsedE += Convert.ToInt32(E_receive);
-            
+
             return 0;
         }
 

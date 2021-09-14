@@ -163,7 +163,7 @@ namespace Clusterization_algorithms
             PrintToTextBoxInfo(Calculator.getClusterDictionary(clusterNum, allPointsClustered));
 
             Point center = Calculator.findCentroid(cluster);    // find cluster center
-            List<Point> routeFragment = routeBuilder.getRouteFragment(center); // find part route go throught cluster
+            List<Point> routeFragment = Calculator.getRouteFragment(center, routeBuilder.RouteList); // find part route go throught cluster
 
             //< Move all points to the start coordinate
             Point vector = new Point(center.X - radius, center.Y - radius);
@@ -222,7 +222,7 @@ namespace Clusterization_algorithms
 
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
             DrawAllSavedObjects();
-            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, clusterCenters, ReadStationHeighth());
+            energyCalculator.CalculteAllNodesEnergy(allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
         }
 
