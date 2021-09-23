@@ -35,10 +35,13 @@ namespace Clusterization_algorithms
         {
             Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
 
-            allPoints = Calculator.setStaticPoints();
+            if (checkBoxAllowGeneratePoints.Checked == true)
+            {
+                allPoints = Calculator.setStaticPoints();
 
-            if (Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
-                allPoints = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+                if (Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
+                    allPoints = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+            }
 
             allPointsClustered = allPoints;
             routeBuilder.RouteList = new List<Point> { };
@@ -98,20 +101,13 @@ namespace Clusterization_algorithms
             allPointsClustered = forel.getPoints();
         }
 
-        private void btnRoute_Click(object sender, EventArgs e) // all points route
-        {
-            labelRoute.Text = "";
-            ClearFields();
-
-            routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
-            routeBuilder.CalculateRoute();
-            graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
-            labelRoute.Text = "Route length: " +  Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
-        }
-
         private void btnClustersRoute_Click(object sender, EventArgs e)
         {
-            routeBuilder.All_points(clusterCenters);
+            if (clusterCenters.Count == 0)
+                routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
+            else
+                routeBuilder.All_points(clusterCenters);
+
             routeBuilder.CalculateRoute();
             graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
@@ -143,8 +139,14 @@ namespace Clusterization_algorithms
 
         private void btnBruteForce_Click(object sender, EventArgs e)
         {
-            routeBuilder.All_points(clusterCenters);
-            List<Point> route = routeBuilder.CalculateRouteBruteForce(clusterCenters);
+            //routeBuilder.All_points(clusterCenters);
+            List<Point> route = new List<Point> { };
+
+            if (clusterCenters.Count > 0)
+                route = routeBuilder.CalculateRouteBruteForce(clusterCenters);
+            else
+                route = routeBuilder.CalculateRouteBruteForce(Calculator.DictionaryToList(allPoints));
+
             graphic.DrawRoute(route, Color.Blue);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
             //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);

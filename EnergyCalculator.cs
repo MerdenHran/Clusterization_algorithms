@@ -69,8 +69,26 @@ namespace Clusterization_algorithms
                     case ConnectionType.PP_to_Route:
                         break;
                 }
-
             }
+        }
+
+        public void Start_PP_ToCenter(List<Point> cluster, int stationHeight) {
+            Point station = Calculator.findCentroid(cluster);
+            Boolean[] alreadyUsed = new bool[cluster.Count];   //true => used //Is node used?
+
+            for (int i = 0; i < cluster.Count; i++) {
+                alreadyUsed[i] = true;
+                //Point node = 
+            }
+        }
+
+        private Point FindCloserNode(int nodePosition, List<Point> cluster) {
+
+            for (int i = 0; i < cluster.Count; i++) {
+                
+            }
+            
+            return new Point();
         }
 
         public void Start_DT_ToRoute(List<Point> cluster, int stationHeight, List<Point> routeList) { // transmission while station moving on route
@@ -128,7 +146,7 @@ namespace Clusterization_algorithms
             }
             else
                 //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // nJ
-                E_transmission = 0;
+                E_transmission = 0;  // no transmittion
 
             double E_receive = package * E_elec;
 
