@@ -118,12 +118,16 @@ namespace Clusterization_algorithms
 
         private void btnSpiralRoute_Click(object sender, EventArgs e)
         {
-            labelRoute.Text = "";
-            ClearFields();
+            //labelRoute.Text = "";
+            //ClearFields();
 
-            routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
+            if (clusterCenters.Count > 0)
+                routeBuilder.All_points(clusterCenters);
+            else
+                routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
+
             routeBuilder.JarvisMarch(true);
-            graphic.DrawRoute(routeBuilder.Convex_hull, Color.Orange);
+            graphic.DrawRoute(routeBuilder.Convex_hull, Color.Violet);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.Convex_hull), 3);
         }
 
