@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace Clusterization_algorithms
 {
+
     public partial class Form1 : Form
     {
         Graphic graphic;
@@ -33,6 +34,7 @@ namespace Clusterization_algorithms
 
         private void btnGenPoints_Click(object sender, EventArgs e)
         {
+
             Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
 
             if (checkBoxAllowGeneratePoints.Checked == true)
@@ -127,7 +129,7 @@ namespace Clusterization_algorithms
                 routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
 
             routeBuilder.JarvisMarch(true);
-            graphic.DrawRoute(routeBuilder.Convex_hull, Color.Violet);
+            graphic.DrawRoute(routeBuilder.Convex_hull, Color.DarkMagenta);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.Convex_hull), 3);
         }
 
@@ -265,6 +267,114 @@ namespace Clusterization_algorithms
 
         private void PrintToTextBoxInfo(Dictionary<Point, int> dictionary) {
             textBoxInfo.Text = Calculator.printPointsDictionary(dictionary, energyCalculator.GetNodesChargeDictionary());
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            DrawScale();
+        }
+
+        private void DrawScale()
+        {
+            Graphics graphicsVector = panel4.CreateGraphics();
+
+            Pen pen = new Pen(Color.Black, 2);
+            Point zeroPosition = new Point(pictBoxArea.Location.X - 10, pictBoxArea.Location.Y - 10);
+            int X = zeroPosition.X;
+            int Y = zeroPosition.Y;
+
+            graphicsVector.DrawLine(pen, new Point(X, Y), new Point(pictBoxArea.Location.X + pictBoxArea.Width, Y));
+            graphicsVector.DrawLine(pen, new Point(X, Y), new Point(X, pictBoxArea.Location.Y + pictBoxArea.Height));
+
+            int distanceX = pictBoxArea.Width + 10;
+
+            int number = 0;
+
+            for (int i = 25; i <= distanceX;)
+            {
+                graphicsVector.DrawLine(pen, new Point(X + i, Y - 3), new Point(X + i, Y + 3));
+
+
+                if (i % 50 != 0)
+                {
+                    if (number == 0)
+                    {
+                        Label lb = new Label
+                        {
+                            Location = new Point(X + i - 6, Y - 15),
+                            Text = $"{number}",
+                            AutoSize = true
+
+                        };
+                        panel4.Controls.Add(lb);
+
+                    }
+                    else
+                    {
+                        Label lb = new Label
+                        {
+                            Location = new Point(X + i - 10, Y - 15),
+                            Text = $"{number}",
+                            AutoSize = true
+
+                        };
+                        panel4.Controls.Add(lb);
+                    }
+                }
+
+                i += 25;
+                number += 25;
+            }
+
+            number = 0;
+
+            int distanceY = pictBoxArea.Height + 25;
+
+
+            for (int i = 25; i < distanceY;)
+            {
+                graphicsVector.DrawLine(pen, new Point(X - 3, Y + i), new Point(X + 3, Y + i));
+                if (i % 50 != 0)
+                {
+                    if (number == 0)
+                    {
+                        Label lb = new Label
+                        {
+                            Location = new Point(X - 15, Y + i - 7),
+                            Text = $"{number}",
+                            AutoSize = true
+
+                        };
+                        panel4.Controls.Add(lb);
+                    }
+                    else if (number == 50)
+                    {
+                        Label lb = new Label
+                        {
+                            Location = new Point(X - 23, Y + i - 7),
+                            Text = $"{number}",
+                            AutoSize = true
+
+                        };
+                        panel4.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lb = new Label
+                        {
+                            Location = new Point(X - 27, Y + i - 7),
+                            Text = $"{number}",
+                            AutoSize = true
+
+                        };
+                        panel4.Controls.Add(lb);
+                    }
+
+                }
+
+                i += 25;
+                number += 25;
+            }
         }
     }
 }

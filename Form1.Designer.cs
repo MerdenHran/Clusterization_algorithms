@@ -52,14 +52,16 @@ namespace Clusterization_algorithms
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxConnectionType = new System.Windows.Forms.ComboBox();
             this.checkBoxAllowGeneratePoints = new System.Windows.Forms.CheckBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictBoxArea
             // 
             this.pictBoxArea.BackColor = System.Drawing.Color.White;
             this.pictBoxArea.Enabled = false;
-            this.pictBoxArea.Location = new System.Drawing.Point(13, 13);
+            this.pictBoxArea.Location = new System.Drawing.Point(72, 59);
             this.pictBoxArea.Margin = new System.Windows.Forms.Padding(0);
             this.pictBoxArea.Name = "pictBoxArea";
             this.pictBoxArea.Size = new System.Drawing.Size(800, 738);
@@ -71,7 +73,7 @@ namespace Clusterization_algorithms
             this.textBoxInfo.AcceptsReturn = true;
             this.textBoxInfo.AcceptsTab = true;
             this.textBoxInfo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxInfo.Location = new System.Drawing.Point(834, 13);
+            this.textBoxInfo.Location = new System.Drawing.Point(887, 39);
             this.textBoxInfo.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxInfo.Multiline = true;
             this.textBoxInfo.Name = "textBoxInfo";
@@ -84,7 +86,7 @@ namespace Clusterization_algorithms
             // textBoxSetPointsCount
             // 
             this.textBoxSetPointsCount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetPointsCount.Location = new System.Drawing.Point(1296, 124);
+            this.textBoxSetPointsCount.Location = new System.Drawing.Point(1336, 118);
             this.textBoxSetPointsCount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetPointsCount.Name = "textBoxSetPointsCount";
             this.textBoxSetPointsCount.Size = new System.Drawing.Size(145, 32);
@@ -94,7 +96,7 @@ namespace Clusterization_algorithms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(1122, 127);
+            this.label2.Location = new System.Drawing.Point(1162, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(152, 24);
             this.label2.TabIndex = 15;
@@ -104,7 +106,7 @@ namespace Clusterization_algorithms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(1119, 242);
+            this.label1.Location = new System.Drawing.Point(1164, 241);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 24);
             this.label1.TabIndex = 14;
@@ -113,7 +115,7 @@ namespace Clusterization_algorithms
             // textBoxSetRadius
             // 
             this.textBoxSetRadius.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetRadius.Location = new System.Drawing.Point(1123, 268);
+            this.textBoxSetRadius.Location = new System.Drawing.Point(1168, 267);
             this.textBoxSetRadius.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetRadius.Name = "textBoxSetRadius";
             this.textBoxSetRadius.Size = new System.Drawing.Size(137, 32);
@@ -123,7 +125,7 @@ namespace Clusterization_algorithms
             // 
             this.btnForel.BackColor = System.Drawing.Color.DarkGray;
             this.btnForel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnForel.Location = new System.Drawing.Point(1285, 261);
+            this.btnForel.Location = new System.Drawing.Point(1330, 260);
             this.btnForel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnForel.Name = "btnForel";
             this.btnForel.Size = new System.Drawing.Size(154, 45);
@@ -136,7 +138,7 @@ namespace Clusterization_algorithms
             // 
             this.btnGenPoints.BackColor = System.Drawing.Color.DarkGray;
             this.btnGenPoints.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGenPoints.Location = new System.Drawing.Point(1122, 34);
+            this.btnGenPoints.Location = new System.Drawing.Point(1162, 28);
             this.btnGenPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGenPoints.Name = "btnGenPoints";
             this.btnGenPoints.Size = new System.Drawing.Size(317, 52);
@@ -151,7 +153,7 @@ namespace Clusterization_algorithms
             // 
             this.btnKMeans.BackColor = System.Drawing.Color.DarkGray;
             this.btnKMeans.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKMeans.Location = new System.Drawing.Point(1287, 195);
+            this.btnKMeans.Location = new System.Drawing.Point(1332, 194);
             this.btnKMeans.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnKMeans.Name = "btnKMeans";
             this.btnKMeans.Size = new System.Drawing.Size(154, 45);
@@ -164,7 +166,7 @@ namespace Clusterization_algorithms
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(1123, 176);
+            this.label3.Location = new System.Drawing.Point(1168, 175);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 24);
             this.label3.TabIndex = 23;
@@ -173,7 +175,7 @@ namespace Clusterization_algorithms
             // textBoxSetSeedsCount
             // 
             this.textBoxSetSeedsCount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetSeedsCount.Location = new System.Drawing.Point(1126, 202);
+            this.textBoxSetSeedsCount.Location = new System.Drawing.Point(1171, 201);
             this.textBoxSetSeedsCount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetSeedsCount.Name = "textBoxSetSeedsCount";
             this.textBoxSetSeedsCount.Size = new System.Drawing.Size(137, 32);
@@ -192,7 +194,7 @@ namespace Clusterization_algorithms
             // 
             this.btnSpiralRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnSpiralRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSpiralRoute.Location = new System.Drawing.Point(1122, 443);
+            this.btnSpiralRoute.Location = new System.Drawing.Point(1167, 442);
             this.btnSpiralRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSpiralRoute.Name = "btnSpiralRoute";
             this.btnSpiralRoute.Size = new System.Drawing.Size(319, 45);
@@ -205,7 +207,7 @@ namespace Clusterization_algorithms
             // 
             this.btnClustersRoute.BackColor = System.Drawing.Color.DarkGray;
             this.btnClustersRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClustersRoute.Location = new System.Drawing.Point(1122, 334);
+            this.btnClustersRoute.Location = new System.Drawing.Point(1167, 333);
             this.btnClustersRoute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClustersRoute.Name = "btnClustersRoute";
             this.btnClustersRoute.Size = new System.Drawing.Size(319, 45);
@@ -218,7 +220,7 @@ namespace Clusterization_algorithms
             // 
             this.btnBruteForce.BackColor = System.Drawing.Color.DarkGray;
             this.btnBruteForce.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnBruteForce.Location = new System.Drawing.Point(1122, 389);
+            this.btnBruteForce.Location = new System.Drawing.Point(1167, 388);
             this.btnBruteForce.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBruteForce.Name = "btnBruteForce";
             this.btnBruteForce.Size = new System.Drawing.Size(319, 45);
@@ -231,7 +233,7 @@ namespace Clusterization_algorithms
             // 
             this.btn1ClusterOn.BackColor = System.Drawing.Color.DarkGray;
             this.btn1ClusterOn.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn1ClusterOn.Location = new System.Drawing.Point(1123, 501);
+            this.btn1ClusterOn.Location = new System.Drawing.Point(1168, 500);
             this.btn1ClusterOn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn1ClusterOn.Name = "btn1ClusterOn";
             this.btn1ClusterOn.Size = new System.Drawing.Size(156, 45);
@@ -243,7 +245,7 @@ namespace Clusterization_algorithms
             // textBoxSetClusterNum
             // 
             this.textBoxSetClusterNum.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetClusterNum.Location = new System.Drawing.Point(1331, 508);
+            this.textBoxSetClusterNum.Location = new System.Drawing.Point(1376, 507);
             this.textBoxSetClusterNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetClusterNum.Name = "textBoxSetClusterNum";
             this.textBoxSetClusterNum.Size = new System.Drawing.Size(110, 32);
@@ -253,7 +255,7 @@ namespace Clusterization_algorithms
             // 
             this.btn1ClusterOff.BackColor = System.Drawing.Color.Salmon;
             this.btn1ClusterOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn1ClusterOff.Location = new System.Drawing.Point(1285, 501);
+            this.btn1ClusterOff.Location = new System.Drawing.Point(1330, 500);
             this.btn1ClusterOff.Name = "btn1ClusterOff";
             this.btn1ClusterOff.Size = new System.Drawing.Size(40, 45);
             this.btn1ClusterOff.TabIndex = 35;
@@ -265,7 +267,7 @@ namespace Clusterization_algorithms
             // 
             this.btnCalcEnergy.BackColor = System.Drawing.Color.DarkGray;
             this.btnCalcEnergy.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCalcEnergy.Location = new System.Drawing.Point(1124, 550);
+            this.btnCalcEnergy.Location = new System.Drawing.Point(1169, 549);
             this.btnCalcEnergy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCalcEnergy.Name = "btnCalcEnergy";
             this.btnCalcEnergy.Size = new System.Drawing.Size(184, 45);
@@ -277,7 +279,7 @@ namespace Clusterization_algorithms
             // textBoxSetHeight
             // 
             this.textBoxSetHeight.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSetHeight.Location = new System.Drawing.Point(1338, 604);
+            this.textBoxSetHeight.Location = new System.Drawing.Point(1383, 603);
             this.textBoxSetHeight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSetHeight.Name = "textBoxSetHeight";
             this.textBoxSetHeight.Size = new System.Drawing.Size(103, 32);
@@ -287,7 +289,7 @@ namespace Clusterization_algorithms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(1113, 607);
+            this.label4.Location = new System.Drawing.Point(1158, 606);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(212, 24);
             this.label4.TabIndex = 38;
@@ -302,7 +304,7 @@ namespace Clusterization_algorithms
             "DT route",
             "PP center",
             "PP route"});
-            this.comboBoxConnectionType.Location = new System.Drawing.Point(1314, 557);
+            this.comboBoxConnectionType.Location = new System.Drawing.Point(1359, 556);
             this.comboBoxConnectionType.Name = "comboBoxConnectionType";
             this.comboBoxConnectionType.Size = new System.Drawing.Size(127, 32);
             this.comboBoxConnectionType.TabIndex = 39;
@@ -313,18 +315,26 @@ namespace Clusterization_algorithms
             this.checkBoxAllowGeneratePoints.Checked = true;
             this.checkBoxAllowGeneratePoints.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAllowGeneratePoints.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAllowGeneratePoints.Location = new System.Drawing.Point(1127, 91);
+            this.checkBoxAllowGeneratePoints.Location = new System.Drawing.Point(1167, 85);
             this.checkBoxAllowGeneratePoints.Name = "checkBoxAllowGeneratePoints";
             this.checkBoxAllowGeneratePoints.Size = new System.Drawing.Size(274, 28);
             this.checkBoxAllowGeneratePoints.TabIndex = 40;
             this.checkBoxAllowGeneratePoints.Text = "Allow to generate a new map";
             this.checkBoxAllowGeneratePoints.UseVisualStyleBackColor = true;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.pictBoxArea);
+            this.panel4.Location = new System.Drawing.Point(0, -1);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(888, 816);
+            this.panel4.TabIndex = 41;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1453, 768);
+            this.ClientSize = new System.Drawing.Size(1498, 823);
             this.Controls.Add(this.checkBoxAllowGeneratePoints);
             this.Controls.Add(this.comboBoxConnectionType);
             this.Controls.Add(this.label4);
@@ -347,10 +357,12 @@ namespace Clusterization_algorithms
             this.Controls.Add(this.btnForel);
             this.Controls.Add(this.btnGenPoints);
             this.Controls.Add(this.textBoxInfo);
-            this.Controls.Add(this.pictBoxArea);
+            this.Controls.Add(this.panel4);
             this.Name = "Form1";
             this.Text = "Clusterization algorithms";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,6 +393,7 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.TextBox textBoxInfo;
         private System.Windows.Forms.ComboBox comboBoxConnectionType;
         private System.Windows.Forms.CheckBox checkBoxAllowGeneratePoints;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 
