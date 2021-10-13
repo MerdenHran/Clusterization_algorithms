@@ -28,7 +28,7 @@ namespace Clusterization_algorithms
         {
         }
 
-        public List<Point> CalculateRoute()
+        public List<Point> CalculateRouteByElasticNet()
         {
             JarvisMarch();
             ElasticNet();
@@ -179,12 +179,11 @@ namespace Clusterization_algorithms
             newPoints.AddRange(points);
             newPoints.Add(startPoint);
 
-            points = newPoints;
+            //points = newPoints;
 
-            length = 9999999;
+            length = 9999; // any value that is more then any possible length
             RecursivePermutation(1, newPoints);
 
-            //findIndexes();
             return routeList;
         }
 
@@ -222,45 +221,53 @@ namespace Clusterization_algorithms
             points[pos_2] = point;
         }
 
-        //public List<Point> getRouteFragment(Point point) {
-        //    List<Point> fragment = new List<Point> { };
+        public List<Point> CalculateRouteNearestNeighbour(List<Point> points) {
 
-        //    for (int i = 0; i < routeList.Count; i++) {
-        //        //Console.WriteLine(i+". "+routeList[i]);
-        //        if (routeList[i] == point) {
+            List<Point> newPoints = new List<Point> { };
+            newPoints.AddRange(points);
+            List<bool> pointIsUsed = new List<bool> {}; //false
 
-        //            fragment.Add(routeList[i - 1]);
-        //            fragment.Add(routeList[i]);
-        //            fragment.Add(routeList[i + 1]);
-                    
-        //            return fragment;
-        //        }
-        //    }
-        //    return routeList;
-        //}
+            foreach (Point point in newPoints) {
+                pointIsUsed.Add(false);
+            } 
 
-        //private void findIndexes()
-        //{
-        //    indexes.Clear();
-        //    //Calculator.printPointList(all_points);
-        //    //Calculator.printPointList(routeList);
-        //    foreach (Point point in all_points) {
-        //        int index = routeList.IndexOf(point);
-        //        indexes.Add(index);
-        //        Console.Write(index + " ");
-        //    }
-        //    //Calculator.printIntList(indexes);
-        //}
+            List<Point> route = new List<Point> { startPoint };
 
-        //public Dictionary<Point, int> SortClustersByRoute(Dictionary<Point, int> dictionary) {
-        //    Dictionary<Point, int> newDict = new Dictionary<Point, int> { };
-        //    foreach (var pair in dictionary) {
-        //        int old_cluster = pair.Value;
-        //        int new_cluster = indexes[old_cluster-1];
-        //        newDict.Add(pair.Key, new_cluster);
-        //    }
+            Point current_point = startPoint;
 
-        //    return newDict;
-        //}
+            for (int j = 0; j < newPoints.Count; j++)
+            {
+                Console.WriteLine("j = "+j);
+
+                int min_point_index = 0;
+                double min_distance = 99999; // any large value
+
+                for (int i = 0; i < newPoints.Count; i++)
+                {
+                    if (!pointIsUsed[i])
+                    {
+                        Console.WriteLine(" i = " + i);
+                        double distance = Calculator.calcDistance(current_point, newPoints[i]);
+
+                        if (distance < min_distance)
+                        {
+                            min_distance = distance;
+                            min_point_index = i;
+                            Console.WriteLine(newPoints[i] + " " + min_distance);
+                        }
+                    }
+                }
+
+                current_point = newPoints[min_point_index];
+                pointIsUsed[min_point_index] = true;
+                route.Add(current_point);
+            }
+
+            route.Add(startPoint);
+
+            return route;
+        }
+
+
     }
 }

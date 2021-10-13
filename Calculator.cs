@@ -35,8 +35,8 @@ namespace Clusterization_algorithms
         // distance between A and B points
         public static double calcDistance(Point a, Point b)
         {
-            int delX = (int)Math.Pow(b.X - a.X, 2);
-            int delY = (int)Math.Pow(b.Y - a.Y, 2);
+            double delX = Math.Pow(b.X - a.X, 2);
+            double delY = Math.Pow(b.Y - a.Y, 2);
             double distance = Math.Sqrt(delX + delY); // distance between points
 
             //Console.WriteLine("distance between " + a + " " + b + " = " + distance);

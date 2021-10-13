@@ -110,7 +110,7 @@ namespace Clusterization_algorithms
             else
                 routeBuilder.All_points(clusterCenters);
 
-            routeBuilder.CalculateRoute();
+            routeBuilder.CalculateRouteByElasticNet();
             graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
 
@@ -145,7 +145,6 @@ namespace Clusterization_algorithms
 
         private void btnBruteForce_Click(object sender, EventArgs e)
         {
-            //routeBuilder.All_points(clusterCenters);
             List<Point> route = new List<Point> { };
 
             if (clusterCenters.Count > 0)
@@ -279,7 +278,7 @@ namespace Clusterization_algorithms
             Graphics graphicsVector = panel4.CreateGraphics();
 
             Pen pen = new Pen(Color.Black, 2);
-            Point zeroPosition = new Point(pictBoxArea.Location.X - 10, pictBoxArea.Location.Y - 10);
+            Point zeroPosition = new Point(pictBoxArea.Location.X - 25, pictBoxArea.Location.Y - 25);
             int X = zeroPosition.X;
             int Y = zeroPosition.Y;
 
@@ -375,6 +374,21 @@ namespace Clusterization_algorithms
                 i += 25;
                 number += 25;
             }
+        }
+
+        private void btnNearestNeighbour_Click(object sender, EventArgs e)
+        {
+            List<Point> route = new List<Point> { };
+
+            if (clusterCenters.Count > 0)
+                route = routeBuilder.CalculateRouteNearestNeighbour(clusterCenters);
+            else
+                route = routeBuilder.CalculateRouteNearestNeighbour(Calculator.DictionaryToList(allPoints));
+
+            graphic.DrawRoute(route, Color.Salmon);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
+            //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
+            PrintToTextBoxInfo(allPointsClustered);
         }
     }
 }
