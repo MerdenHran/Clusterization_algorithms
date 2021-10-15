@@ -30,12 +30,12 @@ namespace Clusterization_algorithms
             forel = new Forel(graphic);
             k_means = new K_means(graphic);
             routeBuilder = new RouteBuilder();
+            labelRoute.Text = "";
         }
 
         private void btnGenPoints_Click(object sender, EventArgs e)
         {
-
-            Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
+            //Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
 
             if (checkBoxAllowGeneratePoints.Checked == true)
             {
@@ -273,9 +273,13 @@ namespace Clusterization_algorithms
             DrawScale();
         }
 
-        private void DrawScale()
+        private void DrawScale() // draw scale in panel related to picturebox
         {
-            Graphics graphicsVector = panel4.CreateGraphics();
+            //< Set panel size to all window 
+            panel.Size = new Size(this.Size.Width, this.Size.Height);
+            panel.Location = new Point(0, 0);
+
+            Graphics graphicsVector = panel.CreateGraphics();
 
             Pen pen = new Pen(Color.Black, 2);
             Point zeroPosition = new Point(pictBoxArea.Location.X - 25, pictBoxArea.Location.Y - 25);
@@ -305,7 +309,7 @@ namespace Clusterization_algorithms
                             AutoSize = true
 
                         };
-                        panel4.Controls.Add(lb);
+                        panel.Controls.Add(lb);
 
                     }
                     else
@@ -317,7 +321,7 @@ namespace Clusterization_algorithms
                             AutoSize = true
 
                         };
-                        panel4.Controls.Add(lb);
+                        panel.Controls.Add(lb);
                     }
                 }
 
@@ -344,7 +348,7 @@ namespace Clusterization_algorithms
                             AutoSize = true
 
                         };
-                        panel4.Controls.Add(lb);
+                        panel.Controls.Add(lb);
                     }
                     else if (number == 50)
                     {
@@ -355,7 +359,7 @@ namespace Clusterization_algorithms
                             AutoSize = true
 
                         };
-                        panel4.Controls.Add(lb);
+                        panel.Controls.Add(lb);
                     }
                     else
                     {
@@ -366,7 +370,7 @@ namespace Clusterization_algorithms
                             AutoSize = true
 
                         };
-                        panel4.Controls.Add(lb);
+                        panel.Controls.Add(lb);
                     }
 
                 }
@@ -381,13 +385,35 @@ namespace Clusterization_algorithms
             List<Point> route = new List<Point> { };
 
             if (clusterCenters.Count > 0)
-                route = routeBuilder.CalculateRouteNearestNeighbour(clusterCenters);
+                route = routeBuilder.CalculateRouteByNearestNeighbour(clusterCenters);
             else
-                route = routeBuilder.CalculateRouteNearestNeighbour(Calculator.DictionaryToList(allPoints));
+                route = routeBuilder.CalculateRouteByNearestNeighbour(Calculator.DictionaryToList(allPoints));
 
             graphic.DrawRoute(route, Color.Salmon);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
-            //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
+            PrintToTextBoxInfo(allPointsClustered);
+        }
+
+        private void btnFPPWR_Click(object sender, EventArgs e)
+        {
+            List<Point> route = new List<Point> { };
+
+            //< draw net on pictBoxArea
+
+            // divide field on cells; cells count:
+            int x_count = 6;
+            int y_count = 6;
+
+            graphic.DrawNet(x_count, y_count, pictBoxArea.Width, pictBoxArea.Height);
+            //>
+
+            if (clusterCenters.Count > 0)
+                route = routeBuilder.CalculateRouteByFPPWR(clusterCenters, x_count, y_count, pictBoxArea.Width, pictBoxArea.Height);
+            else
+                route = routeBuilder.CalculateRouteByFPPWR(Calculator.DictionaryToList(allPoints), x_count, y_count, pictBoxArea.Width, pictBoxArea.Height);
+
+            graphic.DrawRoute(route, Color.Crimson);
+            labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
             PrintToTextBoxInfo(allPointsClustered);
         }
     }

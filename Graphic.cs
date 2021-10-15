@@ -72,5 +72,33 @@ namespace Clusterization_algorithms
                 PAUSE(pause);
             }
         }
+
+        public void DrawNet(int x_count, int y_count, double width, double heigth) {
+
+            // cell sides size
+            double x_side = width / x_count;
+            double y_side = heigth / y_count;
+
+            // draw horisontal lines
+            for (int ix = 0; ix <= x_count; ix++)
+            {
+                int x_position = (int) (x_side * ix);
+                Point pointUp = new Point(x_position, 0);
+                Point pointDown = new Point(x_position, (int)heigth);
+                
+                DrawLine(pointUp, pointDown, Color.DarkGray);
+            }
+
+            // draw vertical lines
+            for (int iy = 0; iy <= x_count; iy++)
+            {
+                int y_position = (int)(y_side * iy);
+                Point pointLeft = new Point(0, y_position);
+                Point pointRight = new Point((int)width, y_position);
+
+                DrawLine(pointLeft, pointRight, Color.DarkGray);
+            }
+
+        }
     }
 }

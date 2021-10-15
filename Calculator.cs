@@ -405,5 +405,26 @@ namespace Clusterization_algorithms
             //Console.WriteLine(fulcrum.ToString());
             return fulcrum;
         }
+
+        public static List<Point> SortPointListByX(List<Point> points) {
+            List<Point> pointList = points.OrderBy(point => point.X).ToList();
+            return pointList;
+        }
+
+        public static Point FindCloserPoint(Point point, List<Point> list) {
+            Point minPoint = list[0];
+            double minDist = Calculator.calcDistance(point, minPoint);
+
+            foreach (Point p in list) {
+                
+                double dist = Calculator.calcDistance(p, point);
+
+                if (dist < minDist) {
+                    minDist = dist;
+                    minPoint = p;
+                }
+            }
+            return minPoint;
+        }
     }
 }

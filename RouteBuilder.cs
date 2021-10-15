@@ -172,17 +172,17 @@ namespace Clusterization_algorithms
             inside_points.AddRange(Calculator.DictionaryToList(dict));
         }
 
-        public List<Point> CalculateRouteBruteForce(List<Point> points)
+        public List<Point> CalculateRouteBruteForce(List<Point> pointList)
         {
-            List<Point> newPoints = new List<Point> { };
-            newPoints.Add(startPoint);
-            newPoints.AddRange(points);
-            newPoints.Add(startPoint);
+            List<Point> points = new List<Point> { };
+            points.Add(startPoint);
+            points.AddRange(pointList);
+            points.Add(startPoint);
 
             //points = newPoints;
 
             length = 9999; // any value that is more then any possible length
-            RecursivePermutation(1, newPoints);
+            RecursivePermutation(1, points);
 
             return routeList;
         }
@@ -221,53 +221,122 @@ namespace Clusterization_algorithms
             points[pos_2] = point;
         }
 
-        public List<Point> CalculateRouteNearestNeighbour(List<Point> points) {
+        public List<Point> CalculateRouteByNearestNeighbour(List<Point> pointList) {
 
-            List<Point> newPoints = new List<Point> { };
-            newPoints.AddRange(points);
+            List<Point> points = new List<Point> { };
+            points.AddRange(pointList);
             List<bool> pointIsUsed = new List<bool> {}; //false
 
-            foreach (Point point in newPoints) {
+            foreach (Point point in points) {
                 pointIsUsed.Add(false);
             } 
 
             List<Point> route = new List<Point> { startPoint };
-
             Point current_point = startPoint;
 
-            for (int j = 0; j < newPoints.Count; j++)
+            for (int j = 0; j < points.Count; j++)
             {
-                Console.WriteLine("j = "+j);
-
                 int min_point_index = 0;
                 double min_distance = 99999; // any large value
 
-                for (int i = 0; i < newPoints.Count; i++)
+                for (int i = 0; i < points.Count; i++)
                 {
                     if (!pointIsUsed[i])
                     {
-                        Console.WriteLine(" i = " + i);
-                        double distance = Calculator.calcDistance(current_point, newPoints[i]);
+                        double distance = Calculator.calcDistance(current_point, points[i]);
 
                         if (distance < min_distance)
                         {
                             min_distance = distance;
                             min_point_index = i;
-                            Console.WriteLine(newPoints[i] + " " + min_distance);
                         }
                     }
                 }
 
-                current_point = newPoints[min_point_index];
+                current_point = points[min_point_index];
                 pointIsUsed[min_point_index] = true;
                 route.Add(current_point);
             }
 
             route.Add(startPoint);
-
             return route;
         }
 
+        public List<Point> CalculateRouteByFPPWR(List<Point> pointList, int x_count, int y_count, double width, double heigth) {
+            
+            List<Point> points = new List<Point> { };
+            points.AddRange(pointList);
+            List<Point> route = new List<Point> { startPoint };
 
+            // cell sides size
+            double x_side = width / x_count;
+            double y_side = heigth / y_count;
+
+            //List<Point> previousCell = new List<Point> { }; // FPPWR feture (negative)
+
+            for (int iy = 0; iy < y_count; iy++) {
+
+                double y_up = y_side * iy;
+                double y_down = y_side * (iy + 1);
+
+                if (iy % 2 == 0) {
+                    for (int ix = 0; ix < x_count; ix++) {
+
+                        double x_left = x_side * ix;
+                        double x_right = x_side * (ix + 1);
+                        
+                        List<Point> cell = GetCellPointList(points, x_left, x_right, y_up, y_down, route);
+                        cell = Calculator.SortPointListByX(cell);
+
+                            //FPPWR_Feature(cell, previousCell, route);
+
+                        route.AddRange(cell);
+                    }
+                }
+                else {
+                    for (int ix = x_count; ix > 0; ix--) {
+
+                        double x_right = x_side * ix;
+                        double x_left = x_side * (ix - 1);
+
+                        List<Point> cell = GetCellPointList(points, x_left, x_right, y_up, y_down, route);
+                        cell = Calculator.SortPointListByX(cell);
+                        cell.Reverse();
+
+                            //FPPWR_Feature(cell, previousCell, route);
+
+                        route.AddRange(cell);
+                    }
+                }
+            }
+
+            route.Add(startPoint);
+            return route;
+        }
+
+        private List<Point> GetCellPointList(List<Point> points, double x_left, double x_rigth, double y_up, double y_down, List<Point> route) {
+
+            List<Point> cell = new List<Point> { };
+
+            foreach (Point point in points)
+            {
+                if ((point.X >= x_left) && (point.X) <= x_rigth)
+                    if ((point.Y >= y_up) && (point.Y) <= y_down)
+                        if (!route.Contains(point))
+                            cell.Add(point);
+            }
+            return cell;
+        }
+
+        //private void FPPWR_Feature(List<Point> cell, List<Point> previousCell, List<Point> route) // FPPWR feture (negative)
+        //{
+        //    if (previousCell.Count != 0)
+        //    {
+        //        Point closerPoint = Calculator.FindCloserPoint(cell[0], previousCell);
+        //        route.Remove(closerPoint);
+        //        route.Add(closerPoint);
+        //    }
+        //    previousCell = cell;
+        //}
     }
 }
