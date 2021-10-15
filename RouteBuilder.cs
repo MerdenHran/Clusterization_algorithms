@@ -272,8 +272,6 @@ namespace Clusterization_algorithms
             double x_side = width / x_count;
             double y_side = heigth / y_count;
 
-            //List<Point> previousCell = new List<Point> { }; // FPPWR feture (negative)
-
             for (int iy = 0; iy < y_count; iy++) {
 
                 double y_up = y_side * iy;
@@ -288,7 +286,7 @@ namespace Clusterization_algorithms
                         List<Point> cell = GetCellPointList(points, x_left, x_right, y_up, y_down, route);
                         cell = Calculator.SortPointListByX(cell);
 
-                            //FPPWR_Feature(cell, previousCell, route);
+                        //FPPWRFeature(cell);
 
                         route.AddRange(cell);
                     }
@@ -303,7 +301,7 @@ namespace Clusterization_algorithms
                         cell = Calculator.SortPointListByX(cell);
                         cell.Reverse();
 
-                            //FPPWR_Feature(cell, previousCell, route);
+                        //FPPWRFeature(cell);
 
                         route.AddRange(cell);
                     }
@@ -328,15 +326,14 @@ namespace Clusterization_algorithms
             return cell;
         }
 
-        //private void FPPWR_Feature(List<Point> cell, List<Point> previousCell, List<Point> route) // FPPWR feture (negative)
-        //{
-        //    if (previousCell.Count != 0)
-        //    {
-        //        Point closerPoint = Calculator.FindCloserPoint(cell[0], previousCell);
-        //        route.Remove(closerPoint);
-        //        route.Add(closerPoint);
-        //    }
-        //    previousCell = cell;
-        //}
+        private void FPPWRFeature(List<Point> cell) {
+            if (cell.Count > 3)
+            {
+                int pos = cell.Count - 2;
+                Point point = cell[pos];
+                cell.Remove(point);
+                cell.Add(point);
+            }
+        }
     }
 }
