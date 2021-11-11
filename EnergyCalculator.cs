@@ -64,6 +64,7 @@ namespace Clusterization_algorithms
                         break;
 
                     case ConnectionType.PP_to_Center:
+                        Start_PP_Protocol(cluster, stationHeight);
                         break;
 
                     case ConnectionType.PP_to_Route:
@@ -72,23 +73,37 @@ namespace Clusterization_algorithms
             }
         }
 
-        public void Start_PP_ToCenter(List<Point> cluster, int stationHeight) {
-            Point station = Calculator.findCentroid(cluster);
-            Boolean[] alreadyUsed = new bool[cluster.Count];   //true => used //Is node used?
+        public void Start_PP_Protocol(List<Point> cluster, int stationHeight) {
 
-            for (int i = 0; i < cluster.Count; i++) {
-                alreadyUsed[i] = true;
-                //Point node = 
-            }
-        }
-
-        private Point FindCloserNode(int nodePosition, List<Point> cluster) {
-
-            for (int i = 0; i < cluster.Count; i++) {
-                
-            }
+            Console.WriteLine("Start PP");
+            Point center = Calculator.findCentroid(cluster);
             
-            return new Point();
+            foreach (Point point in cluster) {
+                //Console.WriteLine(point+" foreach");
+                //Point cur = point;
+                Point closer = Calculator.FindCloserPoint(point, cluster);
+                graphic.DrawLine(point, closer, Color.LightGreen);
+
+                //while (cur != center) {
+                //    Console.WriteLine("while");
+                //Point closer = Calculator.FindCloserPoint(cur, cluster);
+                //double distPCE = Calculator.calcDistance(cur, center); //point - center
+                //double distPCL = Calculator.calcDistance(cur, closer); //point - closer
+
+                //    if (distPCE < distPCL) {
+                //        Console.WriteLine("if");
+                //        PPConnection(point, center, stationHeight);
+                //        cur = center;
+                //    }
+                //    else {
+                //        Console.WriteLine("else");
+                //        graphic.DrawLine(point, closer, Color.LightGreen);
+                //        cur = closer;
+                //    }
+                //}
+            }
+
+            //PPConnection(point, center, stationHeight);
         }
 
         public void Start_DT_ToRoute(List<Point> cluster, int stationHeight, List<Point> routeList) { // transmission while station moving on route
