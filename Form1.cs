@@ -110,7 +110,7 @@ namespace Clusterization_algorithms
             else
                 routeBuilder.All_points(clusterCenters);
 
-            routeBuilder.CalculateRouteByElasticNet();
+            routeBuilder.CalculateRouteByConvexHullInsertion();
             graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
 

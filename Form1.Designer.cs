@@ -194,7 +194,7 @@ namespace Clusterization_algorithms
             this.btnElasticNet.Name = "btnElasticNet";
             this.btnElasticNet.Size = new System.Drawing.Size(319, 45);
             this.btnElasticNet.TabIndex = 30;
-            this.btnElasticNet.Text = "Route by Elastic Net\r\n";
+            this.btnElasticNet.Text = "Convex hull insertion (optimized)";
             this.btnElasticNet.UseVisualStyleBackColor = false;
             this.btnElasticNet.Click += new System.EventHandler(this.btnClustersRoute_Click);
             // 

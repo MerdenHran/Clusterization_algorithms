@@ -28,17 +28,17 @@ namespace Clusterization_algorithms
         {
         }
 
-        public List<Point> CalculateRouteByElasticNet()
+        public List<Point> CalculateRouteByConvexHullInsertion()
         {
             JarvisMarch();
-            ElasticNet();
+            ConvexHullInsertion();
 
             List<Point> unsort_route = new List<Point> { };
             unsort_route.AddRange(routeList);
             routeList.Clear();
 
             SortInsidePoints(); // sort points inside convex hull by they mass center
-            ElasticNet();
+            ConvexHullInsertion();
 
             double unsort_route_length = Calculator.calcRouteLength(unsort_route);
             double sort_route_length = Calculator.calcRouteLength(routeList);
@@ -59,7 +59,7 @@ namespace Clusterization_algorithms
             return routeList;
         }
 
-        private List<Point> ElasticNet()
+        private List<Point> ConvexHullInsertion()
         {
 
             routeList.AddRange(convex_hull);
@@ -108,7 +108,7 @@ namespace Clusterization_algorithms
             return cos;
         }
 
-        public void JarvisMarch(bool getSpiralRoute = false) // 
+        public void JarvisMarch(bool getSpiralRoute = false) // convex hull or gift wrappening
         {
             routeList.Clear();
             convex_hull.Clear();
