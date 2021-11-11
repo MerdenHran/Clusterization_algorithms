@@ -77,33 +77,33 @@ namespace Clusterization_algorithms
 
             Console.WriteLine("Start PP");
             Point center = Calculator.findCentroid(cluster);
-            
-            foreach (Point point in cluster) {
-                //Console.WriteLine(point+" foreach");
-                //Point cur = point;
-                Point closer = Calculator.FindCloserPoint(point, cluster);
-                graphic.DrawLine(point, closer, Color.LightGreen);
 
-                //while (cur != center) {
-                //    Console.WriteLine("while");
-                //Point closer = Calculator.FindCloserPoint(cur, cluster);
-                //double distPCE = Calculator.calcDistance(cur, center); //point - center
-                //double distPCL = Calculator.calcDistance(cur, closer); //point - closer
+            //if (cluster.Count == 1)
+            //    PPConnection(cluster[0], center, stationHeight);
+            //else
+            foreach (Point point in cluster)
+            {
+                Point currentPoint = point;
 
-                //    if (distPCE < distPCL) {
-                //        Console.WriteLine("if");
-                //        PPConnection(point, center, stationHeight);
-                //        cur = center;
-                //    }
-                //    else {
-                //        Console.WriteLine("else");
-                //        graphic.DrawLine(point, closer, Color.LightGreen);
-                //        cur = closer;
-                //    }
-                //}
+                while (!currentPoint.Equals(center))
+                {
+                    Point closer = Calculator.FindCloserPoint(currentPoint, cluster);
+                    Console.WriteLine("cur - closer " + currentPoint + "-" + closer);
+                    double distPCE = Calculator.calcDistance(currentPoint, center); //point - center
+                    double distPCL = Calculator.calcDistance(currentPoint, closer); //point - closer
+
+                    if (distPCE <= distPCL)
+                    {
+                        currentPoint = center;
+                        PPConnection(point, center, stationHeight);
+                    }
+                    else
+                    {
+                        PPConnection(point, closer, 0);
+                        currentPoint = closer;
+                    }
+                }
             }
-
-            //PPConnection(point, center, stationHeight);
         }
 
         public void Start_DT_ToRoute(List<Point> cluster, int stationHeight, List<Point> routeList) { // transmission while station moving on route
