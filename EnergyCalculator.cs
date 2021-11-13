@@ -68,41 +68,40 @@ namespace Clusterization_algorithms
                         break;
 
                     case ConnectionType.PP_to_Route:
+                        Start_PP_ToRoute(cluster, stationHeight, routeList);
                         break;
                 }
             }
         }
 
+        public void Start_PP_ToRoute(List<Point> cluster, int stationHeight, List<Point> routeList) {
+            Point center = Calculator.findCentroid(cluster);
+            List<Point> routeFragment = Calculator.getRouteFragment(center, routeList);
+
+        }
+
         public void Start_PP_Protocol(List<Point> cluster, int stationHeight) {
 
-            Console.WriteLine("Start PP");
             Point center = Calculator.findCentroid(cluster);
 
-            //if (cluster.Count == 1)
-            //    PPConnection(cluster[0], center, stationHeight);
-            //else
-            foreach (Point point in cluster)
-            {
-                Point currentPoint = point;
+            for (int i = 0; i < cluster.Count; i++) {
+                
+                Point closer = center;
+                double dist_i_to_center = Calculator.calcDistance(cluster[i], center);
+                double dist_to_closer = dist_i_to_center;
 
-                while (!currentPoint.Equals(center))
-                {
-                    Point closer = Calculator.FindCloserPoint(currentPoint, cluster);
-                    Console.WriteLine("cur - closer " + currentPoint + "-" + closer);
-                    double distPCE = Calculator.calcDistance(currentPoint, center); //point - center
-                    double distPCL = Calculator.calcDistance(currentPoint, closer); //point - closer
-
-                    if (distPCE <= distPCL)
-                    {
-                        currentPoint = center;
-                        PPConnection(point, center, stationHeight);
-                    }
-                    else
-                    {
-                        PPConnection(point, closer, 0);
-                        currentPoint = closer;
+                for (int j = 0; j < cluster.Count; j++) {
+                    if (i != j) {
+                        double dist_to_node = Calculator.calcDistance(cluster[i], cluster[j]);
+                        double dist_j_to_center = Calculator.calcDistance(cluster[j], center);
+                        if (dist_to_node < dist_to_closer && dist_j_to_center < dist_i_to_center) {
+                            closer = cluster[j];
+                            dist_to_closer = dist_to_node;
+                        }
                     }
                 }
+
+                PPConnection(cluster[i], closer, 0);// high!!!
             }
         }
 
@@ -157,7 +156,7 @@ namespace Clusterization_algorithms
 
             if (dist < d0) {
                 E_transmission = package * E_elec + package * E_fs * Math.Pow(dist, 2); // nJ
-                graphic.DrawLine(node, station, Color.LightGreen);
+                graphic.DrawLine(node, station, Color.Olive);
             }
             else
                 //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // nJ
