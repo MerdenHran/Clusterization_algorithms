@@ -413,11 +413,11 @@ namespace Clusterization_algorithms
 
         public static Point FindCloserPoint(Point point, List<Point> list) {
 
-            List<Point> newList = new List<Point> { };
-            newList.AddRange(list);
+            //List<Point> newList = new List<Point> { };
+            //newList.AddRange(list);
 
-            if (newList.Contains(point))
-                newList.Remove(point);
+            //if (newList.Contains(point))
+            //    newList.Remove(point);
 
             Point minPoint = list[0];
             double minDist = Calculator.calcDistance(point, minPoint);

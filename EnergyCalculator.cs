@@ -85,12 +85,13 @@ namespace Clusterization_algorithms
             Point center = Calculator.findCentroid(cluster);
 
             for (int i = 0; i < cluster.Count; i++) {
-                
+                Console.WriteLine("i = " + i);
                 Point closer = center;
                 double dist_i_to_center = Calculator.calcDistance(cluster[i], center);
                 double dist_to_closer = dist_i_to_center;
 
                 for (int j = 0; j < cluster.Count; j++) {
+                    Console.WriteLine(" j = " + j);
                     if (i != j) {
                         double dist_to_node = Calculator.calcDistance(cluster[i], cluster[j]);
                         double dist_j_to_center = Calculator.calcDistance(cluster[j], center);
@@ -148,15 +149,15 @@ namespace Clusterization_algorithms
             double distH0 = Calculator.calcDistance(node, station);
             double dist = Math.Sqrt(distH0 * distH0 + stationHeight * stationHeight);
 
-            Console.WriteLine("Distance: " + Math.Round(dist) + " Height: " + stationHeight);
+            //Console.WriteLine("Distance: " + Math.Round(dist) + " Height: " + stationHeight);
             
             double E_transmission = 0;
-            Console.WriteLine(node + " " + station);
+            //Console.WriteLine(node + " " + station);
             //d0 = Math.Sqrt(E_fs / E_mp);
 
             if (dist < d0) {
                 E_transmission = package * E_elec + package * E_fs * Math.Pow(dist, 2); // nJ
-                graphic.DrawLine(node, station, Color.Olive);
+                graphic.DrawLine(node, station, Color.Red);
             }
             else
                 //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // nJ
