@@ -80,29 +80,51 @@ namespace Clusterization_algorithms
 
         }
 
-        public void Start_PP_Protocol(List<Point> cluster, int stationHeight) {
-
+        public void Start_PP_Protocol(List<Point> cluster, int stationHeight)
+        {
+            Console.WriteLine("\nNew cluster = "+ cluster.Count);
             Point center = Calculator.findCentroid(cluster);
+            int k = 0;
 
-            for (int i = 0; i < cluster.Count; i++) {
-                Console.WriteLine("i = " + i);
+            for (int i = 0; i < cluster.Count; i++)
+            {
+                Console.Write(i + ",");
+                //Console.WriteLine("i = " + i);
                 Point closer = center;
                 double dist_i_to_center = Calculator.calcDistance(cluster[i], center);
                 double dist_to_closer = dist_i_to_center;
 
-                for (int j = 0; j < cluster.Count; j++) {
-                    Console.WriteLine(" j = " + j);
-                    if (i != j) {
-                        double dist_to_node = Calculator.calcDistance(cluster[i], cluster[j]);
-                        double dist_j_to_center = Calculator.calcDistance(cluster[j], center);
-                        if (dist_to_node < dist_to_closer && dist_j_to_center < dist_i_to_center) {
-                            closer = cluster[j];
-                            dist_to_closer = dist_to_node;
-                        }
+                for (int j = 0; j < cluster.Count; j++)
+                {
+                    //Console.WriteLine("  j = " + j);
+
+                    if (i == j)
+                        continue;
+
+                    double dist_to_node = Calculator.calcDistance(cluster[i], cluster[j]);
+                    double dist_j_to_center = Calculator.calcDistance(cluster[j], center);
+
+                    if (dist_to_node < dist_to_closer && dist_j_to_center < dist_i_to_center)
+                    {
+                        closer = cluster[j];
+                        dist_to_closer = dist_to_node;
+                        //Console.WriteLine("closer = " + closer);
                     }
                 }
 
-                PPConnection(cluster[i], closer, 0);// high!!!
+                if (closer.Equals(center))
+                {
+                    Console.WriteLine("c");
+                    PPConnection(cluster[i], closer, stationHeight);
+                    k++;
+                    i = k-1;
+                    //Console.WriteLine("k="+k+" i=" + i);
+                }
+                else
+                {
+                    //Console.WriteLine("pp connection");
+                    PPConnection(cluster[i], closer, 0);// high!!!
+                }
             }
         }
 
