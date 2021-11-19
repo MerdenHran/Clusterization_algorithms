@@ -36,9 +36,11 @@ namespace Clusterization_algorithms
             PAUSE(pause);
         }
 
-        public void DrawPoint(Point p, Brush brush)
+        public void DrawPoint(Point p, Brush brush, int size = 4)
         {
-            graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
+            int s = (int)(size/2);
+            //graphics.FillRectangle(brush, p.X - 2, p.Y - 2, 4, 4);
+            graphics.FillRectangle(brush, p.X - s, p.Y - s, size, size);
         }
 
         public void DrawPointArray(Point[] points)

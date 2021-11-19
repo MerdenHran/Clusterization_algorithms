@@ -40,7 +40,7 @@ namespace Clusterization_algorithms
 
         public void DrawSeeds() {
             foreach (Point seed in seeds)
-                graphic.DrawPoint(seed, Brushes.Red);
+                graphic.DrawPoint(seed, Brushes.Red, 6);
         }
 
         //write select point to cluster

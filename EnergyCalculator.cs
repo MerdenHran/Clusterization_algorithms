@@ -17,11 +17,11 @@ namespace Clusterization_algorithms
 
         //--------- Energy consumption parameters ------------
         double E_fs = 0.01;//nJ(10^-9) amplifier energy, free space model (short distance) | d<d0
-        //double E_mp = 1300000; //nJ // multipath fading model (large distance) | d >= d0
-        int E_elec = 50; //nJ, energy for work signal transmission/recieve
+        double E_mp = 0.0000013; //nJ // multipath fading model (large distance) | d >= d0
+        int E_elec = 50; //nJ/bit, energy for work signal transmission/recieve
         int node_E = 500000000; //nJ; = 0,5J // initial node energy
         double d0 = 87.7; // (m) distance threshold for swapping amplification models
-        int package = 4000; // bytes, package size
+        int package = 32000; // bits, package size
         //int package = Calculator.genRandInt(20, 65535);
         //----------------------------------------------------
 
@@ -82,13 +82,18 @@ namespace Clusterization_algorithms
 
         public void Start_PP_Protocol(List<Point> cluster, int stationHeight) {
 
+            List<int> packetCountList = new List<int> { };
             Point center = Calculator.findCentroid(cluster);
+
+            for (int i = 0; i < allNodes.Count; i++)
+                packetCountList.Add(1);
 
             for (int i = 0; i < cluster.Count; i++) {
                 
                 Point closer = center;
                 double dist_i_to_center = Calculator.calcDistance(cluster[i], center);
                 double dist_to_closer = dist_i_to_center;
+                int index = -1;
 
                 for (int j = 0; j < cluster.Count; j++) {
                     if (i != j) {
@@ -97,11 +102,18 @@ namespace Clusterization_algorithms
                         if (dist_to_node < dist_to_closer && dist_j_to_center < dist_i_to_center) {
                             closer = cluster[j];
                             dist_to_closer = dist_to_node;
+                            index = j;
                         }
                     }
                 }
 
-                PPConnection(cluster[i], closer, 0);// high!!!
+                if (index == -1)
+                    PPConnection(cluster[i], closer, stationHeight, packetCountList[i]);
+                else
+                {
+                    packetCountList[index] = packetCountList[i] + 1; //packet last node + 1 his packet
+                    PPConnection(cluster[i], closer, 0, packetCountList[i]);
+                }
             }
         }
 
@@ -143,31 +155,39 @@ namespace Clusterization_algorithms
                 PPConnection(point, center, stationHeight);
         }
 
-        public int PPConnection(Point node, Point station, int stationHeight) { // transmission from node -> station
+        public int PPConnection(Point node, Point station, int stationHeight, int packetCount = 1) { // transmission from node -> station
 
             double distH0 = Calculator.calcDistance(node, station);
             double dist = Math.Sqrt(distH0 * distH0 + stationHeight * stationHeight);
-
-            Console.WriteLine("Distance: " + Math.Round(dist) + " Height: " + stationHeight);
-            
+            //Console.WriteLine("Distance: " + Math.Round(dist) + " Height: " + stationHeight);
             double E_transmission = 0;
-            Console.WriteLine(node + " " + station);
+            //Console.WriteLine(node + " " + station);
             //d0 = Math.Sqrt(E_fs / E_mp);
 
-            if (dist < d0) {
-                E_transmission = package * E_elec + package * E_fs * Math.Pow(dist, 2); // nJ
-                graphic.DrawLine(node, station, Color.Olive);
+            if (dist < d0)
+            {
+                E_transmission = (package * packetCount) * E_elec + (package * packetCount) * E_fs * Math.Pow(dist, 2); // nJ
+                graphic.DrawLine(node, station, Color.LimeGreen);
             }
-            else
-                //E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // nJ
-                E_transmission = 0;  // no transmittion
+            else {
+                E_transmission = package * E_elec + package * E_mp * Math.Pow(dist, 4); // nJ
+                //E_transmission = 0;  // no transmittion
+                graphic.DrawLine(node, station, Color.IndianRed);
+            }
 
-            double E_receive = package * E_elec;
+
+            double E_receive = (package*packetCount) * E_elec;
 
             //minus used energy from nodes charge
             if (nodesLevelCharge.TryGetValue(node, out int oldCharge))
             {
                 int newCharge = oldCharge - (int)E_transmission;
+
+                if (newCharge < 0) {
+                    newCharge = 0;
+                    graphic.DrawPoint(node, Brushes.Red);
+                }
+                    
                 nodesLevelCharge.Remove(node);
                 nodesLevelCharge.Add(node, newCharge);
             }

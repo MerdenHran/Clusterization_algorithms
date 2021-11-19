@@ -102,12 +102,12 @@ namespace Clusterization_algorithms
 
             //Point newCenter = findBarycenter(cluster);
             Point newCenter = Calculator.findCentroid(cluster);
-            graphic.DrawPoint(newCenter, Brushes.Pink);
+            graphic.DrawPoint(newCenter, Brushes.Pink, 6);
             graphic.DrawCircle(newCenter, radius, Color.LightGray);
 
             if (center == newCenter){
                 graphic.DrawCircle(center, radius, Color.Black);
-                graphic.DrawPoint(newCenter, Brushes.Red);
+                graphic.DrawPoint(newCenter, Brushes.Red, 6);
                 listOfClastersCenter.Add(center);
             }
                 

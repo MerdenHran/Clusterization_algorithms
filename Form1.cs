@@ -215,7 +215,7 @@ namespace Clusterization_algorithms
 
             if (clusterCenters.Count != 0) {
                 for (int i = 0; i < clusterCenters.Count; i++) {
-                    graphic.DrawPoint(clusterCenters[i], Brushes.Red);
+                    graphic.DrawPoint(clusterCenters[i], Brushes.Red, 6);
                     graphic.DrawCircle(clusterCenters[i], radius, Color.Black, 0);
                 }
             }
