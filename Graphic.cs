@@ -26,6 +26,7 @@ namespace Clusterization_algorithms
             Pen pen = new Pen(color);
             pen.Width = 3;
             graphics.DrawLine(pen, p1, p2);
+            //PAUSE(500);
         }
 
         public void DrawCircle(Point p, int radius, Color color, int pause = 30)

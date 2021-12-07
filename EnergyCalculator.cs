@@ -75,9 +75,46 @@ namespace Clusterization_algorithms
         }
 
         public void Start_PP_ToRoute(List<Point> cluster, int stationHeight, List<Point> routeList) {
+            
             Point center = Calculator.findCentroid(cluster);
             List<Point> routeFragment = Calculator.getRouteFragment(center, routeList);
+            List<int> packetCountList = new List<int> { };
 
+            for (int i = 0; i < allNodes.Count; i++)
+                packetCountList.Add(1);
+
+            for (int i = 0; i < cluster.Count; i++)
+            {
+                Point closer = Calculator.find_PointProjection_OnMultiLine(cluster[i], routeFragment); // set value of closer fulcrum
+                double dist_i_to_fulcrum = Calculator.calcDistance(cluster[i], closer);
+                double dist_to_closer = dist_i_to_fulcrum;
+                int index = -1;
+
+                for (int j = 0; j < cluster.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        double dist_to_node = Calculator.calcDistance(cluster[i], cluster[j]);
+                        Point j_fulcrum = Calculator.find_PointProjection_OnMultiLine(cluster[j], routeFragment);
+                        double dist_j_to_fulcrum = Calculator.calcDistance(cluster[j], j_fulcrum);
+
+                        if (dist_to_node < dist_to_closer && dist_j_to_fulcrum < dist_i_to_fulcrum)
+                        {
+                            closer = cluster[j];
+                            dist_to_closer = dist_to_node;
+                            index = j;
+                        }
+                    }
+                }
+
+                if (index == -1)
+                    PPConnection(cluster[i], closer, stationHeight, packetCountList[i]);
+                else
+                {
+                    packetCountList[index] = packetCountList[i] + 1; //packet last node + 1 his packet
+                    PPConnection(cluster[i], closer, 0, packetCountList[i]);
+                }
+            }
         }
 
         public void Start_PP_Protocol(List<Point> cluster, int stationHeight) {
@@ -121,30 +158,9 @@ namespace Clusterization_algorithms
             Point center = Calculator.findCentroid(cluster);
             List<Point> routeFragment = Calculator.getRouteFragment(center, routeList);
 
-            for (int i = 0; i < cluster.Count; i++) {
-
-                Point closerFulcrum = center;
-                double minDistance = 9999;
-                
-                for (int j = 0; j < routeFragment.Count - 1; j++) {
-                    
-                    Point fulcrum = Calculator.find_PointProjection_OnLine(cluster[i], routeFragment[j], routeFragment[j+1]);
-                    double distance = Calculator.calcDistance(fulcrum, cluster[i]);
-                    
-                    if (distance < minDistance) {
-
-                        // Point must be between a,b point (i, i+1 route). Then, check this by length between points:
-                        double ab_distance = Calculator.calcDistance(routeFragment[j], routeFragment[j+1]);
-                        double af_distance = Calculator.calcDistance(routeFragment[j], fulcrum);
-                        double bf_distance = Calculator.calcDistance(routeFragment[j+1], fulcrum);
-
-                        if ((af_distance < ab_distance) && (bf_distance < ab_distance)) { // then fulcrum is between route points
-                            minDistance = distance;
-                            closerFulcrum = fulcrum;
-                        }
-                    }
-                }
-
+            for (int i = 0; i < cluster.Count; i++)
+            {
+                Point closerFulcrum = Calculator.find_PointProjection_OnMultiLine(cluster[i], routeFragment);
                 PPConnection(cluster[i], closerFulcrum, stationHeight);
             }
         }

@@ -381,7 +381,7 @@ namespace Clusterization_algorithms
             return routeList;
         }
 
-        public static Point find_PointProjection_OnLine(Point point, Point a_point_inLine, Point b_point_inLine) {
+        public static Point find_PointProjection_OnLine(Point point, Point a_point_inLine, Point b_point_inLine) { // find fulcrum
             //Point a_line = new Point(1, 6);
             //Point b_point_inLine = new Point(4, 1);
             //Point point = new Point(6, 5);
@@ -406,18 +406,39 @@ namespace Clusterization_algorithms
             return fulcrum;
         }
 
+        public static Point find_PointProjection_OnMultiLine(Point point, List<Point> intersectionList) {
+            
+            Point closerFulcrum = Calculator.FindCloserPoint(point, intersectionList); // if no projection return closer intersection
+            double minDistance = 9999;
+
+            for (int j = 0; j < intersectionList.Count - 1; j++)
+            {
+                Point fulcrum = Calculator.find_PointProjection_OnLine(point, intersectionList[j], intersectionList[j + 1]);
+                double dist_point_fulcrum = Calculator.calcDistance(fulcrum, point);
+
+                if (dist_point_fulcrum < minDistance)
+                {
+                    // Point must be between a,b point (i, i+1 route). Then, check this by length between points:
+                    double ab_distance = Calculator.calcDistance(intersectionList[j], intersectionList[j + 1]);
+                    double af_distance = Calculator.calcDistance(intersectionList[j], fulcrum);
+                    double bf_distance = Calculator.calcDistance(intersectionList[j + 1], fulcrum);
+
+                    if ((af_distance < ab_distance) && (bf_distance < ab_distance))
+                    { // then fulcrum is between route points
+                        minDistance = dist_point_fulcrum;
+                        closerFulcrum = fulcrum;
+                    }
+                }
+            }
+            return closerFulcrum;
+        }
+
         public static List<Point> SortPointListByX(List<Point> points) {
             List<Point> pointList = points.OrderBy(point => point.X).ToList();
             return pointList;
         }
 
         public static Point FindCloserPoint(Point point, List<Point> list) {
-
-            //List<Point> newList = new List<Point> { };
-            //newList.AddRange(list);
-
-            //if (newList.Contains(point))
-            //    newList.Remove(point);
 
             Point minPoint = list[0];
             double minDist = Calculator.calcDistance(point, minPoint);
