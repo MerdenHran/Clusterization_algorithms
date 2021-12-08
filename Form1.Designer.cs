@@ -129,7 +129,7 @@ namespace Clusterization_algorithms
             // 
             this.btnGenPoints.BackColor = System.Drawing.Color.DarkGray;
             this.btnGenPoints.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGenPoints.Location = new System.Drawing.Point(1162, 28);
+            this.btnGenPoints.Location = new System.Drawing.Point(1170, 28);
             this.btnGenPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGenPoints.Name = "btnGenPoints";
             this.btnGenPoints.Size = new System.Drawing.Size(317, 52);

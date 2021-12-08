@@ -407,9 +407,14 @@ namespace Clusterization_algorithms
         }
 
         public static Point find_PointProjection_OnMultiLine(Point point, List<Point> intersectionList) {
-            
-            Point closerFulcrum = Calculator.FindCloserPoint(point, intersectionList); // if no projection return closer intersection
+
+            Point closerFulcrum;
             double minDistance = 9999;
+
+            if (intersectionList.Contains(point))
+                closerFulcrum = point;
+            else
+                closerFulcrum = Calculator.FindCloserPoint(point, intersectionList); // if no projection return closer intersection
 
             for (int j = 0; j < intersectionList.Count - 1; j++)
             {
