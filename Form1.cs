@@ -18,7 +18,7 @@ namespace Clusterization_algorithms
         Dictionary<Point, int> allPointsClustered;
         List<Point> clusterCenters = new List<Point> { };
         int radius; // in forel
-        // List<Point> route = new List<Point> { };
+        ClusterizationType clusterizationType;
 
         // *** DEFAULT VALUES ***
         int def_points_count = 100; // count nodes generated on map
@@ -47,9 +47,9 @@ namespace Clusterization_algorithms
         {
             //Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
 
-            labelRoute.Text = "";
-            labelCharge.Text = " ";
-            labelUsedEnergy.Text = " ";
+            DisableAll();
+            EnableClusterization();
+            Labels_ClearText();
 
             if (checkBoxAllowGeneratePoints.Checked == true)
             {
@@ -76,8 +76,11 @@ namespace Clusterization_algorithms
 
         private void btnKMeans_Click(object sender, EventArgs e)
         {
-            labelRoute.Text = "";
+            clusterizationType = ClusterizationType.K_means;
+            Labels_ClearText();
             ClearFields();
+            EnableRouteCalculating();
+            DisallowSelectClusterAndCalculateEnergy();
 
             SeedGenerator seedG = new SeedGenerator(); //
             seedG.SetPoints(allPoints);
@@ -100,8 +103,11 @@ namespace Clusterization_algorithms
 
         private void btnForel_Click(object sender, EventArgs e)
         {
-            labelRoute.Text = "";
+            clusterizationType = ClusterizationType.Forel;
+            Labels_ClearText();
             ClearFields();
+            EnableRouteCalculating();
+            DisallowSelectClusterAndCalculateEnergy();
 
             forel.setPoints(allPoints);
             forel.Radius = def_cluster_radius;
@@ -119,6 +125,7 @@ namespace Clusterization_algorithms
 
         private void btnClustersRoute_Click(object sender, EventArgs e)
         {
+            AllowSelectClusterAndCalculateEnergy();
             if (clusterCenters.Count == 0)
                 routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
             else
@@ -134,8 +141,7 @@ namespace Clusterization_algorithms
 
         private void btnSpiralRoute_Click(object sender, EventArgs e)
         {
-            //labelRoute.Text = "";
-            //ClearFields();
+            AllowSelectClusterAndCalculateEnergy();
 
             if (clusterCenters.Count > 0)
                 routeBuilder.All_points(clusterCenters);
@@ -159,6 +165,7 @@ namespace Clusterization_algorithms
 
         private void btnBruteForce_Click(object sender, EventArgs e)
         {
+            AllowSelectClusterAndCalculateEnergy();
             List<Point> route = new List<Point> { };
 
             if (clusterCenters.Count > 0)
@@ -174,6 +181,8 @@ namespace Clusterization_algorithms
 
         private void btn1ClusterOn_Click(object sender, EventArgs e)
         {
+            DisableAll();
+            btnDeselectCluster.Enabled = true;
             graphics.Clear(Color.White);
             int clusterNum = 1;
 
@@ -216,7 +225,7 @@ namespace Clusterization_algorithms
 
         private void btn1ClusterOff_Click(object sender, EventArgs e)
         {
-            DrawAllSavedObjects();
+            
         }
 
         private void DrawAllSavedObjects() {
@@ -230,7 +239,9 @@ namespace Clusterization_algorithms
             if (clusterCenters.Count != 0) {
                 for (int i = 0; i < clusterCenters.Count; i++) {
                     graphic.DrawPoint(clusterCenters[i], Brushes.Red, 6);
-                    graphic.DrawCircle(clusterCenters[i], radius, Color.Black, 0);
+                    
+                    if(clusterizationType == ClusterizationType.Forel)
+                        graphic.DrawCircle(clusterCenters[i], radius, Color.Black, 0);
                 }
             }
 
@@ -401,6 +412,7 @@ namespace Clusterization_algorithms
 
         private void btnNearestNeighbour_Click(object sender, EventArgs e)
         {
+            AllowSelectClusterAndCalculateEnergy();
             List<Point> route = new List<Point> { };
 
             if (clusterCenters.Count > 0)
@@ -415,10 +427,10 @@ namespace Clusterization_algorithms
 
         private void btnFPPWR_Click(object sender, EventArgs e)
         {
+            AllowSelectClusterAndCalculateEnergy();
             List<Point> route = new List<Point> { };
 
             //< draw net on pictBoxArea
-
             // divide field on cells; cells count:
             int x_count = def_net_cols;
             int y_count = def_net_rows;
@@ -438,10 +450,75 @@ namespace Clusterization_algorithms
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            if (labelHelpMap.Visible)
-                labelHelpMap.Visible = false;
+            if (labelInfo.Visible)
+                labelInfo.Visible = false;
             else
-                labelHelpMap.Visible = true;
+                labelInfo.Visible = true;
+        }
+
+        private void Labels_ClearText() {
+            labelRoute.Text = "";
+            labelCharge.Text = " ";
+            labelUsedEnergy.Text = " ";
+        }
+
+        // ***** Protect from user errors *****
+        private void EnableClusterization() { 
+            btnKMeans.Enabled = true;
+            btnForel.Enabled = true;
+        }
+        private void DisableClusterization()
+        {
+            btnKMeans.Enabled = false;
+            btnForel.Enabled = false;
+        }
+
+        private void EnableRouteCalculating()
+        {
+            btnNearestNeighbour.Enabled = true;
+            btnConvexHull.Enabled = true;
+            btnBruteForce.Enabled = true;
+            btnSpiralRoute.Enabled = true;
+            btnFPPWR.Enabled = true;
+        }
+
+        private void DisableRouteCalculating()
+        {
+            btnNearestNeighbour.Enabled = false;
+            btnConvexHull.Enabled = false;
+            btnBruteForce.Enabled = false;
+            btnSpiralRoute.Enabled = false;
+            btnFPPWR.Enabled = false;
+        }
+
+        private void DisableAll() { 
+            DisableClusterization();
+            DisableRouteCalculating();
+            btnSelectCluster.Enabled = false;
+            btnCalcEnergy.Enabled = false;
+        }
+
+        private void AllowSelectClusterAndCalculateEnergy() { 
+            btnSelectCluster.Enabled = true;
+            btnCalcEnergy.Enabled = true;
+        }
+
+        private void DisallowSelectClusterAndCalculateEnergy()
+        {
+            btnSelectCluster.Enabled = false;
+            btnCalcEnergy.Enabled = false;
+        }
+
+        // *******************************
+
+        private void btnDeselectCluster_Click(object sender, EventArgs e)
+        {
+            DrawAllSavedObjects();
+            btnDeselectCluster.Enabled = false;
+            btnSelectCluster.Enabled = true;
+            btnCalcEnergy.Enabled = true;
+            EnableClusterization();
+            EnableRouteCalculating();
         }
     }
 }

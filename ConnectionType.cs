@@ -13,4 +13,10 @@ namespace Clusterization_algorithms
         PP_to_Center, // Point to point
         PP_to_Route
     }
+
+    enum ClusterizationType
+    {
+        K_means,
+        Forel
+    }
 }
