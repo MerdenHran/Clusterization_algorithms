@@ -117,4 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnCalcEnergy.ToolTip" xml:space="preserve">
+    <value>Calculate the energy consumption for data transmission.
+Draw the transmission path.
+Select connection type:
+DT - direct transmittion (next: tr)
+     DT center  - tr to cluster (mass) centers
+     DT route - tr to station move way
+PP - point-to-point connection
+      PP center - from point to point to cluster center
+      PP route - PP to station move way
+</value>
+  </data>
+  <data name="labelHelpMap.Text" xml:space="preserve">
+    <value>black points - nodes
+big red points - mass centers of clusters
+red points - nodes with 0% charge
+black circles - clusters
+gray circles - clusters iterations
+green line - transmittion model for close distance (&lt; 87,7m) 
+red line - transmittion model for long distance (&gt; 87,7m) (with using amplifier)
+route colors - different for each route-building algorithm, allow to see difference</value>
+  </data>
+  <data name="btnFPPWR.ToolTip" xml:space="preserve">
+    <value>Draw a net, build route by cells.
+Move like a snake in every cells to closer point
+then move to next cell.
+Cells: from left to right &gt; down 1 &gt; right-left
+          again to the end of row
+          if all rows is passed, move to start</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>42</value>
+  </metadata>
 </root>

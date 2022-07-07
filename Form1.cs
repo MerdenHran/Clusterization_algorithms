@@ -20,10 +20,16 @@ namespace Clusterization_algorithms
         int radius; // in forel
         // List<Point> route = new List<Point> { };
 
-        // DEFAULT VALUES
+        // *** DEFAULT VALUES ***
         int def_points_count = 100; // count nodes generated on map
         int def_cluster_radius = 100; // round forel cluster radius
         int def_seed_count = 2; // count of centroids in k-means
+        
+        // FPPWR net draw default values
+        int def_net_rows = 6;
+        int def_net_cols = 6;
+
+        // **********************
 
         public Form1()
         {
@@ -44,10 +50,10 @@ namespace Clusterization_algorithms
 
             if (checkBoxAllowGeneratePoints.Checked == true)
             {
-                allPoints = Calculator.setStaticPoints();
-
                 if (Int32.TryParse(textBoxSetPointsCount.Text, out int pointsCount))
                     allPoints = Calculator.generatePoints(pointsCount, pictBoxArea.Width, pictBoxArea.Height);
+                else
+                    allPoints = Calculator.generatePoints(def_points_count, pictBoxArea.Width, pictBoxArea.Height);
             }
 
             allPointsClustered = allPoints;
@@ -72,7 +78,7 @@ namespace Clusterization_algorithms
 
             SeedGenerator seedG = new SeedGenerator(); //
             seedG.SetPoints(allPoints);
-            seedG.seedCount = 3; // by default
+            seedG.seedCount = def_seed_count; // by default
 
             if (Int32.TryParse(textBoxSetSeedsCount.Text, out int seedCount))
                 seedG.seedCount = seedCount;
@@ -95,7 +101,7 @@ namespace Clusterization_algorithms
             ClearFields();
 
             forel.setPoints(allPoints);
-            forel.Radius = 100;
+            forel.Radius = def_cluster_radius;
 
             if (Int32.TryParse(textBoxSetRadius.Text, out int r))
                 forel.Radius = r;
@@ -279,7 +285,9 @@ namespace Clusterization_algorithms
 
         private void DrawScale() // draw scale in panel related to picturebox
         {
-            //< Set panel size to all window 
+            int step = 25;
+
+            // Set panel size to all window 
             panel.Size = new Size(this.Size.Width, this.Size.Height);
             panel.Location = new Point(0, 0);
 
@@ -297,12 +305,12 @@ namespace Clusterization_algorithms
 
             int number = 0;
 
-            for (int i = 25; i <= distanceX;)
+            for (int i = step; i <= distanceX;)
             {
                 graphicsVector.DrawLine(pen, new Point(X + i, Y - 3), new Point(X + i, Y + 3));
 
 
-                if (i % 50 != 0)
+                if (i % (2 * step) != 0)
                 {
                     if (number == 0)
                     {
@@ -405,8 +413,8 @@ namespace Clusterization_algorithms
             //< draw net on pictBoxArea
 
             // divide field on cells; cells count:
-            int x_count = 6;
-            int y_count = 6;
+            int x_count = def_net_cols;
+            int y_count = def_net_rows;
 
             graphic.DrawNet(x_count, y_count, pictBoxArea.Width, pictBoxArea.Height);
             //>
@@ -419,6 +427,14 @@ namespace Clusterization_algorithms
             graphic.DrawRoute(route, Color.Crimson);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
             PrintToTextBoxInfo(allPointsClustered);
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            if (labelHelpMap.Visible)
+                labelHelpMap.Visible = false;
+            else
+                labelHelpMap.Visible = true;
         }
     }
 }
