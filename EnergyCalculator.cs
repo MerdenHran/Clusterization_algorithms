@@ -80,6 +80,16 @@ namespace Clusterization_algorithms
             return sum_charge * 100 / total_capacity;
         }
 
+        /// <summary>
+        /// (J)
+        /// </summary>
+        /// <returns></returns>
+        public double GetMapUsedEnergy() {
+            double total_capacity = GetNodesCapacity(allNodes.Count);
+            double sum_charge = GetMapCurrentCharge();
+            return total_capacity - sum_charge;
+        }
+
         public Dictionary<Point, int> GetNodesChargeDictionary()
         {
             Dictionary<Point, int> chargeList = new Dictionary<Point, int> { };

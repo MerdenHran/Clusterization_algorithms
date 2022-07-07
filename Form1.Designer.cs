@@ -61,9 +61,10 @@ namespace Clusterization_algorithms
             this.btnFPPWR = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label5 = new System.Windows.Forms.Label();
-            this.labelEnergy = new System.Windows.Forms.Label();
+            this.labelCharge = new System.Windows.Forms.Label();
             this.btnLearningMode = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.labelUsedEnergy = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
@@ -335,9 +336,10 @@ namespace Clusterization_algorithms
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.labelUsedEnergy);
             this.panel.Controls.Add(this.button1);
             this.panel.Controls.Add(this.btnLearningMode);
-            this.panel.Controls.Add(this.labelEnergy);
+            this.panel.Controls.Add(this.labelCharge);
             this.panel.Controls.Add(this.labelHelpMap);
             this.panel.Controls.Add(this.btnHelp);
             this.panel.Controls.Add(this.labelRoute);
@@ -430,15 +432,15 @@ namespace Clusterization_algorithms
             this.label5.TabIndex = 44;
             this.label5.Text = "[position, cluster] charge";
             // 
-            // labelEnergy
+            // labelCharge
             // 
-            this.labelEnergy.AutoSize = true;
-            this.labelEnergy.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelEnergy.Location = new System.Drawing.Point(325, 760);
-            this.labelEnergy.Name = "labelEnergy";
-            this.labelEnergy.Size = new System.Drawing.Size(120, 24);
-            this.labelEnergy.TabIndex = 29;
-            this.labelEnergy.Text = "___________";
+            this.labelCharge.AutoSize = true;
+            this.labelCharge.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCharge.Location = new System.Drawing.Point(325, 760);
+            this.labelCharge.Name = "labelCharge";
+            this.labelCharge.Size = new System.Drawing.Size(120, 24);
+            this.labelCharge.TabIndex = 29;
+            this.labelCharge.Text = "___________";
             // 
             // btnLearningMode
             // 
@@ -463,6 +465,16 @@ namespace Clusterization_algorithms
             this.button1.Text = "S";
             this.toolTip1.SetToolTip(this.button1, "Statistic");
             this.button1.UseVisualStyleBackColor = false;
+            // 
+            // labelUsedEnergy
+            // 
+            this.labelUsedEnergy.AutoSize = true;
+            this.labelUsedEnergy.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUsedEnergy.Location = new System.Drawing.Point(544, 760);
+            this.labelUsedEnergy.Name = "labelUsedEnergy";
+            this.labelUsedEnergy.Size = new System.Drawing.Size(120, 24);
+            this.labelUsedEnergy.TabIndex = 32;
+            this.labelUsedEnergy.Text = "___________";
             // 
             // Form1
             // 
@@ -536,9 +548,10 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Label labelHelpMap;
-        private System.Windows.Forms.Label labelEnergy;
+        private System.Windows.Forms.Label labelCharge;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnLearningMode;
+        private System.Windows.Forms.Label labelUsedEnergy;
     }
 }
 

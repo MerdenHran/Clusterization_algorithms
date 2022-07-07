@@ -41,12 +41,15 @@ namespace Clusterization_algorithms
             forel = new Forel(graphic);
             k_means = new K_means(graphic);
             routeBuilder = new RouteBuilder();
-            labelRoute.Text = "";
         }
 
         private void btnGenPoints_Click(object sender, EventArgs e)
         {
             //Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
+
+            labelRoute.Text = "";
+            labelCharge.Text = " ";
+            labelUsedEnergy.Text = " ";
 
             if (checkBoxAllowGeneratePoints.Checked == true)
             {
@@ -263,7 +266,11 @@ namespace Clusterization_algorithms
 
             energyCalculator.CalculteAllNodesEnergy(connectionType, allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
-            labelEnergy.Text = "Total charge: " + energyCalculator.GetMapCurrentChargeInPercents().ToString() + "%";
+
+            labelCharge.Visible = true;
+            labelUsedEnergy.Visible = true;
+            labelCharge.Text = "Total charge: " + energyCalculator.GetMapCurrentChargeInPercents().ToString() + "%";
+            labelUsedEnergy.Text = "Used energy: " + energyCalculator.GetMapUsedEnergy().ToString() + " (J)";
         }
 
         private int ReadStationHeighth() {
@@ -323,7 +330,6 @@ namespace Clusterization_algorithms
 
                         };
                         panel.Controls.Add(lb);
-
                     }
                     else
                     {
