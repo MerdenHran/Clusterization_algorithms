@@ -257,12 +257,13 @@ namespace Clusterization_algorithms
                     break;
             }
 
-            Console.WriteLine(connectionType.ToString());
-            Calculator.Console_PrintDictionary(allPointsClustered);
-            Calculator.Console_PrintPointList(routeBuilder.RouteList);
+            //Console.WriteLine(connectionType.ToString());
+            //Calculator.Console_PrintDictionary(allPointsClustered);
+            //Calculator.Console_PrintPointList(routeBuilder.RouteList);
 
             energyCalculator.CalculteAllNodesEnergy(connectionType, allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
+            labelEnergy.Text = "Total charge: " + energyCalculator.GetMapCurrentChargeInPercents().ToString() + "%";
         }
 
         private int ReadStationHeighth() {

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Clusterization_algorithms
 {
@@ -12,7 +9,6 @@ namespace Clusterization_algorithms
         Graphic graphic;
         Dictionary<Point, int> allNodes; // int - num of cluster
         private Dictionary<Point, int> nodesLevelCharge = new Dictionary<Point, int> { };
-        List<int> clustersEnergy = new List<int> { };
         int stationUsedE = 0; //energy used by station
 
         //--------- Energy consumption parameters ------------
@@ -53,9 +49,39 @@ namespace Clusterization_algorithms
             package = package_size;
         }
 
+        /// <summary>
+        /// Calculate all nodes charge capacity in (J)!
+        /// </summary>
+        public double GetNodesCapacity(int nodesCount) {
+            double sum_cap = node_E/1000000000.000 * nodesCount; //(J)
+            return sum_cap;
+        }
+
+        /// <summary>
+        /// get total current charge of nodes
+        /// </summary>
+        /// <returns>summary charge (J)</returns>
+        public double GetMapCurrentCharge() {
+            double sum_charge = 0;
+
+            foreach (var node in nodesLevelCharge)
+                sum_charge += node.Value / 1000000;
+            sum_charge = sum_charge / 1000;
+
+            return sum_charge; //(J)
+        }
+
+        public double GetMapCurrentChargeInPercents() {
+            double total_capacity = GetNodesCapacity(allNodes.Count);
+            double sum_charge = GetMapCurrentCharge();
+            //double charge_in_percent = total_capacity / 100;
+            //double sum_chargeInPercent = sum_charge/charge_in_percent;
+
+            return sum_charge * 100 / total_capacity;
+        }
+
         public Dictionary<Point, int> GetNodesChargeDictionary()
         {
-
             Dictionary<Point, int> chargeList = new Dictionary<Point, int> { };
             int onePercent = node_E / 100; // 1% = ?nJ
 
