@@ -18,7 +18,12 @@ namespace Clusterization_algorithms
         Dictionary<Point, int> allPointsClustered;
         List<Point> clusterCenters = new List<Point> { };
         int radius; // in forel
-       // List<Point> route = new List<Point> { };
+        // List<Point> route = new List<Point> { };
+
+        // DEFAULT VALUES
+        int def_points_count = 100; // count nodes generated on map
+        int def_cluster_radius = 100; // round forel cluster radius
+        int def_seed_count = 2; // count of centroids in k-means
 
         public Form1()
         {
@@ -230,14 +235,9 @@ namespace Clusterization_algorithms
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
             DrawAllSavedObjects();
 
-            ConnectionType connectionType = ConnectionType.DT_to_Center;
+            ConnectionType connectionType = ConnectionType.DT_to_Center; // default connection
 
             switch (comboBoxConnectionType.SelectedIndex) {
-                
-                case 0:
-                    //by default
-                    break;
-
                 case 1:
                     connectionType = ConnectionType.DT_to_Route;
                     break;
