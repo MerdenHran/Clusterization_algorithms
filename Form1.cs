@@ -251,6 +251,10 @@ namespace Clusterization_algorithms
                     break;
             }
 
+            Console.WriteLine(connectionType.ToString());
+            Calculator.Console_PrintDictionary(allPointsClustered);
+            Calculator.Console_PrintPointList(routeBuilder.RouteList);
+
             energyCalculator.CalculteAllNodesEnergy(connectionType, allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
         }
@@ -265,7 +269,7 @@ namespace Clusterization_algorithms
         }
 
         private void PrintToTextBoxInfo(Dictionary<Point, int> dictionary) {
-            textBoxInfo.Text = Calculator.printPointsDictionary(dictionary, energyCalculator.GetNodesChargeDictionary());
+            textBoxInfo.Text = Calculator.printNodesAndCharge(dictionary, energyCalculator.GetNodesChargeDictionary());
         }
 
         private void Form1_Shown(object sender, EventArgs e)

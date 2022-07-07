@@ -125,7 +125,8 @@ namespace Clusterization_algorithms
             Point point = points[0];
             
             if(!getSpiralRoute)
-                points.Add(startPoint);
+                points.Add(startPoint); // якщо хочемо обгорнути точки
+
             int ki = 0;
 
             do
@@ -153,6 +154,9 @@ namespace Clusterization_algorithms
 
             convex_hull.Remove(falsePoint);
             inside_points.AddRange(points);
+
+            if (getSpiralRoute) routeList = convex_hull;
+                
         }
 
         private void SortInsidePoints() // rework later
@@ -259,6 +263,7 @@ namespace Clusterization_algorithms
             }
 
             route.Add(startPoint);
+            routeList = route;
             return route;
         }
 
@@ -300,15 +305,12 @@ namespace Clusterization_algorithms
                         List<Point> cell = GetCellPointList(points, x_left, x_right, y_up, y_down, route);
                         cell = Calculator.SortPointListByX(cell);
                         cell.Reverse();
-
-                        //FPPWRFeature(cell);
-
                         route.AddRange(cell);
                     }
                 }
             }
-
             route.Add(startPoint);
+            routeList = route;
             return route;
         }
 
@@ -324,16 +326,6 @@ namespace Clusterization_algorithms
                             cell.Add(point);
             }
             return cell;
-        }
-
-        private void FPPWRFeature(List<Point> cell) {
-            if (cell.Count > 3)
-            {
-                int pos = cell.Count - 2;
-                Point point = cell[pos];
-                cell.Remove(point);
-                cell.Add(point);
-            }
         }
     }
 }

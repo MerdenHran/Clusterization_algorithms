@@ -68,7 +68,7 @@ namespace Clusterization_algorithms
             return points;
         }
 
-        public static String printPointsDictionary(Dictionary<Point, int> nodes, Dictionary<Point, int> nodesCharge)
+        public static String printNodesAndCharge(Dictionary<Point, int> nodes, Dictionary<Point, int> nodesCharge)
         {
             nodes = sortDictionaryByValue(nodes);
 
@@ -84,19 +84,6 @@ namespace Clusterization_algorithms
                 //str += "(" + node.Key.X + ", " + node.Key.Y + ") [" + node.Value + "] " + "<" +""+ ">\n";
             }
             //Console.WriteLine();
-            return str;
-        }
-
-        public static String printPointList(List<Point> points) {
-            String str = "";
-
-            Console.WriteLine("\nPoints list:");
-            foreach (var point in points)
-            {
-                Console.WriteLine(point.ToString());
-                str += point.ToString() + "\n";
-            }
-            Console.WriteLine();
             return str;
         }
 
@@ -458,6 +445,30 @@ namespace Clusterization_algorithms
                 }
             }
             return minPoint;
+        }
+
+        public static void Console_PrintDictionary(Dictionary<Point, int> dictionary) {
+            Console.WriteLine("*** Dictionary ***");
+
+            foreach (var keyValuePair in dictionary)
+                Console.WriteLine(keyValuePair.Key + "/" + keyValuePair.Value);
+            
+            Console.WriteLine("******************");
+        }
+
+
+        public static String Console_PrintPointList(List<Point> points)
+        {
+            String str = "";
+            Console.WriteLine("*** Points list: ***");
+
+            foreach (var point in points)
+            {
+                Console.WriteLine(point.ToString());
+                str += point.ToString() + "\n";
+            }
+            Console.WriteLine("********************");
+            return str;
         }
     }
 }
