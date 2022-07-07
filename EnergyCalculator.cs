@@ -29,9 +29,28 @@ namespace Clusterization_algorithms
         {
             this.graphic = graphic;
             this.allNodes = allNodes;
-
             foreach (var node in allNodes)
                 nodesLevelCharge.Add(node.Key, node_E);
+        }
+
+        /// <summary>
+        /// Set energy model
+        /// </summary>
+        /// <param name="e_fs">(nJ) (10^-9J) amplifier energy, free space model (short distance) | d<d0</param>
+        /// <param name="e_mp">(nJ) multipath fading model (large distance) | d >= d0</param>
+        /// <param name="e_elec">(nJ/bit) energy for work signal transmission/recieve</param>
+        /// <param name="node_e">(nJ) initial node energy</param>
+        /// <param name="d0">(m) distance threshold for swapping amplification models</param>
+        /// <param name="package_size">(bit) package size</param>
+        public void SetEnergyModel(double e_fs = 0.01, double e_mp = 0.0000013,
+                                    int e_elec = 50, int node_e = 500000000,
+                                    double d0 = 87.7, int package_size = 32000) { 
+            E_fs = e_fs;
+            E_mp = e_mp;
+            E_elec = e_elec;
+            node_E = node_e;
+            d0 = this.d0;
+            package = package_size;
         }
 
         public Dictionary<Point, int> GetNodesChargeDictionary()
