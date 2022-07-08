@@ -195,7 +195,7 @@ namespace Clusterization_algorithms
             // 
             // btnSpiralRoute
             // 
-            this.btnSpiralRoute.BackColor = System.Drawing.Color.DarkGray;
+            this.btnSpiralRoute.BackColor = System.Drawing.Color.Aqua;
             this.btnSpiralRoute.Enabled = false;
             this.btnSpiralRoute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnSpiralRoute.Location = new System.Drawing.Point(1168, 461);
@@ -210,7 +210,7 @@ namespace Clusterization_algorithms
             // 
             // btnConvexHull
             // 
-            this.btnConvexHull.BackColor = System.Drawing.Color.DarkGray;
+            this.btnConvexHull.BackColor = System.Drawing.Color.Yellow;
             this.btnConvexHull.Enabled = false;
             this.btnConvexHull.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnConvexHull.Location = new System.Drawing.Point(1168, 363);
@@ -226,7 +226,7 @@ namespace Clusterization_algorithms
             // 
             // btnBruteForce
             // 
-            this.btnBruteForce.BackColor = System.Drawing.Color.DarkGray;
+            this.btnBruteForce.BackColor = System.Drawing.Color.Blue;
             this.btnBruteForce.Enabled = false;
             this.btnBruteForce.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnBruteForce.Location = new System.Drawing.Point(1169, 412);
@@ -455,7 +455,7 @@ namespace Clusterization_algorithms
             // 
             // btnNearestNeighbour
             // 
-            this.btnNearestNeighbour.BackColor = System.Drawing.Color.DarkGray;
+            this.btnNearestNeighbour.BackColor = System.Drawing.Color.Salmon;
             this.btnNearestNeighbour.Enabled = false;
             this.btnNearestNeighbour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnNearestNeighbour.Location = new System.Drawing.Point(1168, 314);
@@ -470,7 +470,7 @@ namespace Clusterization_algorithms
             // 
             // btnFPPWR
             // 
-            this.btnFPPWR.BackColor = System.Drawing.Color.DarkGray;
+            this.btnFPPWR.BackColor = System.Drawing.Color.Purple;
             this.btnFPPWR.Enabled = false;
             this.btnFPPWR.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnFPPWR.Location = new System.Drawing.Point(1168, 510);

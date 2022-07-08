@@ -129,13 +129,14 @@ namespace Clusterization_algorithms
         private void btnClustersRoute_Click(object sender, EventArgs e)
         {
             AllowSelectClusterAndCalculateEnergy();
+
             if (clusterCenters.Count == 0)
                 routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
             else
                 routeBuilder.All_points(clusterCenters);
 
             routeBuilder.CalculateRouteByConvexHullInsertion();
-            graphic.DrawRoute(routeBuilder.RouteList, Color.Orange);
+            graphic.DrawRoute(routeBuilder.RouteList, Color.Yellow);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.RouteList), 3);
 
             //allPointsClustered = routeBuilder.SortClustersByRoute(allPointsClustered);
@@ -145,6 +146,7 @@ namespace Clusterization_algorithms
         private void btnSpiralRoute_Click(object sender, EventArgs e)
         {
             AllowSelectClusterAndCalculateEnergy();
+            btnConvexHull.Enabled = false;
 
             if (clusterCenters.Count > 0)
                 routeBuilder.All_points(clusterCenters);
@@ -152,7 +154,7 @@ namespace Clusterization_algorithms
                 routeBuilder.All_points(Calculator.DictionaryToList(allPoints));
 
             routeBuilder.JarvisMarch(true);
-            graphic.DrawRoute(routeBuilder.Convex_hull, Color.DarkMagenta);
+            graphic.DrawRoute(routeBuilder.Convex_hull, Color.Aqua);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(routeBuilder.Convex_hull), 3);
         }
 
@@ -224,11 +226,6 @@ namespace Clusterization_algorithms
             graphic.DrawPointList(cluster);
             graphic.DrawRoute(routeFragment, Color.Orange);
             //>
-        }
-
-        private void btn1ClusterOff_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void DrawAllSavedObjects() {
@@ -417,6 +414,7 @@ namespace Clusterization_algorithms
         private void btnNearestNeighbour_Click(object sender, EventArgs e)
         {
             AllowSelectClusterAndCalculateEnergy();
+            btnConvexHull.Enabled = true;
             List<Point> route = new List<Point> { };
 
             if (clusterCenters.Count > 0)
@@ -432,6 +430,7 @@ namespace Clusterization_algorithms
         private void btnFPPWR_Click(object sender, EventArgs e)
         {
             AllowSelectClusterAndCalculateEnergy();
+            btnConvexHull.Enabled = true;
             List<Point> route = new List<Point> { };
 
             //< draw net on pictBoxArea
@@ -447,7 +446,7 @@ namespace Clusterization_algorithms
             else
                 route = routeBuilder.CalculateRouteByFPPWR(Calculator.DictionaryToList(allPoints), x_count, y_count, pictBoxArea.Width, pictBoxArea.Height);
 
-            graphic.DrawRoute(route, Color.Crimson);
+            graphic.DrawRoute(route, Color.Purple);
             labelRoute.Text = "Route length: " + Math.Round(Calculator.calcRouteLength(route), 3);
             PrintToTextBoxInfo(allPointsClustered);
         }
