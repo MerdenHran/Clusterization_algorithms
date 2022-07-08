@@ -178,15 +178,18 @@ namespace Clusterization_algorithms
 
         public List<Point> CalculateRouteBruteForce(List<Point> pointList)
         {
-            List<Point> points = new List<Point> { };
-            points.Add(startPoint);
-            points.AddRange(pointList);
-            points.Add(startPoint);
+            if (pointList.Count < 10)
+            {
+                List<Point> points = new List<Point> { };
+                points.Add(startPoint);
+                points.AddRange(pointList);
+                points.Add(startPoint);
 
-            //points = newPoints;
+                //points = newPoints;
 
-            length = 9999; // any value that is more then any possible length
-            RecursivePermutation(1, points);
+                length = 9999; // any value that is more then any possible length
+                RecursivePermutation(1, points);
+            }
 
             return routeList;
         }

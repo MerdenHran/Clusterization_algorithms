@@ -56,7 +56,6 @@ namespace Clusterization_algorithms
             this.buttonReloadMap = new System.Windows.Forms.Button();
             this.labelUsedEnergy = new System.Windows.Forms.Label();
             this.buttonStatistic = new System.Windows.Forms.Button();
-            this.btnLearningMode = new System.Windows.Forms.Button();
             this.labelCharge = new System.Windows.Forms.Label();
             this.labelInfo = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -66,6 +65,8 @@ namespace Clusterization_algorithms
             this.btnFPPWR = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelTextBoxInfoTip = new System.Windows.Forms.Label();
+            this.buttonEnergyModel = new System.Windows.Forms.Button();
+            this.btnLink = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
@@ -345,10 +346,11 @@ namespace Clusterization_algorithms
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.buttonEnergyModel);
             this.panel.Controls.Add(this.buttonReloadMap);
             this.panel.Controls.Add(this.labelUsedEnergy);
             this.panel.Controls.Add(this.buttonStatistic);
-            this.panel.Controls.Add(this.btnLearningMode);
+            this.panel.Controls.Add(this.btnLink);
             this.panel.Controls.Add(this.labelCharge);
             this.panel.Controls.Add(this.labelInfo);
             this.panel.Controls.Add(this.btnHelp);
@@ -396,18 +398,6 @@ namespace Clusterization_algorithms
             this.toolTip1.SetToolTip(this.buttonStatistic, "Statistic");
             this.buttonStatistic.UseVisualStyleBackColor = false;
             this.buttonStatistic.Click += new System.EventHandler(this.buttonStatistic_Click);
-            // 
-            // btnLearningMode
-            // 
-            this.btnLearningMode.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnLearningMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnLearningMode.Location = new System.Drawing.Point(829, 102);
-            this.btnLearningMode.Name = "btnLearningMode";
-            this.btnLearningMode.Size = new System.Drawing.Size(42, 37);
-            this.btnLearningMode.TabIndex = 30;
-            this.btnLearningMode.Text = "L";
-            this.toolTip1.SetToolTip(this.btnLearningMode, "Learning mode");
-            this.btnLearningMode.UseVisualStyleBackColor = false;
             // 
             // labelCharge
             // 
@@ -503,6 +493,31 @@ namespace Clusterization_algorithms
             this.labelTextBoxInfoTip.TabIndex = 44;
             this.labelTextBoxInfoTip.Text = "[position, cluster] charge";
             // 
+            // buttonEnergyModel
+            // 
+            this.buttonEnergyModel.BackColor = System.Drawing.Color.Magenta;
+            this.buttonEnergyModel.Enabled = false;
+            this.buttonEnergyModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonEnergyModel.Location = new System.Drawing.Point(829, 231);
+            this.buttonEnergyModel.Name = "buttonEnergyModel";
+            this.buttonEnergyModel.Size = new System.Drawing.Size(42, 37);
+            this.buttonEnergyModel.TabIndex = 34;
+            this.buttonEnergyModel.Text = "M";
+            this.toolTip1.SetToolTip(this.buttonEnergyModel, "(Model) Energy model parameters");
+            this.buttonEnergyModel.UseVisualStyleBackColor = false;
+            // 
+            // btnLink
+            // 
+            this.btnLink.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnLink.Location = new System.Drawing.Point(829, 102);
+            this.btnLink.Name = "btnLink";
+            this.btnLink.Size = new System.Drawing.Size(42, 37);
+            this.btnLink.TabIndex = 30;
+            this.btnLink.Text = "L";
+            this.toolTip1.SetToolTip(this.btnLink, "Link to project site");
+            this.btnLink.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -577,9 +592,10 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.Label labelCharge;
         private System.Windows.Forms.Button buttonStatistic;
-        private System.Windows.Forms.Button btnLearningMode;
         private System.Windows.Forms.Label labelUsedEnergy;
         private System.Windows.Forms.Button buttonReloadMap;
+        private System.Windows.Forms.Button buttonEnergyModel;
+        private System.Windows.Forms.Button btnLink;
     }
 }
 

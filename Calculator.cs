@@ -262,6 +262,9 @@ namespace Clusterization_algorithms
 
         public static double calcRouteLength(List<Point> points)
         {
+            if(points.Count == 0)
+                return 0;
+
             double dist = calcDistance(points[0], points[points.Count - 1]);
 
             for (int i = 0; i < points.Count - 1; i++)
