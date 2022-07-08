@@ -29,6 +29,11 @@ namespace Clusterization_algorithms
         int def_net_rows = 6;
         int def_net_cols = 6;
 
+        // counters
+        int loop_count = 0; // times was data collected from map by station
+        double map_usedE = 0; // used energy in current loop
+        double map_last_usedE = 0; // used energy in last loop
+
         public Form1()
         {
             InitializeComponent();
@@ -253,6 +258,8 @@ namespace Clusterization_algorithms
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
             DrawAllSavedObjects();
             buttonStatistic.Enabled = true;
+            loop_count++;
+            map_last_usedE = map_usedE;
 
             ConnectionType connectionType = ConnectionType.DT_to_Center; // default connection
 
@@ -270,17 +277,15 @@ namespace Clusterization_algorithms
                     break;
             }
 
-            //Console.WriteLine(connectionType.ToString());
-            //Calculator.Console_PrintDictionary(allPointsClustered);
-            //Calculator.Console_PrintPointList(routeBuilder.RouteList);
-
             energyCalculator.CalculteAllNodesEnergy(connectionType, allPointsClustered, routeBuilder.RouteList, ReadStationHeighth());
             PrintToTextBoxInfo(allPointsClustered);
 
             labelCharge.Visible = true;
             labelUsedEnergy.Visible = true;
-            labelCharge.Text = "Total charge: " + energyCalculator.GetMapCurrentChargeInPercents().ToString() + "%";
-            labelUsedEnergy.Text = "Used energy: " + energyCalculator.GetMapUsedEnergy().ToString() + " (J)";
+            map_usedE = energyCalculator.GetMapUsedEnergy();
+            labelCharge.Text = "Total charge: " + String.Format("{0:0.000}", energyCalculator.GetMapCurrentChargeInPercents()) + "%";
+            labelUsedEnergy.Text = "Used energy: " + String.Format("{0:0.000}", map_usedE) + " (J)";
+            if (labelInfo.Enabled) ReloadStatistic();
         }
 
         private int ReadStationHeighth() {
@@ -516,6 +521,9 @@ namespace Clusterization_algorithms
             btnSelectCluster.Enabled = false;
             btnCalcEnergy.Enabled = false;
             buttonStatistic.Enabled = false;
+            loop_count = 0;
+            map_usedE = 0;
+            map_last_usedE = 0;
         }
 
         // *******************************
@@ -532,8 +540,23 @@ namespace Clusterization_algorithms
 
         private void buttonStatistic_Click(object sender, EventArgs e)
         {
-            labelInfo.Text = "";
+            ReloadStatistic();
             CheckLabelInfo();
+        }
+
+        private void ReloadStatistic() {
+            double map_capacity = energyCalculator.GetNodesCapacity(allPoints.Count);
+            double map_charge = energyCalculator.GetMapCurrentCharge();
+            double map_charge_percents = energyCalculator.GetMapCurrentChargeInPercents();
+            int nodes_available = getCountOfAvailableNodes();
+
+            labelInfo.Text =
+                "Total nodes charge: " + map_charge_percents + "% (" + map_charge + " / " + map_capacity + " J)\n" +
+                "Available nodes: " + nodes_available + " / " + allPointsClustered.Count + "\n" +
+                "Clusters count: " + forel.clusterNum + "\n" +
+                "Loops: " + loop_count + "\n" +
+                "Average E, per loop: " + String.Format("{0:0.000}", (map_capacity - map_charge) / loop_count) + " J\n" +
+                "Last loop used E: " + String.Format("{0:0.000}", map_usedE - map_last_usedE) + " J";
         }
 
         private void buttonReloadMap_Click(object sender, EventArgs e)
@@ -546,6 +569,18 @@ namespace Clusterization_algorithms
                 labelInfo.Visible = false;
             else
                 labelInfo.Visible = true;
+        }
+
+        private int getCountOfAvailableNodes() {
+            
+            int count = 0;
+
+            var nodes_charge = energyCalculator.GetNodesChargeDictionary();
+
+            foreach (var node in nodes_charge)
+                if (node.Value != 0) count++;
+
+            return count;
         }
     }
 }

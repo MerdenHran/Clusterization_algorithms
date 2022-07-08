@@ -10,7 +10,7 @@ namespace Clusterization_algorithms
         /* Dictionary contain all pairs (point, number_of_cluster),
          * if (cluster = 0) => point not belong to cluster*/
         private Dictionary<Point, int> points = new Dictionary<Point, int>();
-        private int clusterNum = 0;
+        public int clusterNum = 0;
         private int radius; // search radius
         private Graphic graphic;
 
