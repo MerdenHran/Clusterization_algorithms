@@ -53,6 +53,11 @@ namespace Clusterization_algorithms
             this.comboBoxConnectionType = new System.Windows.Forms.ComboBox();
             this.checkBoxAllowGeneratePoints = new System.Windows.Forms.CheckBox();
             this.panel = new System.Windows.Forms.Panel();
+            this.buttonReloadMap = new System.Windows.Forms.Button();
+            this.labelUsedEnergy = new System.Windows.Forms.Label();
+            this.buttonStatistic = new System.Windows.Forms.Button();
+            this.btnLearningMode = new System.Windows.Forms.Button();
+            this.labelCharge = new System.Windows.Forms.Label();
             this.labelInfo = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
             this.labelRoute = new System.Windows.Forms.Label();
@@ -60,11 +65,7 @@ namespace Clusterization_algorithms
             this.btnNearestNeighbour = new System.Windows.Forms.Button();
             this.btnFPPWR = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label5 = new System.Windows.Forms.Label();
-            this.labelCharge = new System.Windows.Forms.Label();
-            this.btnLearningMode = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.labelUsedEnergy = new System.Windows.Forms.Label();
+            this.labelTextBoxInfoTip = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
@@ -344,8 +345,9 @@ namespace Clusterization_algorithms
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.buttonReloadMap);
             this.panel.Controls.Add(this.labelUsedEnergy);
-            this.panel.Controls.Add(this.button1);
+            this.panel.Controls.Add(this.buttonStatistic);
             this.panel.Controls.Add(this.btnLearningMode);
             this.panel.Controls.Add(this.labelCharge);
             this.panel.Controls.Add(this.labelInfo);
@@ -357,15 +359,74 @@ namespace Clusterization_algorithms
             this.panel.Size = new System.Drawing.Size(888, 816);
             this.panel.TabIndex = 41;
             // 
+            // buttonReloadMap
+            // 
+            this.buttonReloadMap.BackColor = System.Drawing.Color.Gold;
+            this.buttonReloadMap.Enabled = false;
+            this.buttonReloadMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonReloadMap.Location = new System.Drawing.Point(829, 188);
+            this.buttonReloadMap.Name = "buttonReloadMap";
+            this.buttonReloadMap.Size = new System.Drawing.Size(42, 37);
+            this.buttonReloadMap.TabIndex = 33;
+            this.buttonReloadMap.Text = "R";
+            this.toolTip1.SetToolTip(this.buttonReloadMap, "Reload Map");
+            this.buttonReloadMap.UseVisualStyleBackColor = false;
+            this.buttonReloadMap.Click += new System.EventHandler(this.buttonReloadMap_Click);
+            // 
+            // labelUsedEnergy
+            // 
+            this.labelUsedEnergy.AutoSize = true;
+            this.labelUsedEnergy.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUsedEnergy.Location = new System.Drawing.Point(544, 760);
+            this.labelUsedEnergy.Name = "labelUsedEnergy";
+            this.labelUsedEnergy.Size = new System.Drawing.Size(120, 24);
+            this.labelUsedEnergy.TabIndex = 32;
+            this.labelUsedEnergy.Text = "___________";
+            // 
+            // buttonStatistic
+            // 
+            this.buttonStatistic.BackColor = System.Drawing.Color.Red;
+            this.buttonStatistic.Enabled = false;
+            this.buttonStatistic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonStatistic.Location = new System.Drawing.Point(829, 145);
+            this.buttonStatistic.Name = "buttonStatistic";
+            this.buttonStatistic.Size = new System.Drawing.Size(42, 37);
+            this.buttonStatistic.TabIndex = 31;
+            this.buttonStatistic.Text = "S";
+            this.toolTip1.SetToolTip(this.buttonStatistic, "Statistic");
+            this.buttonStatistic.UseVisualStyleBackColor = false;
+            this.buttonStatistic.Click += new System.EventHandler(this.buttonStatistic_Click);
+            // 
+            // btnLearningMode
+            // 
+            this.btnLearningMode.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnLearningMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnLearningMode.Location = new System.Drawing.Point(829, 102);
+            this.btnLearningMode.Name = "btnLearningMode";
+            this.btnLearningMode.Size = new System.Drawing.Size(42, 37);
+            this.btnLearningMode.TabIndex = 30;
+            this.btnLearningMode.Text = "L";
+            this.toolTip1.SetToolTip(this.btnLearningMode, "Learning mode");
+            this.btnLearningMode.UseVisualStyleBackColor = false;
+            // 
+            // labelCharge
+            // 
+            this.labelCharge.AutoSize = true;
+            this.labelCharge.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCharge.Location = new System.Drawing.Point(325, 760);
+            this.labelCharge.Name = "labelCharge";
+            this.labelCharge.Size = new System.Drawing.Size(120, 24);
+            this.labelCharge.TabIndex = 29;
+            this.labelCharge.Text = "___________";
+            // 
             // labelInfo
             // 
             this.labelInfo.AutoSize = true;
             this.labelInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelInfo.Location = new System.Drawing.Point(80, 65);
             this.labelInfo.Name = "labelInfo";
-            this.labelInfo.Size = new System.Drawing.Size(683, 200);
+            this.labelInfo.Size = new System.Drawing.Size(0, 25);
             this.labelInfo.TabIndex = 28;
-            this.labelInfo.Text = resources.GetString("labelInfo.Text");
             this.labelInfo.Visible = false;
             // 
             // btnHelp
@@ -432,66 +493,22 @@ namespace Clusterization_algorithms
             this.btnFPPWR.UseVisualStyleBackColor = false;
             this.btnFPPWR.Click += new System.EventHandler(this.btnFPPWR_Click);
             // 
-            // label5
+            // labelTextBoxInfoTip
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(894, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(223, 25);
-            this.label5.TabIndex = 44;
-            this.label5.Text = "[position, cluster] charge";
-            // 
-            // labelCharge
-            // 
-            this.labelCharge.AutoSize = true;
-            this.labelCharge.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCharge.Location = new System.Drawing.Point(325, 760);
-            this.labelCharge.Name = "labelCharge";
-            this.labelCharge.Size = new System.Drawing.Size(120, 24);
-            this.labelCharge.TabIndex = 29;
-            this.labelCharge.Text = "___________";
-            // 
-            // btnLearningMode
-            // 
-            this.btnLearningMode.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnLearningMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnLearningMode.Location = new System.Drawing.Point(830, 102);
-            this.btnLearningMode.Name = "btnLearningMode";
-            this.btnLearningMode.Size = new System.Drawing.Size(42, 37);
-            this.btnLearningMode.TabIndex = 30;
-            this.btnLearningMode.Text = "L";
-            this.toolTip1.SetToolTip(this.btnLearningMode, "Learning mode");
-            this.btnLearningMode.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(829, 145);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(42, 37);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "S";
-            this.toolTip1.SetToolTip(this.button1, "Statistic");
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // labelUsedEnergy
-            // 
-            this.labelUsedEnergy.AutoSize = true;
-            this.labelUsedEnergy.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelUsedEnergy.Location = new System.Drawing.Point(544, 760);
-            this.labelUsedEnergy.Name = "labelUsedEnergy";
-            this.labelUsedEnergy.Size = new System.Drawing.Size(120, 24);
-            this.labelUsedEnergy.TabIndex = 32;
-            this.labelUsedEnergy.Text = "___________";
+            this.labelTextBoxInfoTip.AutoSize = true;
+            this.labelTextBoxInfoTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTextBoxInfoTip.Location = new System.Drawing.Point(894, 9);
+            this.labelTextBoxInfoTip.Name = "labelTextBoxInfoTip";
+            this.labelTextBoxInfoTip.Size = new System.Drawing.Size(223, 25);
+            this.labelTextBoxInfoTip.TabIndex = 44;
+            this.labelTextBoxInfoTip.Text = "[position, cluster] charge";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1498, 817);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelTextBoxInfoTip);
             this.Controls.Add(this.btnFPPWR);
             this.Controls.Add(this.btnNearestNeighbour);
             this.Controls.Add(this.checkBoxAllowGeneratePoints);
@@ -555,13 +572,14 @@ namespace Clusterization_algorithms
         private System.Windows.Forms.Label labelRoute;
         private System.Windows.Forms.Button btnFPPWR;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelTextBoxInfoTip;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.Label labelCharge;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonStatistic;
         private System.Windows.Forms.Button btnLearningMode;
         private System.Windows.Forms.Label labelUsedEnergy;
+        private System.Windows.Forms.Button buttonReloadMap;
     }
 }
 

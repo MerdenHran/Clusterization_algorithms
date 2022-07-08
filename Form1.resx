@@ -135,16 +135,6 @@ PP - point-to-point connection
       PP route - PP to station move way
 </value>
   </data>
-  <data name="labelInfo.Text" xml:space="preserve">
-    <value>black points - nodes
-big red points - mass centers of clusters
-red points - nodes with 0% charge
-black circles - clusters
-gray circles - clusters iterations
-green line - transmittion model for close distance (&lt; 87,7m) 
-red line - transmittion model for long distance (&gt; 87,7m) (with using amplifier)
-route colors - different for each route-building algorithm, allow to see difference</value>
-  </data>
   <data name="btnFPPWR.ToolTip" xml:space="preserve">
     <value>Draw a net, build route by cells.
 Move like a snake in every cells to closer point

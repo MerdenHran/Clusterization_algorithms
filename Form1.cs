@@ -29,8 +29,6 @@ namespace Clusterization_algorithms
         int def_net_rows = 6;
         int def_net_cols = 6;
 
-        // **********************
-
         public Form1()
         {
             InitializeComponent();
@@ -46,10 +44,10 @@ namespace Clusterization_algorithms
         private void btnGenPoints_Click(object sender, EventArgs e)
         {
             //Console.WriteLine("PictBoxArea: W(X)=" + pictBoxArea.Width + " H(Y)=" + pictBoxArea.Height);
-
             DisableAll();
             EnableClusterization();
             Labels_ClearText();
+            buttonReloadMap.Enabled = true;
 
             if (checkBoxAllowGeneratePoints.Checked == true)
             {
@@ -254,6 +252,7 @@ namespace Clusterization_algorithms
 
         private void btnCalcEnergy_Click(object sender, EventArgs e) {
             DrawAllSavedObjects();
+            buttonStatistic.Enabled = true;
 
             ConnectionType connectionType = ConnectionType.DT_to_Center; // default connection
 
@@ -450,10 +449,17 @@ namespace Clusterization_algorithms
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            if (labelInfo.Visible)
-                labelInfo.Visible = false;
-            else
-                labelInfo.Visible = true;
+            labelInfo.Text = 
+                "black points - nodes\n" +
+                "big red points - mass centers of clusters\n" +
+                "red points - nodes with 0 % charge\n" +
+                "black circles - clusters\n" +
+                "gray circles - clusters iterations\n" +
+                "green line - transmittion model for close distance (< 87, 7m)\n" +
+                "red line - transmittion model for long distance (> 87, 7m) (with using amplifier)\n" +
+                "route colors -different for each route-building algorithm, allow to see difference";
+
+            CheckLabelInfo();
         }
 
         private void Labels_ClearText() {
@@ -496,17 +502,20 @@ namespace Clusterization_algorithms
             DisableRouteCalculating();
             btnSelectCluster.Enabled = false;
             btnCalcEnergy.Enabled = false;
+            buttonStatistic.Enabled = false;
         }
 
         private void AllowSelectClusterAndCalculateEnergy() { 
             btnSelectCluster.Enabled = true;
             btnCalcEnergy.Enabled = true;
+            buttonStatistic.Enabled = false;
         }
 
         private void DisallowSelectClusterAndCalculateEnergy()
         {
             btnSelectCluster.Enabled = false;
             btnCalcEnergy.Enabled = false;
+            buttonStatistic.Enabled = false;
         }
 
         // *******************************
@@ -519,6 +528,24 @@ namespace Clusterization_algorithms
             btnCalcEnergy.Enabled = true;
             EnableClusterization();
             EnableRouteCalculating();
+        }
+
+        private void buttonStatistic_Click(object sender, EventArgs e)
+        {
+            labelInfo.Text = "";
+            CheckLabelInfo();
+        }
+
+        private void buttonReloadMap_Click(object sender, EventArgs e)
+        {
+            DrawAllSavedObjects();
+        }
+
+        private void CheckLabelInfo() {
+            if (labelInfo.Visible)
+                labelInfo.Visible = false;
+            else
+                labelInfo.Visible = true;
         }
     }
 }
