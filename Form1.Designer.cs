@@ -518,6 +518,7 @@ namespace Clusterization_algorithms
             this.btnLink.Text = "L";
             this.toolTip1.SetToolTip(this.btnLink, "Link to project site");
             this.btnLink.UseVisualStyleBackColor = false;
+            this.btnLink.Click += new System.EventHandler(this.btnLink_Click);
             // 
             // Form1
             // 

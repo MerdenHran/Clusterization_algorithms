@@ -597,5 +597,10 @@ namespace Clusterization_algorithms
                 "\nPackage size (20 - 65535): " + energyCalculator.package + " bit" +
                 "\nThreshold for swapping amplification models: " + energyCalculator.d0 + " m";
         }
+
+        private void btnLink_Click(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Process.Start("http://www.facebook.com");
+        }
     }
 }
