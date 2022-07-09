@@ -13,11 +13,11 @@ namespace Clusterization_algorithms
 
         //--------- Energy consumption parameters ------------
         public double E_fs = 0.01;//nJ(10^-9) amplifier energy, free space model (short distance) | d<d0
-        public double E_mp = 0.0000013; //nJ // multipath fading model (large distance) | d >= d0
+        public double E_mp = 0.0000013; //nJ // amplifier energy, multipath fading model (large distance) | d >= d0
         public int E_elec = 50; //nJ/bit, energy for work signal transmission/recieve
         public int node_E = 500000000; //nJ; = 0,5J // initial node energy
         public double d0 = 87.7; // (m) distance threshold for swapping amplification models
-        public int package = 32000; // bits, package size
+        public int package = 32000; // bit, package size
         //int package = Calculator.genRandInt(20, 65535);
         //----------------------------------------------------
 

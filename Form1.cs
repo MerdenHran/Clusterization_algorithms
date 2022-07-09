@@ -53,6 +53,7 @@ namespace Clusterization_algorithms
             EnableClusterization();
             Labels_ClearText();
             buttonReloadMap.Enabled = true;
+            buttonEnergyModel.Enabled = true;
 
             if (checkBoxAllowGeneratePoints.Checked == true)
             {
@@ -584,9 +585,17 @@ namespace Clusterization_algorithms
 
         private void buttonEnergyModel_Click(object sender, EventArgs e)
         {
+            CheckLabelInfo();
 
-            labelInfo.Text = "";
-            
+            labelInfo.Text =
+                "Field size: " + pictBoxArea.Width + " x " + pictBoxArea.Height + " m" +
+                "\nAmplifier energy:" +
+                "\n     Free space model " + "(<= " + energyCalculator.d0 + " m):  " + energyCalculator.E_fs + " nJ" +
+                "\n     Multipath fading model " + "(> " + energyCalculator.d0 + " m):  " + energyCalculator.E_mp * 1000000 + " mJ" +
+                "\nInitial node energy: " + energyCalculator.node_E / 1000000000.000 + " J" +
+                "\nEnergy for signal transmittion / recieve: " + energyCalculator.E_elec + " nJ/bit" +
+                "\nPackage size (20 - 65535): " + energyCalculator.package + " bit" +
+                "\nThreshold for swapping amplification models: " + energyCalculator.d0 + " m";
         }
     }
 }

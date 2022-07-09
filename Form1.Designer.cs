@@ -390,7 +390,7 @@ namespace Clusterization_algorithms
             this.buttonStatistic.BackColor = System.Drawing.Color.Red;
             this.buttonStatistic.Enabled = false;
             this.buttonStatistic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonStatistic.Location = new System.Drawing.Point(829, 145);
+            this.buttonStatistic.Location = new System.Drawing.Point(829, 188);
             this.buttonStatistic.Name = "buttonStatistic";
             this.buttonStatistic.Size = new System.Drawing.Size(42, 37);
             this.buttonStatistic.TabIndex = 31;
@@ -498,7 +498,7 @@ namespace Clusterization_algorithms
             this.buttonEnergyModel.BackColor = System.Drawing.Color.Magenta;
             this.buttonEnergyModel.Enabled = false;
             this.buttonEnergyModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEnergyModel.Location = new System.Drawing.Point(830, 188);
+            this.buttonEnergyModel.Location = new System.Drawing.Point(829, 145);
             this.buttonEnergyModel.Name = "buttonEnergyModel";
             this.buttonEnergyModel.Size = new System.Drawing.Size(42, 37);
             this.buttonEnergyModel.TabIndex = 34;
