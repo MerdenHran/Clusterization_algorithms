@@ -581,5 +581,12 @@ namespace Clusterization_algorithms
 
             return count;
         }
+
+        private void buttonEnergyModel_Click(object sender, EventArgs e)
+        {
+
+            labelInfo.Text = "";
+            
+        }
     }
 }

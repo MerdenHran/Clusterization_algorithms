@@ -366,7 +366,7 @@ namespace Clusterization_algorithms
             this.buttonReloadMap.BackColor = System.Drawing.Color.Gold;
             this.buttonReloadMap.Enabled = false;
             this.buttonReloadMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonReloadMap.Location = new System.Drawing.Point(829, 188);
+            this.buttonReloadMap.Location = new System.Drawing.Point(830, 231);
             this.buttonReloadMap.Name = "buttonReloadMap";
             this.buttonReloadMap.Size = new System.Drawing.Size(42, 37);
             this.buttonReloadMap.TabIndex = 33;
@@ -498,13 +498,14 @@ namespace Clusterization_algorithms
             this.buttonEnergyModel.BackColor = System.Drawing.Color.Magenta;
             this.buttonEnergyModel.Enabled = false;
             this.buttonEnergyModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEnergyModel.Location = new System.Drawing.Point(829, 231);
+            this.buttonEnergyModel.Location = new System.Drawing.Point(830, 188);
             this.buttonEnergyModel.Name = "buttonEnergyModel";
             this.buttonEnergyModel.Size = new System.Drawing.Size(42, 37);
             this.buttonEnergyModel.TabIndex = 34;
             this.buttonEnergyModel.Text = "M";
             this.toolTip1.SetToolTip(this.buttonEnergyModel, "(Model) Energy model parameters");
             this.buttonEnergyModel.UseVisualStyleBackColor = false;
+            this.buttonEnergyModel.Click += new System.EventHandler(this.buttonEnergyModel_Click);
             // 
             // btnLink
             // 
