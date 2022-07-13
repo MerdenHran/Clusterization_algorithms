@@ -1,6 +1,9 @@
 # Clusterization_algorithms
 
-## Abbreviations used
+## Abbreviations and terms
+
+- [UAV](https://en.wikipedia.org/wiki/Unmanned_aerial_vehicle) - * Unmanned aerial vehicle *
+- * Clusterization * - 
 
 ## Project tasks
 
