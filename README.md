@@ -10,10 +10,10 @@
 
   ### Terms
   
-   #### fsfadsf
+   #### General
    
-    - [Cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis)
-    - as
+   - [Cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis)
+   - 
   
    #### Clustering algorithms
    
