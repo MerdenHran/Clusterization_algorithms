@@ -1,4 +1,4 @@
-# Clusterization_algorithms
+# About "Clusterization_algorithms" project
 
 ## Abbreviations and terms
 
