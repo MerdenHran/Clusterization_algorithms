@@ -21,7 +21,7 @@
    - [K-means++](https://en.wikipedia.org/wiki/K-means%2B%2B)
    - [Forel](https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B_%D1%81%D0%B5%D0%BC%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B0_FOREL)
    
-   #### Route finding algorithms
+   #### Route search algorithms
    
    - [FPPWR](https://www.researchgate.net/publication/343100133_Evaluating_flight_coordination_approaches_of_UAV_squads_for_WSN_data_collection_enhancing_the_internet_range_on_WSN_data_collection)
   
