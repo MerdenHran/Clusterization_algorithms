@@ -23,7 +23,7 @@
    
    #### Route search algorithms
    
-   - [FPPWR](https://www.researchgate.net/publication/343100133_Evaluating_flight_coordination_approaches_of_UAV_squads_for_WSN_data_collection_enhancing_the_internet_range_on_WSN_data_collection)
+   - [FPPWR]()
   
   ### References to used articles
   -
