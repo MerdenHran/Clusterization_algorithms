@@ -15,7 +15,8 @@
    - [Cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis)
    - [Convex hull algorithms](https://en.wikipedia.org/wiki/Convex_hull_algorithms)
    - [Gift wrapping algorithm (Jarvis march)](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm)
-   - []()
+   - [Greedy algorithm](https://en.wikipedia.org/wiki/Greedy_algorithm)
+   
    #### Clustering algorithms
    
    - [K-means](https://en.wikipedia.org/wiki/K-means_clustering)
@@ -28,10 +29,13 @@
    - [Convex hull insertion](https://www2.isye.gatech.edu/~mgoetsch/cali/VEHICLE/TSP/TSP017__.HTM)
    - [Nearest neighbour](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm)
    - [Spiral route](https://www.researchgate.net/figure/Spiral-search-route-of-area-target_fig6_349545726)
-   - [FPPWR]()
+   - FPPWR
   
   ### References to used articles
-  -
+  - [Initial Centroid Selection Method for an Enhanced K-means Clustering Algorithm](https://link.springer.com/chapter/10.1007/978-3-030-58008-7_15#:~:text=K%2Dmeans%20is%20one%20of,or%20given%20by%20the%20user.)
+  - [Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)
+  - [Data Clustering with K-Means++ Using C#](https://visualstudiomagazine.com/Articles/2020/05/06/data-clustering-k-means.aspx?Page=1)
+  - []()
   
 ## Project goals and objectives
 
