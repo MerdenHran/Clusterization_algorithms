@@ -7,6 +7,7 @@
   - [UAV](https://en.wikipedia.org/wiki/Unmanned_aerial_vehicle) - *Unmanned aerial vehicle*
   - [WSN](https://en.wikipedia.org/wiki/Wireless_sensor_network) - *Wireless sensor network*
   - [TSP](https://en.wikipedia.org/wiki/Travelling_salesman_problem) - *Travelling salesman problem*
+  - DEEC - *Distributed energy-efficient clustering algorithm*
 
   ### Terms
   
@@ -35,7 +36,10 @@
   - [Initial Centroid Selection Method for an Enhanced K-means Clustering Algorithm](https://link.springer.com/chapter/10.1007/978-3-030-58008-7_15#:~:text=K%2Dmeans%20is%20one%20of,or%20given%20by%20the%20user.)
   - [Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)
   - [Data Clustering with K-Means++ Using C#](https://visualstudiomagazine.com/Articles/2020/05/06/data-clustering-k-means.aspx?Page=1)
-  - []()
+  - [An energy-efficient distributed clustering algorithm for heterogeneous WSNs](https://jwcn-eurasipjournals.springeropen.com/articles/10.1186/s13638-015-0376-4#Equ10)
+  - [https://www.sciencedirect.com/science/article/abs/pii/S0140366406000727](Design of a distributed energy-efficient clustering algorithm for heterogeneous wireless sensor networks)
+  - [https://journals.sagepub.com/doi/full/10.1177/1550147717743701](Energy-efficient clustering algorithm based on game theory for wireless sensor networks)
+  - [https://www.researchgate.net/publication/262916599_Ameliored_Threshold_Distributed_Energy_Efficient_Clustering_Algorithm_for_Heterogeneous_Wireless_Sensor_Networks](Ameliored Threshold Distributed Energy Efficient Clustering Algorithm for Heterogeneous Wireless Sensor Networks)
   
 ## Project goals and objectives
 
