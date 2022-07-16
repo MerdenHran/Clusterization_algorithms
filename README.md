@@ -67,6 +67,9 @@
    - Spiral route
    - FPPWR
 5. Process of data collection.
-   1. Data transmission algorithms. Algorithm comparison.
-   2. Create an energy model of the system.
-   3. Create statistics.
+   1. DEEC algorithm.
+   2. Data transmission types.
+      - Direct transmittion.
+      - Point-to-point.
+   4. Create an energy model of the system.
+   5. Create statistic.
