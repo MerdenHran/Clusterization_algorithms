@@ -37,9 +37,9 @@
   - [Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)
   - [Data Clustering with K-Means++ Using C#](https://visualstudiomagazine.com/Articles/2020/05/06/data-clustering-k-means.aspx?Page=1)
   - [An energy-efficient distributed clustering algorithm for heterogeneous WSNs](https://jwcn-eurasipjournals.springeropen.com/articles/10.1186/s13638-015-0376-4#Equ10)
-  - [https://www.sciencedirect.com/science/article/abs/pii/S0140366406000727](Design of a distributed energy-efficient clustering algorithm for heterogeneous wireless sensor networks)
+  - [Design of a distributed energy-efficient clustering algorithm for heterogeneous wireless sensor networks](https://www.sciencedirect.com/science/article/abs/pii/S0140366406000727)
   - [https://journals.sagepub.com/doi/full/10.1177/1550147717743701](Energy-efficient clustering algorithm based on game theory for wireless sensor networks)
-  - [https://www.researchgate.net/publication/262916599_Ameliored_Threshold_Distributed_Energy_Efficient_Clustering_Algorithm_for_Heterogeneous_Wireless_Sensor_Networks](Ameliored Threshold Distributed Energy Efficient Clustering Algorithm for Heterogeneous Wireless Sensor Networks)
+  - [Ameliored Threshold Distributed Energy Efficient Clustering Algorithm for Heterogeneous Wireless Sensor Networks](https://www.researchgate.net/publication/262916599_Ameliored_Threshold_Distributed_Energy_Efficient_Clustering_Algorithm_for_Heterogeneous_Wireless_Sensor_Networks)
   
 ## Project goals and objectives
 
