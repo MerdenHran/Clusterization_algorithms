@@ -53,3 +53,7 @@
    - Convex hull insertion (by angle of rotation)
    - Spiral route
    - FPPWR
+5. Process of data collection.
+   1. Data transmission algorithms. Algorithm comparison.
+   2. Create an energy model of the system.
+   3. Create statistics.
