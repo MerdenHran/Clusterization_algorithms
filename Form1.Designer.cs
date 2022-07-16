@@ -53,9 +53,11 @@ namespace Clusterization_algorithms
             this.comboBoxConnectionType = new System.Windows.Forms.ComboBox();
             this.checkBoxAllowGeneratePoints = new System.Windows.Forms.CheckBox();
             this.panel = new System.Windows.Forms.Panel();
+            this.buttonEnergyModel = new System.Windows.Forms.Button();
             this.buttonReloadMap = new System.Windows.Forms.Button();
             this.labelUsedEnergy = new System.Windows.Forms.Label();
             this.buttonStatistic = new System.Windows.Forms.Button();
+            this.btnLink = new System.Windows.Forms.Button();
             this.labelCharge = new System.Windows.Forms.Label();
             this.labelInfo = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -65,8 +67,6 @@ namespace Clusterization_algorithms
             this.btnFPPWR = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelTextBoxInfoTip = new System.Windows.Forms.Label();
-            this.buttonEnergyModel = new System.Windows.Forms.Button();
-            this.btnLink = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictBoxArea)).BeginInit();
             this.SuspendLayout();
@@ -229,7 +229,7 @@ namespace Clusterization_algorithms
             this.btnBruteForce.BackColor = System.Drawing.Color.Blue;
             this.btnBruteForce.Enabled = false;
             this.btnBruteForce.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnBruteForce.Location = new System.Drawing.Point(1169, 412);
+            this.btnBruteForce.Location = new System.Drawing.Point(1168, 314);
             this.btnBruteForce.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBruteForce.Name = "btnBruteForce";
             this.btnBruteForce.Size = new System.Drawing.Size(319, 45);
@@ -361,6 +361,20 @@ namespace Clusterization_algorithms
             this.panel.Size = new System.Drawing.Size(888, 816);
             this.panel.TabIndex = 41;
             // 
+            // buttonEnergyModel
+            // 
+            this.buttonEnergyModel.BackColor = System.Drawing.Color.Magenta;
+            this.buttonEnergyModel.Enabled = false;
+            this.buttonEnergyModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonEnergyModel.Location = new System.Drawing.Point(829, 145);
+            this.buttonEnergyModel.Name = "buttonEnergyModel";
+            this.buttonEnergyModel.Size = new System.Drawing.Size(42, 37);
+            this.buttonEnergyModel.TabIndex = 34;
+            this.buttonEnergyModel.Text = "M";
+            this.toolTip1.SetToolTip(this.buttonEnergyModel, "(Model) Energy model parameters");
+            this.buttonEnergyModel.UseVisualStyleBackColor = false;
+            this.buttonEnergyModel.Click += new System.EventHandler(this.buttonEnergyModel_Click);
+            // 
             // buttonReloadMap
             // 
             this.buttonReloadMap.BackColor = System.Drawing.Color.Gold;
@@ -398,6 +412,19 @@ namespace Clusterization_algorithms
             this.toolTip1.SetToolTip(this.buttonStatistic, "Statistic");
             this.buttonStatistic.UseVisualStyleBackColor = false;
             this.buttonStatistic.Click += new System.EventHandler(this.buttonStatistic_Click);
+            // 
+            // btnLink
+            // 
+            this.btnLink.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnLink.Location = new System.Drawing.Point(829, 102);
+            this.btnLink.Name = "btnLink";
+            this.btnLink.Size = new System.Drawing.Size(42, 37);
+            this.btnLink.TabIndex = 30;
+            this.btnLink.Text = "L";
+            this.toolTip1.SetToolTip(this.btnLink, "Link to project site");
+            this.btnLink.UseVisualStyleBackColor = false;
+            this.btnLink.Click += new System.EventHandler(this.btnLink_Click);
             // 
             // labelCharge
             // 
@@ -458,7 +485,7 @@ namespace Clusterization_algorithms
             this.btnNearestNeighbour.BackColor = System.Drawing.Color.Salmon;
             this.btnNearestNeighbour.Enabled = false;
             this.btnNearestNeighbour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnNearestNeighbour.Location = new System.Drawing.Point(1168, 314);
+            this.btnNearestNeighbour.Location = new System.Drawing.Point(1169, 412);
             this.btnNearestNeighbour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNearestNeighbour.Name = "btnNearestNeighbour";
             this.btnNearestNeighbour.Size = new System.Drawing.Size(319, 45);
@@ -492,33 +519,6 @@ namespace Clusterization_algorithms
             this.labelTextBoxInfoTip.Size = new System.Drawing.Size(223, 25);
             this.labelTextBoxInfoTip.TabIndex = 44;
             this.labelTextBoxInfoTip.Text = "[position, cluster] charge";
-            // 
-            // buttonEnergyModel
-            // 
-            this.buttonEnergyModel.BackColor = System.Drawing.Color.Magenta;
-            this.buttonEnergyModel.Enabled = false;
-            this.buttonEnergyModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEnergyModel.Location = new System.Drawing.Point(829, 145);
-            this.buttonEnergyModel.Name = "buttonEnergyModel";
-            this.buttonEnergyModel.Size = new System.Drawing.Size(42, 37);
-            this.buttonEnergyModel.TabIndex = 34;
-            this.buttonEnergyModel.Text = "M";
-            this.toolTip1.SetToolTip(this.buttonEnergyModel, "(Model) Energy model parameters");
-            this.buttonEnergyModel.UseVisualStyleBackColor = false;
-            this.buttonEnergyModel.Click += new System.EventHandler(this.buttonEnergyModel_Click);
-            // 
-            // btnLink
-            // 
-            this.btnLink.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnLink.Location = new System.Drawing.Point(829, 102);
-            this.btnLink.Name = "btnLink";
-            this.btnLink.Size = new System.Drawing.Size(42, 37);
-            this.btnLink.TabIndex = 30;
-            this.btnLink.Text = "L";
-            this.toolTip1.SetToolTip(this.btnLink, "Link to project site");
-            this.btnLink.UseVisualStyleBackColor = false;
-            this.btnLink.Click += new System.EventHandler(this.btnLink_Click);
             // 
             // Form1
             // 
