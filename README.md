@@ -13,8 +13,9 @@
    #### General
    
    - [Cluster analysis](https://en.wikipedia.org/wiki/Cluster_analysis)
-   - 
-  
+   - [Convex hull algorithms](https://en.wikipedia.org/wiki/Convex_hull_algorithms)
+   - [Gift wrapping algorithm (Jarvis march)](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm)
+   - []()
    #### Clustering algorithms
    
    - [K-means](https://en.wikipedia.org/wiki/K-means_clustering)
@@ -23,6 +24,10 @@
    
    #### Route search algorithms
    
+   - [Brute-force](https://en.wikipedia.org/wiki/Brute-force_search)
+   - [Convex hull insertion](https://www2.isye.gatech.edu/~mgoetsch/cali/VEHICLE/TSP/TSP017__.HTM)
+   - [Nearest neighbour](https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm)
+   - [Spiral route](https://www.researchgate.net/figure/Spiral-search-route-of-area-target_fig6_349545726)
    - [FPPWR]()
   
   ### References to used articles
